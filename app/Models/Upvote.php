@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Upvote extends Model
 {
     use HasFactory;
-    protected $table="upvote";
 
     /**
      * Get the user upvote the post.

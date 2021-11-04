@@ -11,7 +11,6 @@ use App\Models\BaseModel;
 class Follow extends Model
 {
     use HasFactory;
-    protected $table="follow";
 
     protected $fillable = [
         "source_id",
