@@ -17,7 +17,9 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PostController;
 
 Route::post('login', [AuthController::class, 'authenticate']);
 Route::post('register', [AuthController::class, 'register']);
@@ -26,6 +28,8 @@ Route::post('forgot_password', [AuthController::class, 'forget_password']);
 Route::group(['middleware' => ['jwt.verify']], function() {
     Route::get('logout', [AuthController::class, 'logout']);
     Route::get('get_user', [AuthController::class, 'get_user']);
+    Route::get('create_post', [PostController::class, "create_post"]);
+    Route::get('/delete_post', [PostController::class, "delete_post"]);
     // Route::get('products', [ProductController::class, 'index']);
     // Route::get('products/{id}', [ProductController::class, 'show']);
     // Route::post('create', [ProductController::class, 'store']);
