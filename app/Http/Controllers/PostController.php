@@ -10,11 +10,9 @@ class PostController extends Controller
 {
     //
     public function create_post(Request $request) {
-        $this->validate($request, [
-            'token' => 'required'
-        ]);
         
-        $user = JWTAuth::authenticate($request->token);
+        // $user = JWTAuth::authenticate($request->token);
+        $user = $request->user;
         // var_dump($user);
         $post = Post::create([
             "owner_id" => $user->id,
@@ -25,11 +23,9 @@ class PostController extends Controller
     }
 
     public function delete_post(Request $request) {
-        $this->validate($request, [
-            'token' => 'required'
-        ]);
         
-        $user = JWTAuth::authenticate($request->token);
+        // $user = JWTAuth::authenticate($request->token);
+        $user = $request->user;
         $post_id = $request->input("post_id");
         if(count(Post::where("id", $post_id)->get()) == 0) {
             return response()->json(["success" => false, "message" => "No posts match"]);
