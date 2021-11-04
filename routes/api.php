@@ -36,3 +36,7 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     // Route::put('update/{product}',  [ProductController::class, 'update']);
     // Route::delete('delete/{product}',  [ProductController::class, 'destroy']);
 });
+use App\Http\Controllers\ResetPasswordController;
+
+Route::post('reset-password', [ResetPasswordController::class, "sendMail"]);
+Route::get('reset-password/{token}', [ResetPasswordController::class, "reset"]);
