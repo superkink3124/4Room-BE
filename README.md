@@ -1,62 +1,46 @@
-### Setting up:
+# How to run
 
-* Cài đặt: `composer`, `php7.4`, `mysql`
+* Requirement: `composer`, `php7.4`, `mysql`
 
-1. Clone project về thư mục chứa code
-```  
-git clone ... 
-```
-
-2. Tạo file config môi trường
+1. Create file ```.env```
 ```
 cp .env.example .env
 ```
 
-3. Install package.json (via `composer`)
+2. Install package.json (via `composer`)
 ```
 composer install
 ```
 
-4. Tạo key cho project Laravel
+4. Generate key for Laravel project
 ```
 php artisan key:generate
 ```
 
-5. Thêm vào file config/app.php
-```
-'providers' => [
-   ...
-'Tymon\JWTAuth\Providers\LaravelServiceProvider',
-],
-'aliases' => [
-    ...
-    'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class,
-     'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class,
-],
-```
-6. Chạy lênh để publish JWT configuration
-
+5. Run following commands to use JWT
 ```
 php artisan vendor:publish --provider="Tymon\JWTAuth\Providers\LaravelServiceProvider"
-```
-
-7. Chạy command
-```
 php artisan jwt:secret
 ```
 
-8. Config email
-
-<img src="./image-README/config_email.png">
-MAIL_FROM_ADDRESS=youremail@gmail.com
-MAIL_FROM_NAME="4room"
-
-8. Chạy migrate tạo bảng cho database
+8. Config email in  ```.env```
 ```
-php artisan migrate
+MAIL_MAILER=smtp
+MAIL_HOST=smtp.gmail.com
+MAIL_PORT=587
+MAIL_USERNAME=your_gmail
+MAIL_PASSWORD=your_password
+MAIL_ENCRYPTION=tls
+MAIL_FROM_ADDRESS=null
+MAIL_FROM_NAME="${APP_NAME}"
 ```
 
-9. Chạy project (mặc định port 8000)
+8. Create database and fake data
+```
+php artisan migrate --seed
+```
+
+9. Run project (default port 8000)
 ```
 php artisan serve
 ```
