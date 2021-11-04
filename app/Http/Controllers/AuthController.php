@@ -14,9 +14,10 @@ class AuthController extends Controller
     public function register(Request $request)
     {
     	//Validate data
-        $data = $request->only('email', 'password');
+        $data = $request->only('email', 'name_in_forum', 'password');
         $validator = Validator::make($data, [
             'email' => 'required|email|unique:users',
+            'name_in_forum' => 'required|string',
             'password' => 'required|string|min:6|max:50'
         ]);
 
@@ -27,7 +28,7 @@ class AuthController extends Controller
 
         //Request is valid, create new user
         $user = User::create([
-        	'name' => $request->name,
+        	'name_in_forum' => $request->name_in_forum,
         	'email' => $request->email,
         	'password' => bcrypt($request->password)
         ]);
