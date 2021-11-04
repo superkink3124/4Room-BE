@@ -45,6 +45,12 @@ php artisan vendor:publish --provider="Tymon\JWTAuth\Providers\LaravelServicePro
 php artisan jwt:secret
 ```
 
+8. Config email
+
+<img src="./image-README/config_email.png">
+MAIL_FROM_ADDRESS=youremail@gmail.com
+MAIL_FROM_NAME="4room"
+
 8. Chạy migrate tạo bảng cho database
 ```
 php artisan migrate
