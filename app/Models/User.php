@@ -35,14 +35,6 @@ class User extends Authenticatable implements JWTSubject
         "role" => 0
     ];
 
-    // public function follow_source_id() {
-    //     return $this->hasMany(Follow::class, "source_id", "user_id");
-    // }
-
-    // public function follow_destination_id() {
-    //     return $this->hasMany(Follow::class, "target_id", "user_id");
-    // }
-
     public function getJWTIdentifier()
     {
         return $this->getKey();

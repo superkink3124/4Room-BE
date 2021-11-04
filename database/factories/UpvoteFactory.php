@@ -13,7 +13,7 @@ class UpvoteFactory extends Factory
      *
      * @return array
      */
-    public function definition()
+    public function definition(): array
     {
         return [
             "user_id" => rand(1, User::count()),

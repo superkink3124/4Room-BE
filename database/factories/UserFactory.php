@@ -14,22 +14,20 @@ class UserFactory extends Factory
      *
      * @return array
      */
-    public function definition()
+    public function definition(): array
     {
         return [
             'email' => $this->faker->unique()->safeEmail(),
             'password' => Hash::make('hehehe123'),
             'name_in_forum' => VNFaker::fullname(),
             'bio' => VNFaker::paragraphs(),
-            'email_verified_at' => now(),
-            'remember_token' => Str::random(10),
         ];
     }
 
     /**
      * Indicate that the model's email address should be unverified.
      *
-     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     * @return Factory
      */
     public function unverified()
     {
