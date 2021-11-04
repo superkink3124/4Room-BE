@@ -23,7 +23,7 @@ class CreateUsersTable extends Migration
             $table->string('linkedin_link')->nullable();
             $table->string('instagram_link')->nullable();
             $table->string('twitter_link')->nullable();
-            $table->tinyInteger('role');
+            $table->tinyInteger('role')->default(1);
             $table->timestamps();
         });
     }
