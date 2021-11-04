@@ -19,23 +19,26 @@ class ResetPasswordController extends Controller
      */
     public function sendMail(Request $request)
     {
+        $token = Str::random(60);
         $user = User::where('email', $request->email)->firstOrFail();
         $passwordReset = PasswordReset::updateOrCreate([
             'email' => $user->email,
         ], [
-            'token' => Str::random(60),
+            'token' => $token,
         ]);
         if ($passwordReset) {
             $user->notify(new ResetPasswordRequest($passwordReset->token));
         }
   
         return response()->json([
-        'message' => 'We have e-mailed your password reset link!'
+        'message' => 'We have e-mailed your password reset link!',
+        'token' => $token
         ]);
     }
 
-    public function reset(Request $request, $token)
+    public function reset(Request $request)
     {
+        $token = $request->input("token");
         $passwordReset = PasswordReset::where('token', $token)->firstOrFail();
         if (Carbon::parse($passwordReset->updated_at)->addMinutes(720)->isPast()) {
             $passwordReset->delete();

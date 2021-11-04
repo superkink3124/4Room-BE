@@ -23,13 +23,12 @@ use App\Http\Controllers\PostController;
 
 Route::post('login', [AuthController::class, 'authenticate']);
 Route::post('register', [AuthController::class, 'register']);
-Route::post('forgot_password', [AuthController::class, 'forget_password']);
 
 Route::group(['middleware' => ['jwt.verify']], function() {
     Route::get('logout', [AuthController::class, 'logout']);
     Route::get('get_user', [AuthController::class, 'get_user']);
     Route::get('create_post', [PostController::class, "create_post"]);
-    Route::get('/delete_post', [PostController::class, "delete_post"]);
+    Route::get('delete_post', [PostController::class, "delete_post"]);
     // Route::get('products', [ProductController::class, 'index']);
     // Route::get('products/{id}', [ProductController::class, 'show']);
     // Route::post('create', [ProductController::class, 'store']);
@@ -39,4 +38,4 @@ Route::group(['middleware' => ['jwt.verify']], function() {
 use App\Http\Controllers\ResetPasswordController;
 
 Route::post('reset-password', [ResetPasswordController::class, "sendMail"]);
-Route::get('reset-password/{token}', [ResetPasswordController::class, "reset"]);
+Route::post('change-password', [ResetPasswordController::class, "reset"]);

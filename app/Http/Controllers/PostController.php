@@ -15,7 +15,7 @@ class PostController extends Controller
         $user = $request->user;
         // var_dump($user);
         $post = Post::create([
-            "owner_id" => $user->id,
+            "user_id" => $user->id,
             "content" => $request->input("content"),
         ]);
 
@@ -30,7 +30,7 @@ class PostController extends Controller
         if(count(Post::where("id", $post_id)->get()) == 0) {
             return response()->json(["success" => false, "message" => "No posts match"]);
         }
-        if($user->id != Post::where("id", $post_id)->value("owner_id")) {
+        if($user->id != Post::where("id", $post_id)->value("user_id")) {
             return response()->json(["success" => false, "message" => "You are not owner"]);
         }
         $post = Post::where("id", $post_id)->delete();

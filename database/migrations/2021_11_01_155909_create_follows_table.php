@@ -15,11 +15,11 @@ class CreateFollowsTable extends Migration
     {
         Schema::create('follows', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
             $table->unsignedBigInteger("source_id");
             $table->unsignedBigInteger("target_id");
             $table->foreign("source_id")->references("id")->on("users")->onDelete("cascade")->onUpdate("cascade");
             $table->foreign("target_id")->references("id")->on("users")->onDelete("cascade")->onUpdate("cascade");
+            $table->timestamps();
         });
     }
 
