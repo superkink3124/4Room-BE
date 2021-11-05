@@ -2,6 +2,10 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\UserController;
 
 /*
@@ -19,13 +23,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\PostController;
-
 Route::post('login', [AuthController::class, 'authenticate']);
 Route::post('register', [AuthController::class, 'register']);
 
 Route::get('users/{id}', [UserController::class, 'show']);
+Route::get('users/', [UserController::class, 'show']);
 Route::post('users', [UserController::class, 'store']);
 
 Route::delete('users/{id}', [UserController::class, 'destroy']);
@@ -44,7 +46,6 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     // Route::put('update/{product}',  [ProductController::class, 'update']);
     // Route::delete('delete/{product}',  [ProductController::class, 'destroy']);
 });
-use App\Http\Controllers\ResetPasswordController;
 
 Route::post('reset-password', [ResetPasswordController::class, "sendMail"]);
 Route::post('change-password', [ResetPasswordController::class, "reset"]);

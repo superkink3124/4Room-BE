@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -36,9 +37,17 @@ class UserController extends Controller
      */
     public function show($id=null)
     {
-        // xử lý nếu không có, nếu null
-        return User::find($id);
-        
+        // return $id? User::find($id) : User::all();
+
+        if ($id === null) {
+            return User::all();
+        }
+        // if (User::where("id", $id)) {
+        if (User::find($id)) {
+            return User::where('id', $id)->get();
+        } else {
+            return response()->json([]);
+        }  
     }
 
     /**
@@ -70,12 +79,16 @@ class UserController extends Controller
     }
 
     /**
-     * Search user by email.
+     * Search user by name_in_forum.
      *
      * @param  int  $email
      * @return \Illuminate\Http\Response
      */
     public function search($name) {
         return User::where("name_in_forum", "like", '%'.$name.'%')->get();
+
+        // $user = DB::select(SELECT * FROM `users` 
+        //     WHERE MATCH(description) AGAINST($name IN NATURAL LANGUAGE MODE));
+        
     }
 }
