@@ -40,7 +40,12 @@ MAIL_FROM_NAME="${APP_NAME}"
 php artisan migrate --seed
 ```
 
-9. Run project (default port 8000)
+9. Create symbolic link
+```
+php artisan storage:link
+```
+
+10. Run project (default port 8000)
 ```
 php artisan serve
 ```
