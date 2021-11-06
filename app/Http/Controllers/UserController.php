@@ -18,6 +18,7 @@ class UserController extends Controller
     public function index(): JsonResponse
     {
         //
+        return response()->json(['success' => true]);
     }
 
     /**
@@ -29,6 +30,7 @@ class UserController extends Controller
     public function store(Request $request): JsonResponse
     {
         //
+        return response()->json(['success' => true]);
     }
 
     /**
@@ -39,17 +41,28 @@ class UserController extends Controller
      */
     public function show($id=null)
     {
-        // return $id? User::find($id) : User::all();
-
+        // Check if $id is NULL, (route: ../users/)
         if ($id === null) {
-            return User::all();
+            return response()->json([
+                'success' => true,
+                'message' => 'Get all users in database',
+                'user_info' => User::all()
+            ]);
         }
-        // if (User::where("id", $id)) {
+        
+        // If $id is not NULL (route: ../users/{id})
         if (User::find($id)) {
-            return User::where('id', $id)->get();
+            return response()->json([
+                'success' => true,
+                'user_info' => User::find($id)
+            ]);
         } else {
-            return response()->json([]);
-        }
+            return response()->json([
+                'success' => true,
+                'message' => 'Database does not have this user',
+                'user_info' => []
+            ]);
+        }  
     }
 
     /**
@@ -74,6 +87,7 @@ class UserController extends Controller
     public function destroy(int $id) : JsonResponse
     {
         //
+        return response()->json(['success' => true]);
     }
 
     /**
@@ -83,10 +97,22 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function search($name) {
-        return User::where("name_in_forum", "like", '%'.$name.'%')->get();
+        // Get all users with name_in_forum LIKE $name
+        $data = User::where("name_in_forum", "like", '%'.$name.'%')->get();
+        // error_log($data);
 
-        // $user = DB::select(SELECT * FROM `users`
-        //     WHERE MATCH(description) AGAINST($name IN NATURAL LANGUAGE MODE));
-
+        // Check if $data JSON is empty
+        if (json_decode($data, true)) {
+            return response()->json([
+                'success' => true,
+                'users_info' => User::where("name_in_forum", "like", '%'.$name.'%')->get(),
+            ]);
+        } else {
+            return response()->json([
+                'success' => true,
+                'message' => 'There are no users with name like this',
+                'users_info' => []
+            ]);
+        }
     }
 }
