@@ -19,7 +19,9 @@ class ResetPasswordController extends Controller
      */
     public function sendMail(Request $request)
     {
+
         $token = Str::random(60);
+//        dd($token);
         $user = User::where('email', $request->email)->firstOrFail();
         $passwordReset = PasswordReset::updateOrCreate([
             'email' => $user->email,
@@ -29,7 +31,7 @@ class ResetPasswordController extends Controller
         if ($passwordReset) {
             $user->notify(new ResetPasswordRequest($passwordReset->token));
         }
-  
+
         return response()->json([
         'message' => 'We have e-mailed your password reset link!',
         'token' => $token

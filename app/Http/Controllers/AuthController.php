@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\JsonResponse;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -11,17 +12,17 @@ use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
-    public function register(Request $request)
+    public function register(Request $request): JsonResponse
     {
-    	//Validate data
+        //Validate data
         $data = $request->only('email', 'name_in_forum', 'password');
         $password = $request->input("password");
-        $retype_password = $request->input("retype_password");
-        if($password != $retype_password) {
+        $password_confirmation = $request->input("password_confirmation");
+        if ($password != $password_confirmation) {
             return response()->json([
-                'success' => true,
-                'message' => 'unmatching password and retype password'
-            ]);
+                'success' => false,
+                'message' => 'Password does not match confirmed password.'
+            ], 400);
         }
         $validator = Validator::make($data, [
             'email' => 'required|email|unique:users',
@@ -31,14 +32,17 @@ class AuthController extends Controller
 
         //Send failed response if request is not valid
         if ($validator->fails()) {
-            return response()->json(['error' => "Invalid email or password"], 200);
+            return response()->json([
+                'success' => false,
+                'message' => 'Invalid email or password',
+            ], 400);
         }
 
         //Request is valid, create new user
         $user = User::create([
-        	'name_in_forum' => $request->name_in_forum,
-        	'email' => $request->email,
-        	'password' => bcrypt($request->password)
+            'name_in_forum' => $request->name_in_forum,
+            'email' => $request->email,
+            'password' => bcrypt($request->password)
         ]);
 
         //User created, return success response
@@ -49,7 +53,7 @@ class AuthController extends Controller
         ], Response::HTTP_OK);
     }
 
-    public function authenticate(Request $request)
+    public function authenticate(Request $request): JsonResponse
     {
         $credentials = $request->only('email', 'password');
 
@@ -64,42 +68,31 @@ class AuthController extends Controller
             return response()->json(['error' => "invalid email or password"], 200);
         }
 
-        //Request is validated
-        //Crean token
+        //Request is validated, create jwt
         try {
-            if (! $token = JWTAuth::attempt($credentials)) {
+            if (!$jwt = JWTAuth::attempt($credentials)) {
                 return response()->json([
-                	'success' => false,
-                	'message' => 'Login credentials are invalid.',
+                    'success' => false,
+                    'message' => 'Login credentials are invalid.',
                 ], 400);
             }
         } catch (JWTException $e) {
             return response()->json([
-                	'success' => false,
-                	'message' => 'Could not create token.',
-                ], 500);
+                'success' => false,
+                'message' => 'Could not create token.',
+            ], 500);
         }
 
- 		//Token created, return with success response and jwt token
+        //Token created, return with success response and jwt token
         return response()->json([
             'success' => true,
-            'token' => $token,
+            'jwt' => $jwt,
+            'user_info' => User::where('email', $credentials['email'])->get()[0]
         ]);
     }
 
-    public function logout(Request $request)
+    public function logout(Request $request): JsonResponse
     {
-        //valid credential
-//        $validator = Validator::make($request->only('token'), [
-//            'token' => 'required'
-//        ]);
-//
-//        //Send failed response if request is not valid
-//        if ($validator->fails()) {
-//            return response()->json(['error' => "invalid token"], 200);
-//        }
-
-		//Request is validated, do logout
         try {
             JWTAuth::invalidate($request->bearerToken());
 
@@ -114,10 +107,4 @@ class AuthController extends Controller
             ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
-
-    public function get_user(Request $request)
-    {
-        return response()->json(['user' => $request->user]);
-    }
-
 }

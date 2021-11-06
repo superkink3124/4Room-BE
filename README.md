@@ -7,24 +7,10 @@
 cp .env.example .env
 ```
 
-2. Install package.json (via `composer`)
-```
-composer install
+2. Config email in  ```.env```
 ```
 
-4. Generate key for Laravel project
-```
-php artisan key:generate
-```
 
-5. Run following commands to use JWT
-```
-php artisan vendor:publish --provider="Tymon\JWTAuth\Providers\LaravelServiceProvider"
-php artisan jwt:secret
-```
-
-8. Config email in  ```.env```
-```
 MAIL_MAILER=smtp
 MAIL_HOST=smtp.gmail.com
 MAIL_PORT=587
@@ -35,17 +21,33 @@ MAIL_FROM_ADDRESS=null
 MAIL_FROM_NAME="${APP_NAME}"
 ```
 
-8. Create database and fake data
+3. Install package.json (via `composer`)
 ```
-php artisan migrate --seed
+composer install
 ```
 
-9. Create symbolic link
+4. Generate key for Laravel project
+```
+php artisan key:generate
+```
+
+5. Run following commands to use JWT-Auth lib
+```
+php artisan vendor:publish --provider="Tymon\JWTAuth\Providers\LaravelServiceProvider"
+php artisan jwt:secret
+```
+
+6. Create database and fake data
+```
+php artisan migrate:fresh --seed
+```
+
+7. Create symbolic link
 ```
 php artisan storage:link
 ```
 
-10. Run project (default port 8000)
+8. Run project (default port 8000)
 ```
 php artisan serve
 ```

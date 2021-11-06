@@ -14,11 +14,11 @@ class Post extends Model
     protected $fillable = [
         'user_id', 
         'content',
+        'has_file',
         'file_address',
         'file_name',
-        'size',
-        'file_description',
-        'has_file'
+        'file_size',
+        'file_description'
     ];
 
     /**
