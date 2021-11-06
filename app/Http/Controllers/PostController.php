@@ -18,30 +18,29 @@ class PostController extends Controller
         $user = $request->user;
         $content = $request->input("content");
         // var_dump($user);
-        $post_model = Post::create([
-            "user_id" => $user->id,
-            "content" => $request->input("content"),
-        ]);
-        $post_id = $post_model->id;
         if ($request->file('file')->isValid()) {
             $upload_file = $request->file('file');
             $path = $upload_file->store("public");
             $file_origin_name = $upload_file->getClientOriginalName();
-            $size = Storage::size($path);
-            $file_model = File::create([
-                "name" => $file_origin_name,
-                "address" => $path,
-                "size" => $size
+            $file_size = Storage::size($path);
+            $post_model = Post::create([
+                "user_id" => $user->id,
+                "content" => $content,
+                "has_file" => true,
+                "file_address" => $path,
+                "file_name" => $file_origin_name,
+                "file_size" => $file_size
             ]);
-            $file_id = $file_model->id;
-            $file_attach_post_model = File_Attach_Post::create([
-                "post_id" => $post_id,
-                "file_id" => $file_id
+        } 
+        else {
+            $post_model = Post::create([
+                "user_id" => $user->id,
+                "content" => $content,
             ]);
         }
         return response()->json(["success" => true]);
     }
-
+    
     public function download_file(Request $request) {
         $file_path = $request->input("path");
         return Storage::download($file_path);

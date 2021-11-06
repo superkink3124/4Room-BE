@@ -13,14 +13,14 @@ class CreateFileAttachPostsTable extends Migration
      */
     public function up()
     {
-        Schema::create('file__attach__posts', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger("post_id");
-            $table->unsignedBigInteger("file_id");
-            $table->timestamps();
-            $table->foreign("post_id")->references("id")->on("posts")->onDelete("cascade")->onUpdate("cascade");
-            $table->foreign("file_id")->references("id")->on("files")->onDelete("cascade")->onUpdate("cascade");
-        });
+        // Schema::create('file__attach__posts', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->unsignedBigInteger("post_id");
+        //     $table->unsignedBigInteger("file_id");
+        //     $table->timestamps();
+        //     $table->foreign("post_id")->references("id")->on("posts")->onDelete("cascade")->onUpdate("cascade");
+        //     $table->foreign("file_id")->references("id")->on("files")->onDelete("cascade")->onUpdate("cascade");
+        // });
     }
 
     /**
