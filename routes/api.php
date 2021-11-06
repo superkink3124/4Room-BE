@@ -28,15 +28,13 @@ Route::post('register', [AuthController::class, 'register']);
 
 Route::get('users/{id}', [UserController::class, 'show']);
 Route::get('users/', [UserController::class, 'show']);
-Route::post('users', [UserController::class, 'store']);
-
-Route::delete('users/{id}', [UserController::class, 'destroy']);
+//Route::post('users', [UserController::class, 'store']);
+//Route::delete('users/{id}', [UserController::class, 'destroy']);
 
 Route::get('users/search/{name}', [UserController::class, 'search']);
 
 Route::group(['middleware' => ['jwt.verify']], function() {
     Route::get('logout', [AuthController::class, 'logout']);
-    Route::get('get_user', [AuthController::class, 'get_user']);
     Route::get('create_post', [PostController::class, "create_post"]);
     Route::get('delete_post', [PostController::class, "delete_post"]);
     Route::post('profile', [UserController::class, 'update']);
