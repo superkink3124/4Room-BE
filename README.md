@@ -39,7 +39,7 @@ php artisan jwt:secret
 
 6. Create database and fake data
 ```
-php artisan migrate --seed
+php artisan migrate:fresh --seed
 ```
 
 7. Run project (default port 8000)
