@@ -16,6 +16,14 @@ class AuthController extends Controller
     {
     	//Validate data
         $data = $request->only('email', 'name_in_forum', 'password');
+        $password = $request->input("password");
+        $retype_password = $request->input("retype_password");
+        if($password != $retype_password) {
+            return response()->json([
+                'success' => true,
+                'message' => 'unmatching password and retype password'
+            ]);
+        }
         $validator = Validator::make($data, [
             'email' => 'required|email|unique:users',
             'name_in_forum' => 'required|string',
