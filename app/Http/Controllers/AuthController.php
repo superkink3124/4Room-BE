@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\JsonResponse;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -11,7 +12,7 @@ use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
-    public function register(Request $request)
+    public function register(Request $request): JsonResponse
     {
     	//Validate data
         $data = $request->only('email', 'name_in_forum', 'password');
@@ -23,7 +24,10 @@ class AuthController extends Controller
 
         //Send failed response if request is not valid
         if ($validator->fails()) {
-            return response()->json(['error' => "Invalid email or password"], 200);
+            return response()->json([
+                'success' => false,
+                'message' => 'Invalid email or password',
+            ], 400);
         }
 
         //Request is valid, create new user
@@ -41,7 +45,7 @@ class AuthController extends Controller
         ], Response::HTTP_OK);
     }
 
-    public function authenticate(Request $request)
+    public function authenticate(Request $request): JsonResponse
     {
         $credentials = $request->only('email', 'password');
 
@@ -59,14 +63,13 @@ class AuthController extends Controller
         //Request is validated
         //Crean token
         try {
-            if (! $token = JWTAuth::attempt($credentials)) {
+            if (! $jwt = JWTAuth::attempt($credentials)) {
                 return response()->json([
                 	'success' => false,
                 	'message' => 'Login credentials are invalid.',
                 ], 400);
             }
         } catch (JWTException $e) {
-    	return $credentials;
             return response()->json([
                 	'success' => false,
                 	'message' => 'Could not create token.',
@@ -76,23 +79,12 @@ class AuthController extends Controller
  		//Token created, return with success response and jwt token
         return response()->json([
             'success' => true,
-            'token' => $token,
+            'jwt' => $jwt,
         ]);
     }
 
-    public function logout(Request $request)
+    public function logout(Request $request): JsonResponse
     {
-        //valid credential
-//        $validator = Validator::make($request->only('token'), [
-//            'token' => 'required'
-//        ]);
-//
-//        //Send failed response if request is not valid
-//        if ($validator->fails()) {
-//            return response()->json(['error' => "invalid token"], 200);
-//        }
-
-		//Request is validated, do logout
         try {
             JWTAuth::invalidate($request->bearerToken());
 
