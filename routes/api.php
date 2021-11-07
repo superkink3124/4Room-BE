@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\FileController;
+use App\Http\Controllers\UpvoteController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -52,4 +53,8 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::post('posts/{id}/edit', [PostController::class, "update"]);
     Route::post('posts/create', [PostController::class, "store"]);
     Route::delete('posts/{id}', [PostController::class, "destroy"]);
+
+    // Upvote API
+    Route::post('upvote/posts/{id}', [UpvoteController::class, "store"]);
+    Route::delete('upvote/posts/{id}', [UpvoteController::class, "destroy"]);
 });

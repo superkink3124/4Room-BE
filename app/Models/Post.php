@@ -36,6 +36,15 @@ class Post extends Model
     }
 
     /**
+     * Get all upvotes that in this post.
+     * @return HasMany
+     */
+    public function upvotes(): HasMany
+    {
+        return $this->hasMany(Upvote::class);
+    }
+
+    /**
      * Get file attach this post.
      * @return HasOne
      */

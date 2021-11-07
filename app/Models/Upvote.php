@@ -10,6 +10,11 @@ class Upvote extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'user_id',
+        'post_id',
+    ];
+
     /**
      * Get the user upvote the post.
      */
