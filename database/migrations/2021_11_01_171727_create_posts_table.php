@@ -19,11 +19,6 @@ class CreatePostsTable extends Migration
             $table->text("content");
             $table->timestamps();
             $table->foreign("user_id")->references("id")->on("users")->onDelete("cascade")->onUpdate("cascade");
-            $table->boolean("has_file")->default(false);
-            $table->text("file_address")->nullable();
-            $table->text("file_name")->nullable();
-            $table->float("file_size")->nullable();
-            $table->text("file_description")->nullable();
         });
     }
 

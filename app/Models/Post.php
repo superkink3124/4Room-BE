@@ -6,23 +6,20 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Post extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'user_id', 
+        'user_id',
         'content',
-        'has_file',
-        'file_address',
-        'file_name',
-        'file_size',
-        'file_description'
     ];
 
     /**
      * Get the user that owns this post.
+     * @return BelongsTo
      */
     public function user(): BelongsTo
     {
@@ -31,9 +28,19 @@ class Post extends Model
 
     /**
      * Get all comments that in this post.
+     * @return HasMany
      */
     public function comments(): HasMany
     {
         return $this->hasMany(Comment::class);
+    }
+
+    /**
+     * Get file attach this post.
+     * @return HasOne
+     */
+    public function file(): HasOne
+    {
+        return $this->hasOne(File::class);
     }
 }

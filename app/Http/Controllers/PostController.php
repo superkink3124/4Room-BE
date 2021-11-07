@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\PostResource;
+use App\Models\File;
 use App\Models\Post;
 use Illuminate\Support\Facades\Storage;
 use Exception;
@@ -31,27 +33,12 @@ class PostController extends Controller
     {
         try {
             $user = $request->user;
-            $content = $request->input("content");
-            // var_dump($user);
+            $post = Post::create([
+                "user_id" => $user->id,
+                "content" => $request->input("content"),
+            ]);
             if ($request->file('file')->isValid()) {
-                $upload_file = $request->file('file');
-                $path = $upload_file->store("public");
-                $file_origin_name = $upload_file->getClientOriginalName();
-                $file_size = Storage::size($path);
-                $post_model = Post::create([
-                    "user_id" => $user->id,
-                    "content" => $content,
-                    "has_file" => true,
-                    "file_address" => $path,
-                    "file_name" => $file_origin_name,
-                    "file_size" => $file_size,
-                ]);
-            } 
-            else {
-                $post_model = Post::create([
-                    "user_id" => $user->id,
-                    "content" => $content,
-                ]);
+                File::storage_file($request, $post);
             }
             return response()->json([
                 "success" => true,
@@ -74,12 +61,13 @@ class PostController extends Controller
         try {
             return response()->json([
                 "success" => true,
-                "data" => Post::findOrFail($id)
+//                "data" => Post::findOrFail($id)
+                "data" => new PostResource(Post::findOrFail($id))
                 ], 200);
         } catch (Exception $e) {
             return response()->json([
                 "success" => false,
-                "message" => "Could not get post."], 400);
+                "message" => "Post does not exist in database."], 400);
         }
     }
 
@@ -110,10 +98,6 @@ class PostController extends Controller
                 "success" => false,
                 "message" => "User does not own post."], 400);
         }
-    }
-    
-    public function download_file(Request $request, $file_path) {
-        return Storage::download($file_path);
     }
 
     /**

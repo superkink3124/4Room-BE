@@ -34,7 +34,7 @@ class AuthController extends Controller
         if ($validator->fails()) {
             return response()->json([
                 'success' => false,
-                'message' => 'Invalid email or password',
+                'message' => 'Invalid email or password.',
             ], 400);
         }
 
@@ -48,7 +48,7 @@ class AuthController extends Controller
         //User created, return success response
         return response()->json([
             'success' => true,
-            'message' => 'User created successfully',
+            'message' => 'User created successfully.',
             'data' => $user
         ], Response::HTTP_OK);
     }
@@ -65,7 +65,7 @@ class AuthController extends Controller
 
         //Send failed response if request is not valid
         if ($validator->fails()) {
-            return response()->json(['error' => "invalid email or password"], 200);
+            return response()->json(['error' => "Invalid email or password."], 200);
         }
 
         //Request is validated, create jwt
@@ -87,7 +87,7 @@ class AuthController extends Controller
         return response()->json([
             'success' => true,
             'jwt' => $jwt,
-            'user_info' => User::where('email', $credentials['email'])->get()[0]
+            'data' => User::where('email', $credentials['email'])->get()[0]
         ]);
     }
 
@@ -98,12 +98,12 @@ class AuthController extends Controller
 
             return response()->json([
                 'success' => true,
-                'message' => 'User has been logged out'
+                'message' => 'User has been logged out.'
             ]);
         } catch (JWTException $exception) {
             return response()->json([
                 'success' => false,
-                'message' => 'Sorry, user cannot be logged out'
+                'message' => 'Sorry, user cannot be logged out.'
             ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }

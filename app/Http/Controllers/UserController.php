@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
+use Exception;
 
 class UserController extends Controller
 {
@@ -17,8 +18,16 @@ class UserController extends Controller
      */
     public function index(): JsonResponse
     {
-        //
-        return response()->json(['success' => true]);
+        try {
+            return response()->json([
+                "success" => true,
+                "data" => User::all()
+            ], 200);
+        } catch (Exception $e) {
+            return response()->json([
+                "success" => false,
+                "message" => "Could not get all users profile"], 400);
+        }
     }
 
     /**
@@ -29,7 +38,6 @@ class UserController extends Controller
      */
     public function store(Request $request): JsonResponse
     {
-        //
         return response()->json(['success' => true]);
     }
 
@@ -39,30 +47,18 @@ class UserController extends Controller
      * @param  int  $id
      * @return JsonResponse
      */
-    public function show($id=null)
+    public function show(int $id)
     {
-        // Check if $id is NULL, (route: ../users/)
-        if ($id === null) {
+        try {
             return response()->json([
-                'success' => true,
-                'message' => 'Get all users in database',
-                'user_info' => User::all()
-            ]);
+                "success" => true,
+                "data" => User::findOrFail($id)
+            ], 200);
+        } catch (Exception $e) {
+            return response()->json([
+                "success" => false,
+                "message" => "User does not exist in database."], 400);
         }
-        
-        // If $id is not NULL (route: ../users/{id})
-        if (User::find($id)) {
-            return response()->json([
-                'success' => true,
-                'user_info' => User::find($id)
-            ]);
-        } else {
-            return response()->json([
-                'success' => true,
-                'message' => 'Database does not have this user',
-                'user_info' => []
-            ]);
-        }  
     }
 
     /**
@@ -73,9 +69,19 @@ class UserController extends Controller
      */
     public function update(Request $request): JsonResponse
     {
-        $user = $request->user;
-        $user->update($request->all());
-        return response()->json(["success" => true, 'user_info' => $user]);
+        try {
+            $user = $request->user;
+            $user->update($request->all());
+            return response()->json([
+                "success" => true,
+                "message" => "Updated profile.",
+                "user_info" => $user], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                "success" => false,
+                "message" => "Could not update profile.",
+                "user_info" => $user], 400);
+        }
     }
 
     /**
@@ -93,8 +99,8 @@ class UserController extends Controller
     /**
      * Search user by name_in_forum.
      *
-     * @param  int  $email
-     * @return \Illuminate\Http\Response
+     * @param $name
+     * @return JsonResponse
      */
     public function search($name) {
         // Get all users with name_in_forum LIKE $name
