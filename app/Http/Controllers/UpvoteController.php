@@ -60,14 +60,16 @@ class UpvoteController extends Controller
      *
      * @param Request $request
      * @param int $post_id
+     * @return JsonResponse
      */
-    public function destroy(Request $request, int $post_id)
+    public function destroy(Request $request, int $post_id): JsonResponse
     {
         $user = $request->user;
-        $upvote = Upvote::where("user_id", $user->id)
-                        ->where("post_id", $post_id)
-                        ->first();
-        if ($upvote == null) {
+        try {
+            $upvote = Upvote::where("user_id", $user->id)
+                ->where("post_id", $post_id)
+                ->firstOrFail();
+        } catch (\Exception $e) {
             return response()->json([
                 "success" => false,
                 "message" => "User did not upvote post before."], 400);

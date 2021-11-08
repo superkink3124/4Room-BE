@@ -61,7 +61,6 @@ class PostController extends Controller
         try {
             return response()->json([
                 "success" => true,
-//                "data" => Post::findOrFail($id)
                 "data" => new PostResource(Post::findOrFail($id))
                 ], 200);
         } catch (Exception $e) {

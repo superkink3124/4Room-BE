@@ -24,7 +24,7 @@ class PostResource extends JsonResource
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
             'file' => $this->file,
-            'comment' => $this->comments
+            'comment' => $this->comments()->simplePaginate(1)
         ];
     }
 }

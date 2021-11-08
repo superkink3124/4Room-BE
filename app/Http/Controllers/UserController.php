@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\UserCollection;
+use App\Http\Resources\UserResource;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Models\User;
-use Illuminate\Http\Response;
-use Illuminate\Support\Facades\DB;
 use Exception;
 
 class UserController extends Controller
@@ -14,15 +14,11 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return JsonResponse
      */
-    public function index(): JsonResponse
+    public function index()
     {
         try {
-            return response()->json([
-                "success" => true,
-                "data" => User::all()
-            ], 200);
+            return new UserCollection(User::simplePaginate(15));
         } catch (Exception $e) {
             return response()->json([
                 "success" => false,
@@ -44,16 +40,12 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
-     * @return JsonResponse
+     * @param int $id
      */
     public function show(int $id)
     {
         try {
-            return response()->json([
-                "success" => true,
-                "data" => User::findOrFail($id)
-            ], 200);
+            return new UserCollection([User::findOrFail($id)]);
         } catch (Exception $e) {
             return response()->json([
                 "success" => false,
