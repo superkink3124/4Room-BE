@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Str;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -14,14 +15,13 @@ class ResetPasswordController extends Controller
     /**
      * Create token password reset.
      *
-     * @param  ResetPasswordRequest $request
+     * @param Request $request
      * @return JsonResponse
      */
-    public function sendMail(Request $request)
+    public function sendMail(Request $request): JsonResponse
     {
 
         $token = Str::random(60);
-//        dd($token);
         $user = User::where('email', $request->email)->firstOrFail();
         $passwordReset = PasswordReset::updateOrCreate([
             'email' => $user->email,
@@ -33,19 +33,27 @@ class ResetPasswordController extends Controller
         }
 
         return response()->json([
-        'message' => 'We have e-mailed your password reset link!',
-        'token' => $token
+            'success' => true,
+            'message' => 'We have e-mailed your password reset link!',
+            'token' => $token
         ]);
     }
 
     public function reset(Request $request)
     {
         $token = $request->input("token");
-        $passwordReset = PasswordReset::where('token', $token)->firstOrFail();
+        try {
+            $passwordReset = PasswordReset::where('token', $token)->firstOrFail();
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'This password reset token is invalid.',
+            ], 422);
+        }
         if (Carbon::parse($passwordReset->updated_at)->addMinutes(720)->isPast()) {
             $passwordReset->delete();
-
             return response()->json([
+                'success' => false,
                 'message' => 'This password reset token is invalid.',
             ], 422);
         }
@@ -55,6 +63,7 @@ class ResetPasswordController extends Controller
 
         return response()->json([
             'success' => $updatePasswordUser,
+            'message' => 'Password reset successfully.'
         ]);
     }
 }
