@@ -234,7 +234,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYzNjM0Mzc2NCwiZXhwIjoxNjM2MzQ3MzY0LCJuYmYiOjE2MzYzNDM3NjQsImp0aSI6IkZ1ZG1HTk9XMHpjaEkxeTAiLCJzdWIiOjEwMiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9._rADzHpIZgOBZ9oB7Km63RmgUAqj87UMTNF_JIrBAvM",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYzNjM3OTM3NiwiZXhwIjoxNjM2MzgyOTc2LCJuYmYiOjE2MzYzNzkzNzYsImp0aSI6Ims1cHlrMmpwRmd1VHdYSXMiLCJzdWIiOjEsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.PU24pjaa6HKZMRNyv1wnEGjJauwPZ-xL2s2L2pAsZ3o",
 									"type": "string"
 								}
 							]
@@ -324,7 +324,7 @@
 								{
 									"key": "file",
 									"type": "file",
-									"src": "/home/anhduc/Downloads/Background_flipped.png"
+									"src": []
 								}
 							]
 						},
@@ -511,7 +511,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYzNjM2NDI4NiwiZXhwIjoxNjM2MzY3ODg2LCJuYmYiOjE2MzYzNjQyODYsImp0aSI6IkpEbUEzWmZQTlJXWnBuVEoiLCJzdWIiOjEsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.YKF4PNKxL9LNKVkUTfFyQlBBdvyAiTfpaKXuaI4OLSw",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYzNjM2OTE2OSwiZXhwIjoxNjM2MzcyNzY5LCJuYmYiOjE2MzYzNjkxNjksImp0aSI6ImZkVlpxYlRocndoREFUc20iLCJzdWIiOjEwMiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.rs-CFBROETbb2lJ0vMTxSybNy7TC-xeDNkSR0l0Q1A4",
 									"type": "string"
 								}
 							]
@@ -549,7 +549,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYzNjM0Mzc2NCwiZXhwIjoxNjM2MzQ3MzY0LCJuYmYiOjE2MzYzNDM3NjQsImp0aSI6IkZ1ZG1HTk9XMHpjaEkxeTAiLCJzdWIiOjEwMiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9._rADzHpIZgOBZ9oB7Km63RmgUAqj87UMTNF_JIrBAvM",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYzNjM2OTE2OSwiZXhwIjoxNjM2MzcyNzY5LCJuYmYiOjE2MzYzNjkxNjksImp0aSI6ImZkVlpxYlRocndoREFUc20iLCJzdWIiOjEwMiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.rs-CFBROETbb2lJ0vMTxSybNy7TC-xeDNkSR0l0Q1A4",
 									"type": "string"
 								}
 							]
@@ -557,7 +557,7 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:8000/api/posts/1/upvote",
+							"raw": "http://127.0.0.1:8000/api/upvote-post/102",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -568,9 +568,8 @@
 							"port": "8000",
 							"path": [
 								"api",
-								"posts",
-								"1",
-								"upvote"
+								"upvote-post",
+								"102"
 							]
 						}
 					},
@@ -584,7 +583,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYzNjM0Mzc2NCwiZXhwIjoxNjM2MzQ3MzY0LCJuYmYiOjE2MzYzNDM3NjQsImp0aSI6IkZ1ZG1HTk9XMHpjaEkxeTAiLCJzdWIiOjEwMiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9._rADzHpIZgOBZ9oB7Km63RmgUAqj87UMTNF_JIrBAvM",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYzNjM2OTE2OSwiZXhwIjoxNjM2MzcyNzY5LCJuYmYiOjE2MzYzNjkxNjksImp0aSI6ImZkVlpxYlRocndoREFUc20iLCJzdWIiOjEwMiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.rs-CFBROETbb2lJ0vMTxSybNy7TC-xeDNkSR0l0Q1A4",
 									"type": "string"
 								}
 							]
@@ -592,7 +591,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:8000/api/posts/1/upvote",
+							"raw": "http://127.0.0.1:8000/api/upvote-post/1",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -603,9 +602,8 @@
 							"port": "8000",
 							"path": [
 								"api",
-								"posts",
-								"1",
-								"upvote"
+								"upvote-post",
+								"1"
 							]
 						}
 					},
@@ -631,6 +629,149 @@
 								"posts",
 								"1",
 								"upvote"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Follow",
+			"item": [
+				{
+					"name": "Follow",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYzNjM3OTM3NiwiZXhwIjoxNjM2MzgyOTc2LCJuYmYiOjE2MzYzNzkzNzYsImp0aSI6Ims1cHlrMmpwRmd1VHdYSXMiLCJzdWIiOjEsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.PU24pjaa6HKZMRNyv1wnEGjJauwPZ-xL2s2L2pAsZ3o",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/follow-user/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"follow-user",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Unfollow",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYzNjM2OTE2OSwiZXhwIjoxNjM2MzcyNzY5LCJuYmYiOjE2MzYzNjkxNjksImp0aSI6ImZkVlpxYlRocndoREFUc20iLCJzdWIiOjEwMiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.rs-CFBROETbb2lJ0vMTxSybNy7TC-xeDNkSR0l0Q1A4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/follow-user/91",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"follow-user",
+								"91"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Following",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYzNjM3ODQ0MywiZXhwIjoxNjM2MzgyMDQzLCJuYmYiOjE2MzYzNzg0NDMsImp0aSI6IkRvYXdnSzdYZVE5MVo5RE8iLCJzdWIiOjEsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.Wnzf41WzfliXoLXL70X3iGc5M0J4qoKlgeGpJ1uYqTw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/users/10/following",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"users",
+								"10",
+								"following"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Followers",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYzNjM3ODQ0MywiZXhwIjoxNjM2MzgyMDQzLCJuYmYiOjE2MzYzNzg0NDMsImp0aSI6IkRvYXdnSzdYZVE5MVo5RE8iLCJzdWIiOjEsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.Wnzf41WzfliXoLXL70X3iGc5M0J4qoKlgeGpJ1uYqTw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/users/10/followers",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"users",
+								"10",
+								"followers"
 							]
 						}
 					},
