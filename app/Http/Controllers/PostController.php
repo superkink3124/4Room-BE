@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Resources\PostResource;
 use App\Models\File;
 use App\Models\Post;
-use Illuminate\Support\Facades\Storage;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;

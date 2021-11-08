@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\UserCollection;
 use App\Models\Post;
 use App\Models\Upvote;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 
 class UpvoteController extends Controller
 {
@@ -45,14 +45,27 @@ class UpvoteController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Display list users upvote post.
      *
-     * @param  int  $id
-     * @return Response
+     * @param int $id
+     * @return UserCollection|JsonResponse
      */
-    public function show($id)
+    public function show(int $id)
     {
-        //
+        try {
+            $post = Post::findOrFail($id);
+        } catch (\Exception $e) {
+            return response()->json([
+                "success" => false,
+                "message" => "Post does not exist in database."], 400);
+        }
+        $all_upvote = $post->upvotes;
+        $users = [];
+        foreach ($all_upvote as $upvote) {
+            $user = $upvote->user;
+            array_push($users, $user);
+        }
+        return new UserCollection($users);
     }
 
     /**

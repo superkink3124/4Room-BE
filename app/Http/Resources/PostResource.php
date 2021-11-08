@@ -2,9 +2,9 @@
 
 namespace App\Http\Resources;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
-use JsonSerializable;
 
 class PostResource extends JsonResource
 {
@@ -19,12 +19,13 @@ class PostResource extends JsonResource
         return [
             'post_id' => $this->id,
             'owner_id' => $this->user_id,
+            'name_in_forum' => User::findOrFail($this->user_id)->name_in_forum,
             'content' => $this->content,
             'upvote' => $this->upvotes->count(),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
-            'file' => $this->file,
-            'comment' => $this->comments()->simplePaginate(1)
+            'file' => new FileResource($this->file),
+            'comment' => CommentResource::collection($this->comments)
         ];
     }
 }
