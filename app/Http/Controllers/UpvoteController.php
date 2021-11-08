@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 class UpvoteController extends Controller
 {
     /**
-     * Store a newly created resource in storage.
+     * Store a new upvote in database.
      *
      * @param Request $request
      * @param int $id
@@ -41,7 +41,7 @@ class UpvoteController extends Controller
         ]);
         return response()->json([
             "success" => true,
-            "message" => "Upvoted post."], 400);
+            "message" => "Upvoted post."], 200);
     }
 
     /**
@@ -69,7 +69,7 @@ class UpvoteController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove upvote from database.
      *
      * @param Request $request
      * @param int $post_id
@@ -90,6 +90,6 @@ class UpvoteController extends Controller
         $upvote->delete();
         return response()->json([
             "success" => true,
-            "message" => "Removed upvote."], 400);
+            "message" => "Removed upvote."], 200);
     }
 }

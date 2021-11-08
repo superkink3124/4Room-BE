@@ -10,7 +10,7 @@ use App\Http\Controllers\UpvoteController;
 */
 
 Route::get('posts/{id}/upvote', [UpvoteController::class, "show"]);
-Route::post('posts/{id}/upvote', [UpvoteController::class, "store"])
+Route::post('upvote-post/{id}', [UpvoteController::class, "store"])
     ->middleware('jwt.verify');
-Route::delete('posts/{id}/upvote', [UpvoteController::class, "destroy"])
+Route::delete('upvote-post/{id}', [UpvoteController::class, "destroy"])
     ->middleware('jwt.verify');

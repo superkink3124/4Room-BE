@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -54,18 +55,25 @@ class User extends Authenticatable implements JWTSubject
     }
 
     /**
-     * Relationship followers of user.
+     * Get all followers of user.
      */
-    public function followers(): HasMany
+    public function followers(): HasManyThrough
     {
-        return $this->hasMany(Follow::class, 'target_id');
+        return $this->hasManyThrough(
+            User::class,
+            Follow::class,
+            'target_id',
+            'id',
+            'id',
+            'source_id'
+        );
     }
 
 
     /**
-     * Get all followings of user.
+     * Get all following of user.
      */
-    public function followings()
+    public function following(): HasManyThrough
     {
         return $this->hasManyThrough(
             User::class,
