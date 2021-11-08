@@ -2,25 +2,48 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\PostCollection;
 use App\Http\Resources\PostResource;
 use App\Models\File;
 use App\Models\Post;
+use App\Models\User;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 
 class PostController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return Response
+     * Display a list posts in user's newsfeed
      */
-    // public function index(): Response
-    // {
-    //     //
-    // }
+    public function newsfeed(Request $request) {
+        $user = $request->user;
+        $followings = $user->followings;
+        $followings_id = [$user->id];
+        foreach ($followings as $following) {
+            array_push($followings_id, $following->id);
+        }
+        return new PostCollection(Post::whereIn('user_id', $followings_id)
+                                        ->orderBy('updated_at', 'desc')
+                                        ->simplePaginate(15));
+    }
+
+    /**
+     * Display a list posts owned by user_id.
+     * @param int $id
+     * @return JsonResponse|PostCollection
+     */
+     public function user(int $id)
+     {
+         try {
+             $user = User::findOrFail($id);
+         } catch (Exception $e) {
+             return response()->json([
+                 "success" => false,
+                 "message" => "User does not exist in database."], 400);
+         }
+         return new PostCollection($user->posts);
+     }
 
     /**
      * Store a newly created post in database.
@@ -50,7 +73,7 @@ class PostController extends Controller
     }
 
     /**
-     * Display the specified post.
+     * Display the specified post by id.
      *
      * @param int $id
      * @return JsonResponse

@@ -46,7 +46,7 @@ class User extends Authenticatable implements JWTSubject
     }
 
     /**
-     * Get all posts that owned by this user.
+     * Get all posts that owned by user.
      */
     public function posts(): HasMany
     {
@@ -54,18 +54,26 @@ class User extends Authenticatable implements JWTSubject
     }
 
     /**
-     * Get all followers of this user.
+     * Relationship followers of user.
      */
     public function followers(): HasMany
     {
         return $this->hasMany(Follow::class, 'target_id');
     }
 
+
     /**
-     * Get all followings of this user.
+     * Get all followings of user.
      */
-    public function followings(): HasMany
+    public function followings()
     {
-        return $this->hasMany(Follow::class, 'source_id');
+        return $this->hasManyThrough(
+            User::class,
+            Follow::class,
+            'source_id',
+            'id',
+            'id',
+            'target_id'
+        );
     }
 }

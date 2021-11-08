@@ -46,7 +46,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"email\": \"anhducpn67@gmail.com\",\n    \"password\": \"123456789\"\n}",
+							"raw": "{\n    \"email\": \"hoan24@example.org\",\n    \"password\": \"hehehe123\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -208,7 +208,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8000/api/users/1",
+							"raw": "http://127.0.0.1:8000/api/users/102",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -220,7 +220,7 @@
 							"path": [
 								"api",
 								"users",
-								"1"
+								"102"
 							]
 						}
 					},
@@ -306,7 +306,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYzNjMzNDk5NSwiZXhwIjoxNjM2MzM4NTk1LCJuYmYiOjE2MzYzMzQ5OTUsImp0aSI6IlVWb0dFSW5SdUFSeklSVFgiLCJzdWIiOjEwMSwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.N3JXQ8_YtfnOA2nMZzdtgSVnVfjxIjWZ8TGAsOHyXEU",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYzNjM2MDYwNCwiZXhwIjoxNjM2MzY0MjA0LCJuYmYiOjE2MzYzNjA2MDQsImp0aSI6IjNQT3J4MThCVXpzNmY2SXoiLCJzdWIiOjEsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.7f4CS3iCG37AZXBwbHQPpW5RYGyDY8029f6JI6Y_nYI",
 									"type": "string"
 								}
 							]
@@ -450,6 +450,31 @@
 					"response": []
 				},
 				{
+					"name": "user_posts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/users/1/posts",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"users",
+								"1",
+								"posts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "download_file",
 					"request": {
 						"auth": {
@@ -473,6 +498,39 @@
 								"files",
 								"public",
 								"ezIJRRmYZOoQCugyNYToJvLUHvkCUsst57DDAwgF.png"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "newsfeed",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYzNjM2NDI4NiwiZXhwIjoxNjM2MzY3ODg2LCJuYmYiOjE2MzYzNjQyODYsImp0aSI6IkpEbUEzWmZQTlJXWnBuVEoiLCJzdWIiOjEsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.YKF4PNKxL9LNKVkUTfFyQlBBdvyAiTfpaKXuaI4OLSw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/newsfeed",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"newsfeed"
 							]
 						}
 					},
@@ -534,7 +592,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:8000/api/upvote/posts/1",
+							"raw": "http://127.0.0.1:8000/api/posts/1/upvote",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -545,9 +603,34 @@
 							"port": "8000",
 							"path": [
 								"api",
-								"upvote",
 								"posts",
+								"1",
+								"upvote"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "users_upvote",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/posts/1/upvote",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
 								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"posts",
+								"1",
+								"upvote"
 							]
 						}
 					},

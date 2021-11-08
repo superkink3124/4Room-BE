@@ -45,7 +45,9 @@ class UserController extends Controller
     public function show(int $id)
     {
         try {
-            return new UserCollection([User::findOrFail($id)]);
+            return response()->json([
+                "success" => true,
+                "data" => new UserResource(User::findOrFail($id))], 200);
         } catch (Exception $e) {
             return response()->json([
                 "success" => false,
