@@ -91,6 +91,14 @@ class AuthController extends Controller
         ]);
     }
 
+    public function jwtValidate(Request $request): JsonResponse
+    {
+        return response()->json([
+            'success' => true,
+            'message' => 'Token is valid'
+        ]);
+    }
+
     public function logout(Request $request): JsonResponse
     {
         try {
