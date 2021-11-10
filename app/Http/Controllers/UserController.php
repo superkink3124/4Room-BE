@@ -39,7 +39,7 @@ class UserController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified user's profile.
      *
      * @param Request $request
      * @param int $id
@@ -75,7 +75,7 @@ class UserController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update user's profile.
      *
      * @param Request $request
      * @return JsonResponse

@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "c7be455f-d6e3-4144-bca9-4740de0313b8",
-		"name": "4room333",
+		"name": "4room",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -46,7 +46,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"email\": \"hoan24@example.org\",\n    \"password\": \"hehehe123\"\n}",
+							"raw": "{\n    \"email\": \"ly69@example.org\",\n    \"password\": \"hehehe123\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -201,6 +201,16 @@
 						"disableBodyPruning": true
 					},
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYzNjUxNTcyOSwiZXhwIjoxNjM2NTE5MzI5LCJuYmYiOjE2MzY1MTU3MjksImp0aSI6ImF5WVo5Y2xnOEFzY1AzYVkiLCJzdWIiOjEwMSwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.5xG5aJIb33Tvmwo83i4OxsPI8zQ5h9sTERYtmszzLUg",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"body": {
@@ -234,7 +244,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYzNjM3OTM3NiwiZXhwIjoxNjM2MzgyOTc2LCJuYmYiOjE2MzYzNzkzNzYsImp0aSI6Ims1cHlrMmpwRmd1VHdYSXMiLCJzdWIiOjEsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.PU24pjaa6HKZMRNyv1wnEGjJauwPZ-xL2s2L2pAsZ3o",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYzNjU0MDMzNSwiZXhwIjoxNjM2NTQzOTM1LCJuYmYiOjE2MzY1NDAzMzUsImp0aSI6IlgwOGlkSTZHaGQxblNCYlkiLCJzdWIiOjIxLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.0eXzzxxvX26PArUajRVWS6945-7_eI-FqZR088GWveg",
 									"type": "string"
 								}
 							]
@@ -271,10 +281,20 @@
 				{
 					"name": "search_by_name",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYzNjUxNTcyOSwiZXhwIjoxNjM2NTE5MzI5LCJuYmYiOjE2MzY1MTU3MjksImp0aSI6ImF5WVo5Y2xnOEFzY1AzYVkiLCJzdWIiOjEwMSwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.5xG5aJIb33Tvmwo83i4OxsPI8zQ5h9sTERYtmszzLUg",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:8000/api/users/search/cuong",
+							"raw": "http://127.0.0.1:8000/api/users/search/Huy",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -287,7 +307,7 @@
 								"api",
 								"users",
 								"search",
-								"cuong"
+								"Huy"
 							]
 						}
 					},
@@ -647,7 +667,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYzNjM3OTM3NiwiZXhwIjoxNjM2MzgyOTc2LCJuYmYiOjE2MzYzNzkzNzYsImp0aSI6Ims1cHlrMmpwRmd1VHdYSXMiLCJzdWIiOjEsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.PU24pjaa6HKZMRNyv1wnEGjJauwPZ-xL2s2L2pAsZ3o",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYzNjUxNTcyOSwiZXhwIjoxNjM2NTE5MzI5LCJuYmYiOjE2MzY1MTU3MjksImp0aSI6ImF5WVo5Y2xnOEFzY1AzYVkiLCJzdWIiOjEwMSwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.5xG5aJIb33Tvmwo83i4OxsPI8zQ5h9sTERYtmszzLUg",
 									"type": "string"
 								}
 							]
@@ -772,6 +792,40 @@
 								"users",
 								"10",
 								"followers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Suggestion",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYzNjU0MDczOCwiZXhwIjoxNjM2NTQ0MzM4LCJuYmYiOjE2MzY1NDA3MzgsImp0aSI6ImhSUTV2NVJCZDBhZU90aTIiLCJzdWIiOjEwMSwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.VwhzTez1a5tP4FPYZOxf4_ND0cBy8cKw__D1YeeWp2Y",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/follow/suggestion",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"follow",
+								"suggestion"
 							]
 						}
 					},

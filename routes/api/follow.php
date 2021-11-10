@@ -17,3 +17,5 @@ Route::post('follow-user/{id}', [FollowController::class, "store"])
     ->middleware('jwt.verify');
 Route::delete('follow-user/{id}', [FollowController::class, "destroy"])
     ->middleware('jwt.verify');
+Route::get('/follow/suggestion', [FollowController::class, "suggestion"])
+    ->middleware('jwt.verify');

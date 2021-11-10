@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\UserCollection;
+use App\Http\Resources\UserResource;
 use App\Models\Follow;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
@@ -26,6 +27,33 @@ class FollowController extends Controller
                 "message" => "Target user does not exist in database."], 400);
         }
         return new UserCollection($user->following);
+    }
+
+    /**
+     * Display top 10 suggestion user
+     */
+    public function suggestion(Request $request)
+    {
+        $request_user = $request->user;
+        $users = User::all();
+        $candidate_users = [];
+        foreach ($users as $user) {
+            array_push($candidate_users, new UserResource($user));
+        }
+        usort($candidate_users, function($a, $b) {return $a->followers->count() < $b->followers->count();});
+        $result = [];
+        foreach ($candidate_users as $candidate_user) {
+            if (count($result) == 10) {
+                break;
+            }
+            if ($request_user->id == $candidate_user->id) {
+                continue;
+            }
+            array_push($result, $candidate_user);
+        }
+        return response()->json([
+            "success" => true,
+            "data" => $result], 200);
     }
 
     /**
