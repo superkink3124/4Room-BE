@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\UserCollection;
 use App\Http\Resources\UserResource;
+use App\Models\Follow;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -18,7 +19,7 @@ class UserController extends Controller
     public function index()
     {
         try {
-            return new UserCollection(User::simplePaginate(15));
+            return new UserCollection(User::simplePaginate(10));
         } catch (Exception $e) {
             return response()->json([
                 "success" => false,
@@ -40,14 +41,23 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      *
+     * @param Request $request
      * @param int $id
+     * @return JsonResponse
      */
-    public function show(int $id)
+    public function show(Request $request, int $id): JsonResponse
     {
+        $request_user = $request->user;
         try {
+            $target_user = User::findOrFail($id);
+            $follow = Follow::where("source_id", $request_user->id)
+                            ->where("target_id", $target_user->id)
+                            ->first();
+            $is_follow = ($follow != null);
             return response()->json([
                 "success" => true,
-                "data" => new UserResource(User::findOrFail($id))], 200);
+                "data" => new UserResource($target_user),
+                "followed" => $is_follow], 200);
         } catch (Exception $e) {
             return response()->json([
                 "success" => false,
@@ -68,51 +78,44 @@ class UserController extends Controller
             $user->update($request->all());
             return response()->json([
                 "success" => true,
-                "message" => "Updated profile.",
-                "user_info" => $user], 200);
-        } catch (\Exception $e) {
+                "message" => "Updated profile."], 200);
+        } catch (Exception $e) {
             return response()->json([
                 "success" => false,
-                "message" => "Could not update profile.",
-                "user_info" => $user], 400);
+                "message" => "Could not update profile."], 400);
         }
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified user from database.
      *
      * @param int $id
      * @return JsonResponse
      */
     public function destroy(int $id) : JsonResponse
     {
-        //
-        return response()->json(['success' => true]);
+        try {
+            $user = User::findOrFail($id);
+        } catch (Exception $e) {
+            return response()->json([
+                "success" => false,
+                "message" => "User does not exist in database."], 400);
+        }
+        $user->delete();
+        return response()->json([
+            "success" => true,
+            "message" => "Deleted user."], 200);
     }
 
     /**
      * Search user by name_in_forum.
      *
-     * @param $name
-     * @return JsonResponse
+     * @param $name_in_forum
+     * @return UserCollection
      */
-    public function search($name) {
-        // Get all users with name_in_forum LIKE $name
-        $data = User::where("name_in_forum", "like", '%'.$name.'%')->get();
-        // error_log($data);
-
-        // Check if $data JSON is empty
-        if (json_decode($data, true)) {
-            return response()->json([
-                'success' => true,
-                'users_info' => User::where("name_in_forum", "like", '%'.$name.'%')->get(),
-            ]);
-        } else {
-            return response()->json([
-                'success' => true,
-                'message' => 'There are no users with name like this',
-                'users_info' => []
-            ]);
-        }
+    public function search($name_in_forum): UserCollection
+    {
+        $candidate_users = User::where("name_in_forum", "like", '%'.$name_in_forum.'%')->get();
+        return new UserCollection($candidate_users);
     }
 }

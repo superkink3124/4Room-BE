@@ -11,8 +11,9 @@ use App\Http\Controllers\UserController;
 
 
 Route::get('users', [UserController::class, "index"]);
-Route::get('users/{id}', [UserController::class, "show"]);
-Route::post('profile', [UserController::class, 'update'])
+Route::get('users/{id}', [UserController::class, "show"])
     ->middleware('jwt.verify');
-Route::get('users/search/{name}', [UserController::class, 'search'])
+Route::post('profile', [UserController::class, "update"])
+    ->middleware('jwt.verify');
+Route::get('users/search/{name}', [UserController::class, "search"])
     ->middleware('jwt.verify');
