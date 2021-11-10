@@ -10,6 +10,12 @@ class Comment extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'user_id',
+        'post_id',
+        'content'
+    ];
+
     /**
      * Get the post that owns this comment.
      */
