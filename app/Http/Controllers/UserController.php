@@ -65,6 +65,15 @@ class UserController extends Controller
         }
     }
 
+    public function getProfile(Request $request): JsonResponse
+    {
+        $user = $request->user;
+        return response()->json([
+            'success' => true,
+            'data' => new UserResource($user)
+        ]);
+    }
+
     /**
      * Update the specified resource in storage.
      *

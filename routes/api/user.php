@@ -15,5 +15,7 @@ Route::get('users/{id}', [UserController::class, "show"])
     ->middleware('jwt.verify');
 Route::post('profile', [UserController::class, "update"])
     ->middleware('jwt.verify');
+Route::get('profile', [UserController::class, "getProfile"])
+    ->middleware('jwt.verify');
 Route::post('users/search', [UserController::class, "search"])
     ->middleware('jwt.verify');
