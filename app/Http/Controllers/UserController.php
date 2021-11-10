@@ -78,7 +78,8 @@ class UserController extends Controller
             $user->update($request->all());
             return response()->json([
                 "success" => true,
-                "message" => "Updated profile."], 200);
+                "message" => "Updated profile.",
+                "data" => new UserResource($user)], 200);
         } catch (Exception $e) {
             return response()->json([
                 "success" => false,
@@ -107,15 +108,14 @@ class UserController extends Controller
             "message" => "Deleted user."], 200);
     }
 
-    /**
-     * Search user by name_in_forum.
-     *
-     * @param $name_in_forum
-     * @return UserCollection
-     */
-    public function search($name_in_forum): UserCollection
+    public function search(Request $request): JsonResponse
     {
-        $candidate_users = User::where("name_in_forum", "like", '%'.$name_in_forum.'%')->simplePaginate(10);
-        return new UserCollection($candidate_users);
+        $name_in_forum = $request->name_in_forum;
+        $data = User::where("name_in_forum", "like", '%'.$name_in_forum.'%')->limit(10)->get();
+
+        return response()->json([
+            'success' => true,
+            'data' => $data
+        ]);
     }
 }
