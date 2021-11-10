@@ -115,7 +115,7 @@ class UserController extends Controller
      */
     public function search($name_in_forum): UserCollection
     {
-        $candidate_users = User::where("name_in_forum", "like", '%'.$name_in_forum.'%')->get();
+        $candidate_users = User::where("name_in_forum", "like", '%'.$name_in_forum.'%')->simplePaginate(10);
         return new UserCollection($candidate_users);
     }
 }
