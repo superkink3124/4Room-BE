@@ -85,6 +85,13 @@ class CommentController extends Controller
             ], 400);
         }
 
+        if ($request->input("content") == $comment->content) {
+            return response()->json([
+                "success" => false,
+                "message" => "You have not changed the comment yet."
+            ], 400);
+        }
+
         $comment->update(["content" => $request->input("content")]);
         return response()->json([
             "success" => true,
