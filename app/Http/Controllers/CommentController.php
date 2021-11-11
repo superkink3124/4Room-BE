@@ -56,6 +56,43 @@ class CommentController extends Controller
     }
 
     /**
+     * Update an existing comment.
+     *
+     * @param  Request  $request
+     * @return JsonResponse
+     */
+    public function updateComment(Request $request, int $post_id, int $id): JsonResponse
+    {
+        $user = $request->user;
+
+        try {
+            Post::findOrFail($post_id);
+        } catch (Exception $e) {
+            return response()->json([
+                "success" => false,
+                "message" => "This post does not exist in database."
+            ], 400);
+        }
+
+        try {
+            $comment = Comment::where("user_id", $user->id)
+                ->where("post_id", $post_id)
+                ->findOrFail($id);
+        } catch (Exception $e) {
+            return response()->json([
+                "success" => false,
+                "message" => "Comment does not exist in this post."
+            ], 400);
+        }
+
+        $comment->update(["content" => $request->input("content")]);
+        return response()->json([
+            "success" => true,
+            "message" => "Updated comment."
+        ], 200);
+    }
+
+    /**
      * Display the specified resource.
      *
      * @param Request $request

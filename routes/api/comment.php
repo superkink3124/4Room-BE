@@ -12,5 +12,7 @@ use App\Http\Controllers\CommentController;
 
 Route::post('posts/{post_id}/create-comment', [CommentController::class, 'createComment'])
     ->middleware('jwt.verify');
+Route::post('posts/{post_id}/comment_id={id}/update', [CommentController::class, 'updateComment'])
+    ->middleware('jwt.verify');
 Route::delete('posts/{post_id}/comment_id={id}', [CommentController::class, 'deleteComment'])
     ->middleware('jwt.verify');
