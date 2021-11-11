@@ -59,7 +59,7 @@ class PostController extends Controller
                 "user_id" => $user->id,
                 "content" => $request->input("content"),
             ]);
-            if ($request->file('file')->isValid()) {
+            if ($request->file('file') !== null && $request->file('file')->isValid()) {
                 File::storage_file($request, $post);
             }
             return response()->json([

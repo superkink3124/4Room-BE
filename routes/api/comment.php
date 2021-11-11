@@ -10,9 +10,9 @@ use App\Http\Controllers\CommentController;
 |--------------------------------------------------------------------------
 */
 
-Route::post('posts/{post_id}/create-comment', [CommentController::class, 'createComment'])
+Route::post('posts/{post_id}/comments/create', [CommentController::class, 'createComment'])
     ->middleware('jwt.verify');
-Route::post('posts/{post_id}/comment_id={id}/update', [CommentController::class, 'updateComment'])
+Route::post('posts/{post_id}/comments/{id}/update', [CommentController::class, 'updateComment'])
     ->middleware('jwt.verify');
-Route::delete('posts/{post_id}/comment_id={id}', [CommentController::class, 'deleteComment'])
+Route::delete('posts/{post_id}/comments/{id}/delete', [CommentController::class, 'deleteComment'])
     ->middleware('jwt.verify');
