@@ -18,7 +18,7 @@ class PostController extends Controller
      */
     public function newsfeed(Request $request) {
         $user = $request->user;
-        $followings = $user->followings;
+        $followings = $user->following;
         $followings_id = [$user->id];
         foreach ($followings as $following) {
             array_push($followings_id, $following->id);
