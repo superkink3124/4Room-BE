@@ -23,3 +23,4 @@ Route::group([], __DIR__ . '/api/post.php');
 Route::group([], __DIR__ . '/api/upvote.php');
 Route::group([], __DIR__ . '/api/follow.php');
 Route::group([], __DIR__ . '/api/comment.php');
+Route::group([], __DIR__ . '/api/file.php');
