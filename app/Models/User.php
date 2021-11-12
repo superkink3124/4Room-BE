@@ -73,7 +73,7 @@ class User extends Authenticatable implements JWTSubject
     /**
      * Get all following of user.
      */
-    public function following(): HasManyThrough
+    public function followings(): HasManyThrough
     {
         return $this->hasManyThrough(
             User::class,
