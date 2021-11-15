@@ -20,7 +20,7 @@ class UserFactory extends Factory
             'email' => $this->faker->unique()->safeEmail(),
             'password' => Hash::make('hehehe123'),
             'name_in_forum' => VNFaker::fullname(),
-            'bio' => VNFaker::paragraphs(),
+            'bio' => VNFaker::sentences(2),
         ];
     }
 

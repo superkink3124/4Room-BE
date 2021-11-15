@@ -9,8 +9,6 @@ cp .env.example .env
 
 2. Config email in  ```.env```
 ```
-
-
 MAIL_MAILER=smtp
 MAIL_HOST=smtp.gmail.com
 MAIL_PORT=587
