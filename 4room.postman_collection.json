@@ -1,934 +1,1032 @@
 {
-    "info": {
-        "_postman_id": "c7be455f-d6e3-4144-bca9-4740de0313b8",
-        "name": "4room",
-        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
-    },
-    "item": [{
-            "name": "Authen",
-            "item": [{
-                    "name": "register",
-                    "request": {
-                        "method": "POST",
-                        "header": [],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "{\n    \"email\": \"anhducpn67@gmail.com\",\n    \"name_in_forum\": \"Nguyen Tran Anh Duc\",\n    \"password\": \"duaboa123\",\n    \"password_confirmation\": \"duaboa123\"\n}",
-                            "options": {
-                                "raw": {
-                                    "language": "json"
-                                }
-                            }
-                        },
-                        "url": {
-                            "raw": "127.0.0.1:8000/api/register",
-                            "host": [
-                                "127",
-                                "0",
-                                "0",
-                                "1"
-                            ],
-                            "port": "8000",
-                            "path": [
-                                "api",
-                                "register"
-                            ]
-                        }
-                    },
-                    "response": []
-                },
-                {
-                    "name": "login",
-                    "request": {
-                        "method": "POST",
-                        "header": [],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "{\n    \"email\": \"anhducpn67@gmail.com\",\n    \"password\": \"duaboa123\"\n}",
-                            "options": {
-                                "raw": {
-                                    "language": "json"
-                                }
-                            }
-                        },
-                        "url": {
-                            "raw": "127.0.0.1:8000/api/login",
-                            "host": [
-                                "127",
-                                "0",
-                                "0",
-                                "1"
-                            ],
-                            "port": "8000",
-                            "path": [
-                                "api",
-                                "login"
-                            ]
-                        }
-                    },
-                    "response": []
-                },
-                {
-                    "name": "logout",
-                    "request": {
-                        "auth": {
-                            "type": "bearer",
-                            "bearer": [{
-                                "key": "token",
-                                "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYzNTk5Mzg3MSwiZXhwIjoxNjM1OTk3NDcxLCJuYmYiOjE2MzU5OTM4NzEsImp0aSI6IjM4MDJUVUNNUG16TUdXQmYiLCJzdWIiOjEsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.trdDBxPpxUKvI6-V3OyoT6a0Ja543JyYKuaUnCW8o4A",
-                                "type": "string"
-                            }]
-                        },
-                        "method": "GET",
-                        "header": [],
-                        "url": {
-                            "raw": "127.0.0.1:8000/api/logout",
-                            "host": [
-                                "127",
-                                "0",
-                                "0",
-                                "1"
-                            ],
-                            "port": "8000",
-                            "path": [
-                                "api",
-                                "logout"
-                            ]
-                        }
-                    },
-                    "response": []
-                },
-                {
-                    "name": "reset_password",
-                    "request": {
-                        "method": "POST",
-                        "header": [],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "{\n    \"email\": \"anhducpn67@gmail.com\"\n}",
-                            "options": {
-                                "raw": {
-                                    "language": "json"
-                                }
-                            }
-                        },
-                        "url": {
-                            "raw": "http://127.0.0.1:8000/api/reset-password",
-                            "protocol": "http",
-                            "host": [
-                                "127",
-                                "0",
-                                "0",
-                                "1"
-                            ],
-                            "port": "8000",
-                            "path": [
-                                "api",
-                                "reset-password"
-                            ]
-                        }
-                    },
-                    "response": []
-                },
-                {
-                    "name": "change_password",
-                    "request": {
-                        "method": "POST",
-                        "header": [],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "{\n    \"token\": \"t6HFVH4CZRsMYAppLFFxlRU0bqxwCHp2buJOY8Rwc7f75hRNSjJRRf6rNVXz\",\n    \"password\": \"123456789\"\n}",
-                            "options": {
-                                "raw": {
-                                    "language": "json"
-                                }
-                            }
-                        },
-                        "url": {
-                            "raw": "http://127.0.0.1:8000/api/change-password/",
-                            "protocol": "http",
-                            "host": [
-                                "127",
-                                "0",
-                                "0",
-                                "1"
-                            ],
-                            "port": "8000",
-                            "path": [
-                                "api",
-                                "change-password",
-                                ""
-                            ]
-                        }
-                    },
-                    "response": []
-                }
-            ]
-        },
-        {
-            "name": "User",
-            "item": [{
-                    "name": "get_all_profile",
-                    "request": {
-                        "method": "GET",
-                        "header": [],
-                        "url": {
-                            "raw": "http://127.0.0.1:8000/api/users",
-                            "protocol": "http",
-                            "host": [
-                                "127",
-                                "0",
-                                "0",
-                                "1"
-                            ],
-                            "port": "8000",
-                            "path": [
-                                "api",
-                                "users"
-                            ]
-                        }
-                    },
-                    "response": []
-                },
-                {
-                    "name": "get_specified_profile",
-                    "protocolProfileBehavior": {
-                        "disableBodyPruning": true
-                    },
-                    "request": {
-                        "auth": {
-                            "type": "bearer",
-                            "bearer": [{
-                                "key": "token",
-                                "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYzNjUxNTcyOSwiZXhwIjoxNjM2NTE5MzI5LCJuYmYiOjE2MzY1MTU3MjksImp0aSI6ImF5WVo5Y2xnOEFzY1AzYVkiLCJzdWIiOjEwMSwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.5xG5aJIb33Tvmwo83i4OxsPI8zQ5h9sTERYtmszzLUg",
-                                "type": "string"
-                            }]
-                        },
-                        "method": "GET",
-                        "header": [],
-                        "body": {
-                            "mode": "raw",
-                            "raw": ""
-                        },
-                        "url": {
-                            "raw": "http://127.0.0.1:8000/api/users/102",
-                            "protocol": "http",
-                            "host": [
-                                "127",
-                                "0",
-                                "0",
-                                "1"
-                            ],
-                            "port": "8000",
-                            "path": [
-                                "api",
-                                "users",
-                                "102"
-                            ]
-                        }
-                    },
-                    "response": []
-                },
-                {
-                    "name": "update_profile",
-                    "request": {
-                        "auth": {
-                            "type": "bearer",
-                            "bearer": [{
-                                "key": "token",
-                                "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYzNjU0MDMzNSwiZXhwIjoxNjM2NTQzOTM1LCJuYmYiOjE2MzY1NDAzMzUsImp0aSI6IlgwOGlkSTZHaGQxblNCYlkiLCJzdWIiOjIxLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.0eXzzxxvX26PArUajRVWS6945-7_eI-FqZR088GWveg",
-                                "type": "string"
-                            }]
-                        },
-                        "method": "POST",
-                        "header": [],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "{\r\n    \"bio\": \"Hehehe\",\r\n    \"instagram_link\": \"fb.com/anhduc\",\r\n    \"twitter_link\": \"linkedin.com/anhduc\"\r\n}",
-                            "options": {
-                                "raw": {
-                                    "language": "json"
-                                }
-                            }
-                        },
-                        "url": {
-                            "raw": "http://127.0.0.1:8000/api/profile",
-                            "protocol": "http",
-                            "host": [
-                                "127",
-                                "0",
-                                "0",
-                                "1"
-                            ],
-                            "port": "8000",
-                            "path": [
-                                "api",
-                                "profile"
-                            ]
-                        }
-                    },
-                    "response": []
-                },
-                {
-                    "name": "search_by_name",
-                    "request": {
-                        "auth": {
-                            "type": "bearer",
-                            "bearer": [{
-                                "key": "token",
-                                "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYzNjUxNTcyOSwiZXhwIjoxNjM2NTE5MzI5LCJuYmYiOjE2MzY1MTU3MjksImp0aSI6ImF5WVo5Y2xnOEFzY1AzYVkiLCJzdWIiOjEwMSwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.5xG5aJIb33Tvmwo83i4OxsPI8zQ5h9sTERYtmszzLUg",
-                                "type": "string"
-                            }]
-                        },
-                        "method": "GET",
-                        "header": [],
-                        "url": {
-                            "raw": "http://127.0.0.1:8000/api/users/search/Huy",
-                            "protocol": "http",
-                            "host": [
-                                "127",
-                                "0",
-                                "0",
-                                "1"
-                            ],
-                            "port": "8000",
-                            "path": [
-                                "api",
-                                "users",
-                                "search",
-                                "Huy"
-                            ]
-                        }
-                    },
-                    "response": []
-                }
-            ]
-        },
-        {
-            "name": "Post",
-            "item": [{
-                    "name": "create_post",
-                    "request": {
-                        "auth": {
-                            "type": "bearer",
-                            "bearer": [{
-                                "key": "token",
-                                "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYzNjY0MDgzOSwiZXhwIjoxNjM2NjQ0NDM5LCJuYmYiOjE2MzY2NDA4MzksImp0aSI6InpVNEVrNXlmdG1OOHRmemsiLCJzdWIiOjEwMSwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.-x_x_Ye17WKANEZMSO_Hw6yiN2i_5uAjq74KT0_NFOY",
-                                "type": "string"
-                            }]
-                        },
-                        "method": "POST",
-                        "header": [],
-                        "body": {
-                            "mode": "formdata",
-                            "formdata": [{
-                                    "key": "content",
-                                    "value": "Test",
-                                    "type": "text"
-                                },
-                                {
-                                    "key": "file",
-                                    "type": "file",
-                                    "src": [],
-                                    "disabled": true
-                                }
-                            ]
-                        },
-                        "url": {
-                            "raw": "http://127.0.0.1:8000/api/posts/create",
-                            "protocol": "http",
-                            "host": [
-                                "127",
-                                "0",
-                                "0",
-                                "1"
-                            ],
-                            "port": "8000",
-                            "path": [
-                                "api",
-                                "posts",
-                                "create"
-                            ]
-                        }
-                    },
-                    "response": []
-                },
-                {
-                    "name": "get_specified_post",
-                    "request": {
-                        "method": "GET",
-                        "header": [],
-                        "url": {
-                            "raw": "http://127.0.0.1:8000/api/posts/1",
-                            "protocol": "http",
-                            "host": [
-                                "127",
-                                "0",
-                                "0",
-                                "1"
-                            ],
-                            "port": "8000",
-                            "path": [
-                                "api",
-                                "posts",
-                                "1"
-                            ]
-                        }
-                    },
-                    "response": []
-                },
-                {
-                    "name": "update_post",
-                    "request": {
-                        "auth": {
-                            "type": "bearer",
-                            "bearer": [{
-                                "key": "token",
-                                "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYzNjMzNDk5NSwiZXhwIjoxNjM2MzM4NTk1LCJuYmYiOjE2MzYzMzQ5OTUsImp0aSI6IlVWb0dFSW5SdUFSeklSVFgiLCJzdWIiOjEwMSwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.N3JXQ8_YtfnOA2nMZzdtgSVnVfjxIjWZ8TGAsOHyXEU",
-                                "type": "string"
-                            }]
-                        },
-                        "method": "POST",
-                        "header": [],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "{\n    \"content\": \"Hummmmmm\"\n}",
-                            "options": {
-                                "raw": {
-                                    "language": "json"
-                                }
-                            }
-                        },
-                        "url": {
-                            "raw": "http://127.0.0.1:8000/api/posts/2002/edit",
-                            "protocol": "http",
-                            "host": [
-                                "127",
-                                "0",
-                                "0",
-                                "1"
-                            ],
-                            "port": "8000",
-                            "path": [
-                                "api",
-                                "posts",
-                                "2002",
-                                "edit"
-                            ]
-                        }
-                    },
-                    "response": []
-                },
-                {
-                    "name": "delete_post",
-                    "request": {
-                        "auth": {
-                            "type": "bearer",
-                            "bearer": [{
-                                "key": "token",
-                                "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYzNjMzNDk5NSwiZXhwIjoxNjM2MzM4NTk1LCJuYmYiOjE2MzYzMzQ5OTUsImp0aSI6IlVWb0dFSW5SdUFSeklSVFgiLCJzdWIiOjEwMSwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.N3JXQ8_YtfnOA2nMZzdtgSVnVfjxIjWZ8TGAsOHyXEU",
-                                "type": "string"
-                            }]
-                        },
-                        "method": "DELETE",
-                        "header": [],
-                        "url": {
-                            "raw": "http://127.0.0.1:8000/api/posts/2001",
-                            "protocol": "http",
-                            "host": [
-                                "127",
-                                "0",
-                                "0",
-                                "1"
-                            ],
-                            "port": "8000",
-                            "path": [
-                                "api",
-                                "posts",
-                                "2001"
-                            ]
-                        }
-                    },
-                    "response": []
-                },
-                {
-                    "name": "user_posts",
-                    "request": {
-                        "method": "GET",
-                        "header": [],
-                        "url": {
-                            "raw": "http://127.0.0.1:8000/api/users/1/posts",
-                            "protocol": "http",
-                            "host": [
-                                "127",
-                                "0",
-                                "0",
-                                "1"
-                            ],
-                            "port": "8000",
-                            "path": [
-                                "api",
-                                "users",
-                                "1",
-                                "posts"
-                            ]
-                        }
-                    },
-                    "response": []
-                },
-                {
-                    "name": "download_file",
-                    "request": {
-                        "auth": {
-                            "type": "noauth"
-                        },
-                        "method": "GET",
-                        "header": [],
-                        "url": {
-                            "raw": "http://127.0.0.1:8000/api/download/files/public/ezIJRRmYZOoQCugyNYToJvLUHvkCUsst57DDAwgF.png",
-                            "protocol": "http",
-                            "host": [
-                                "127",
-                                "0",
-                                "0",
-                                "1"
-                            ],
-                            "port": "8000",
-                            "path": [
-                                "api",
-                                "download",
-                                "files",
-                                "public",
-                                "ezIJRRmYZOoQCugyNYToJvLUHvkCUsst57DDAwgF.png"
-                            ]
-                        }
-                    },
-                    "response": []
-                },
-                {
-                    "name": "newsfeed",
-                    "request": {
-                        "auth": {
-                            "type": "bearer",
-                            "bearer": [{
-                                "key": "token",
-                                "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYzNjM2OTE2OSwiZXhwIjoxNjM2MzcyNzY5LCJuYmYiOjE2MzYzNjkxNjksImp0aSI6ImZkVlpxYlRocndoREFUc20iLCJzdWIiOjEwMiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.rs-CFBROETbb2lJ0vMTxSybNy7TC-xeDNkSR0l0Q1A4",
-                                "type": "string"
-                            }]
-                        },
-                        "method": "GET",
-                        "header": [],
-                        "url": {
-                            "raw": "http://127.0.0.1:8000/api/newsfeed",
-                            "protocol": "http",
-                            "host": [
-                                "127",
-                                "0",
-                                "0",
-                                "1"
-                            ],
-                            "port": "8000",
-                            "path": [
-                                "api",
-                                "newsfeed"
-                            ]
-                        }
-                    },
-                    "response": []
-                }
-            ]
-        },
-        {
-            "name": "Upvote",
-            "item": [{
-                    "name": "add_upvote",
-                    "request": {
-                        "auth": {
-                            "type": "bearer",
-                            "bearer": [{
-                                "key": "token",
-                                "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYzNjM2OTE2OSwiZXhwIjoxNjM2MzcyNzY5LCJuYmYiOjE2MzYzNjkxNjksImp0aSI6ImZkVlpxYlRocndoREFUc20iLCJzdWIiOjEwMiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.rs-CFBROETbb2lJ0vMTxSybNy7TC-xeDNkSR0l0Q1A4",
-                                "type": "string"
-                            }]
-                        },
-                        "method": "POST",
-                        "header": [],
-                        "url": {
-                            "raw": "http://127.0.0.1:8000/api/upvote-post/102",
-                            "protocol": "http",
-                            "host": [
-                                "127",
-                                "0",
-                                "0",
-                                "1"
-                            ],
-                            "port": "8000",
-                            "path": [
-                                "api",
-                                "upvote-post",
-                                "102"
-                            ]
-                        }
-                    },
-                    "response": []
-                },
-                {
-                    "name": "remove_upvote",
-                    "request": {
-                        "auth": {
-                            "type": "bearer",
-                            "bearer": [{
-                                "key": "token",
-                                "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYzNjM2OTE2OSwiZXhwIjoxNjM2MzcyNzY5LCJuYmYiOjE2MzYzNjkxNjksImp0aSI6ImZkVlpxYlRocndoREFUc20iLCJzdWIiOjEwMiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.rs-CFBROETbb2lJ0vMTxSybNy7TC-xeDNkSR0l0Q1A4",
-                                "type": "string"
-                            }]
-                        },
-                        "method": "DELETE",
-                        "header": [],
-                        "url": {
-                            "raw": "http://127.0.0.1:8000/api/upvote-post/1",
-                            "protocol": "http",
-                            "host": [
-                                "127",
-                                "0",
-                                "0",
-                                "1"
-                            ],
-                            "port": "8000",
-                            "path": [
-                                "api",
-                                "upvote-post",
-                                "1"
-                            ]
-                        }
-                    },
-                    "response": []
-                },
-                {
-                    "name": "users_upvote",
-                    "request": {
-                        "method": "GET",
-                        "header": [],
-                        "url": {
-                            "raw": "http://127.0.0.1:8000/api/posts/1/upvote",
-                            "protocol": "http",
-                            "host": [
-                                "127",
-                                "0",
-                                "0",
-                                "1"
-                            ],
-                            "port": "8000",
-                            "path": [
-                                "api",
-                                "posts",
-                                "1",
-                                "upvote"
-                            ]
-                        }
-                    },
-                    "response": []
-                }
-            ]
-        },
-        {
-            "name": "Follow",
-            "item": [{
-                    "name": "Follow",
-                    "request": {
-                        "auth": {
-                            "type": "bearer",
-                            "bearer": [{
-                                "key": "token",
-                                "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYzNjUxNTcyOSwiZXhwIjoxNjM2NTE5MzI5LCJuYmYiOjE2MzY1MTU3MjksImp0aSI6ImF5WVo5Y2xnOEFzY1AzYVkiLCJzdWIiOjEwMSwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.5xG5aJIb33Tvmwo83i4OxsPI8zQ5h9sTERYtmszzLUg",
-                                "type": "string"
-                            }]
-                        },
-                        "method": "POST",
-                        "header": [],
-                        "url": {
-                            "raw": "http://127.0.0.1:8000/api/follow-user/1",
-                            "protocol": "http",
-                            "host": [
-                                "127",
-                                "0",
-                                "0",
-                                "1"
-                            ],
-                            "port": "8000",
-                            "path": [
-                                "api",
-                                "follow-user",
-                                "1"
-                            ]
-                        }
-                    },
-                    "response": []
-                },
-                {
-                    "name": "Unfollow",
-                    "request": {
-                        "auth": {
-                            "type": "bearer",
-                            "bearer": [{
-                                "key": "token",
-                                "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYzNjM2OTE2OSwiZXhwIjoxNjM2MzcyNzY5LCJuYmYiOjE2MzYzNjkxNjksImp0aSI6ImZkVlpxYlRocndoREFUc20iLCJzdWIiOjEwMiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.rs-CFBROETbb2lJ0vMTxSybNy7TC-xeDNkSR0l0Q1A4",
-                                "type": "string"
-                            }]
-                        },
-                        "method": "DELETE",
-                        "header": [],
-                        "url": {
-                            "raw": "http://127.0.0.1:8000/api/follow-user/91",
-                            "protocol": "http",
-                            "host": [
-                                "127",
-                                "0",
-                                "0",
-                                "1"
-                            ],
-                            "port": "8000",
-                            "path": [
-                                "api",
-                                "follow-user",
-                                "91"
-                            ]
-                        }
-                    },
-                    "response": []
-                },
-                {
-                    "name": "Following",
-                    "request": {
-                        "auth": {
-                            "type": "bearer",
-                            "bearer": [{
-                                "key": "token",
-                                "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYzNjM3ODQ0MywiZXhwIjoxNjM2MzgyMDQzLCJuYmYiOjE2MzYzNzg0NDMsImp0aSI6IkRvYXdnSzdYZVE5MVo5RE8iLCJzdWIiOjEsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.Wnzf41WzfliXoLXL70X3iGc5M0J4qoKlgeGpJ1uYqTw",
-                                "type": "string"
-                            }]
-                        },
-                        "method": "GET",
-                        "header": [],
-                        "url": {
-                            "raw": "http://127.0.0.1:8000/api/users/10/following",
-                            "protocol": "http",
-                            "host": [
-                                "127",
-                                "0",
-                                "0",
-                                "1"
-                            ],
-                            "port": "8000",
-                            "path": [
-                                "api",
-                                "users",
-                                "10",
-                                "following"
-                            ]
-                        }
-                    },
-                    "response": []
-                },
-                {
-                    "name": "Followers",
-                    "request": {
-                        "auth": {
-                            "type": "bearer",
-                            "bearer": [{
-                                "key": "token",
-                                "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYzNjM3ODQ0MywiZXhwIjoxNjM2MzgyMDQzLCJuYmYiOjE2MzYzNzg0NDMsImp0aSI6IkRvYXdnSzdYZVE5MVo5RE8iLCJzdWIiOjEsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.Wnzf41WzfliXoLXL70X3iGc5M0J4qoKlgeGpJ1uYqTw",
-                                "type": "string"
-                            }]
-                        },
-                        "method": "GET",
-                        "header": [],
-                        "url": {
-                            "raw": "http://127.0.0.1:8000/api/users/10/followers",
-                            "protocol": "http",
-                            "host": [
-                                "127",
-                                "0",
-                                "0",
-                                "1"
-                            ],
-                            "port": "8000",
-                            "path": [
-                                "api",
-                                "users",
-                                "10",
-                                "followers"
-                            ]
-                        }
-                    },
-                    "response": []
-                },
-                {
-                    "name": "Suggestion",
-                    "request": {
-                        "auth": {
-                            "type": "bearer",
-                            "bearer": [{
-                                "key": "token",
-                                "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYzNjU0MDczOCwiZXhwIjoxNjM2NTQ0MzM4LCJuYmYiOjE2MzY1NDA3MzgsImp0aSI6ImhSUTV2NVJCZDBhZU90aTIiLCJzdWIiOjEwMSwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.VwhzTez1a5tP4FPYZOxf4_ND0cBy8cKw__D1YeeWp2Y",
-                                "type": "string"
-                            }]
-                        },
-                        "method": "GET",
-                        "header": [],
-                        "url": {
-                            "raw": "http://127.0.0.1:8000/api/follow/suggestion",
-                            "protocol": "http",
-                            "host": [
-                                "127",
-                                "0",
-                                "0",
-                                "1"
-                            ],
-                            "port": "8000",
-                            "path": [
-                                "api",
-                                "follow",
-                                "suggestion"
-                            ]
-                        }
-                    },
-                    "response": []
-                }
-            ]
-        },
-        {
-            "name": "Comment",
-            "item": [{
-                    "name": "create_comment",
-                    "request": {
-                        "auth": {
-                            "type": "bearer",
-                            "bearer": [{
-                                "key": "token",
-                                "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYzNjY0MTQ1NCwiZXhwIjoxNjM2NjQ1MDU0LCJuYmYiOjE2MzY2NDE0NTQsImp0aSI6IkRsczV6cHZ5bHJkV25XRUMiLCJzdWIiOjEwMSwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.Zu_IOTp7-H8OVK5Z57lgd03yyGfPQfT2ZgN5xl7SwF8",
-                                "type": "string"
-                            }]
-                        },
-                        "method": "POST",
-                        "header": [],
-                        "body": {
-                            "mode": "formdata",
-                            "formdata": [{
-                                "key": "content",
-                                "value": "test pac comment 05",
-                                "type": "text"
-                            }]
-                        },
-                        "url": {
-                            "raw": "http://127.0.0.1:8000/api/posts/2001/comments/create",
-                            "protocol": "http",
-                            "host": [
-                                "127",
-                                "0",
-                                "0",
-                                "1"
-                            ],
-                            "port": "8000",
-                            "path": [
-                                "api",
-                                "posts",
-                                "2001",
-                                "comments",
-                                "create"
-                            ]
-                        }
-                    },
-                    "response": []
-                },
-                {
-                    "name": "delete_comment",
-                    "request": {
-                        "auth": {
-                            "type": "bearer",
-                            "bearer": [{
-                                "key": "token",
-                                "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYzNjYzOTQ1MSwiZXhwIjoxNjM2NjQzMDUxLCJuYmYiOjE2MzY2Mzk0NTEsImp0aSI6IktWYlduT1V6NGd5eE91Q2giLCJzdWIiOjEwMSwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.yRq9JQubjRmaU1calXdfFsEY_lwWEWwTk4xtHKJSx7I",
-                                "type": "string"
-                            }]
-                        },
-                        "method": "DELETE",
-                        "header": [],
-                        "body": {
-                            "mode": "formdata",
-                            "formdata": [],
-                            "options": {
-                                "raw": {
-                                    "language": "json"
-                                }
-                            }
-                        },
-                        "url": {
-                            "raw": "http://127.0.0.1:8000/api/posts/2001/comments/5005/delete",
-                            "protocol": "http",
-                            "host": [
-                                "127",
-                                "0",
-                                "0",
-                                "1"
-                            ],
-                            "port": "8000",
-                            "path": [
-                                "api",
-                                "posts",
-                                "2001",
-                                "comments",
-                                "5005",
-                                "delete"
-                            ]
-                        }
-                    },
-                    "response": []
-                },
-                {
-                    "name": "update_comment",
-                    "request": {
-                        "auth": {
-                            "type": "bearer",
-                            "bearer": [{
-                                "key": "token",
-                                "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYzNjYzOTQ1MSwiZXhwIjoxNjM2NjQzMDUxLCJuYmYiOjE2MzY2Mzk0NTEsImp0aSI6IktWYlduT1V6NGd5eE91Q2giLCJzdWIiOjEwMSwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.yRq9JQubjRmaU1calXdfFsEY_lwWEWwTk4xtHKJSx7I",
-                                "type": "string"
-                            }]
-                        },
-                        "method": "POST",
-                        "header": [],
-                        "body": {
-                            "mode": "formdata",
-                            "formdata": [{
-                                "key": "content",
-                                "value": "Test pac comment updated 03",
-                                "type": "text"
-                            }]
-                        },
-                        "url": {
-                            "raw": "http://127.0.0.1:8000/api/posts/2001/comments/5005/update",
-                            "protocol": "http",
-                            "host": [
-                                "127",
-                                "0",
-                                "0",
-                                "1"
-                            ],
-                            "port": "8000",
-                            "path": [
-                                "api",
-                                "posts",
-                                "2001",
-                                "comments",
-                                "5005",
-                                "update"
-                            ]
-                        }
-                    },
-                    "response": []
-                }
-            ]
-        }
-    ]
+	"info": {
+		"_postman_id": "c7be455f-d6e3-4144-bca9-4740de0313b8",
+		"name": "4room",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Authen",
+			"item": [
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"anhducpn67@gmail.com\",\n    \"name_in_forum\": \"Nguyen Tran Anh Duc\",\n    \"password\": \"duaboa123\",\n    \"password_confirmation\": \"duaboa123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:8000/api/register",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"anhducpn67@gmail.com\",\n    \"password\": \"123456789\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:8000/api/login",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYzNTk5Mzg3MSwiZXhwIjoxNjM1OTk3NDcxLCJuYmYiOjE2MzU5OTM4NzEsImp0aSI6IjM4MDJUVUNNUG16TUdXQmYiLCJzdWIiOjEsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.trdDBxPpxUKvI6-V3OyoT6a0Ja543JyYKuaUnCW8o4A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:8000/api/logout",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "reset_password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"anhducpn67@gmail.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/reset-password",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"reset-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "change_password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"token\": \"utxktHARB5H9eRcoT7su8ydLCtbAhuwqoQpJ0WyF9Uh0XofcyjorfimDL3kn\",\n    \"password\": \"123456789\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/change-password/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"change-password",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "get_all_profile",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/users",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_specified_profile",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYzNjY5OTI2NSwiZXhwIjoxNjM2NzAyODY1LCJuYmYiOjE2MzY2OTkyNjUsImp0aSI6IngweGRXOTM0aDNncXo2eUQiLCJzdWIiOjEwMSwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.C8me4tf9Hec8jwhka-BZBwYbnetSB-ktamv1Rbj6fds",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/users/102",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"users",
+								"102"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update_profile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYzNjU0MDMzNSwiZXhwIjoxNjM2NTQzOTM1LCJuYmYiOjE2MzY1NDAzMzUsImp0aSI6IlgwOGlkSTZHaGQxblNCYlkiLCJzdWIiOjIxLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.0eXzzxxvX26PArUajRVWS6945-7_eI-FqZR088GWveg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"bio\": \"Hehehe\",\r\n    \"instagram_link\": \"fb.com/anhduc\",\r\n    \"twitter_link\": \"linkedin.com/anhduc\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/profile",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "search_by_name",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYzNjUxNTcyOSwiZXhwIjoxNjM2NTE5MzI5LCJuYmYiOjE2MzY1MTU3MjksImp0aSI6ImF5WVo5Y2xnOEFzY1AzYVkiLCJzdWIiOjEwMSwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.5xG5aJIb33Tvmwo83i4OxsPI8zQ5h9sTERYtmszzLUg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/users/search/Huy",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"users",
+								"search",
+								"Huy"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Post",
+			"item": [
+				{
+					"name": "create_post",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYzNjkzODE5NSwiZXhwIjoxNjM2OTQxNzk1LCJuYmYiOjE2MzY5MzgxOTUsImp0aSI6InQzVzRxbU1ITFBHYWNFRzgiLCJzdWIiOjEwMSwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.VyctAbHYg-MrJJyoIpyQYMtu6Jf4C-OLDMIW3I8A-5o",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "content",
+									"value": "Test",
+									"type": "text"
+								},
+								{
+									"key": "file",
+									"type": "file",
+									"src": [],
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/posts/create",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"posts",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get_specified_post",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYzNjkzNjQ5MiwiZXhwIjoxNjM2OTQwMDkyLCJuYmYiOjE2MzY5MzY0OTIsImp0aSI6IkVDcjhadmVjVUNvOGI3aEoiLCJzdWIiOjEwMSwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.5xm4DkzAAtVcEhQVEPuiZ2EJdpCBf2CpXrtgZustJ0I",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/posts/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"posts",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update_post",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYzNjY5OTI2NSwiZXhwIjoxNjM2NzAyODY1LCJuYmYiOjE2MzY2OTkyNjUsImp0aSI6IngweGRXOTM0aDNncXo2eUQiLCJzdWIiOjEwMSwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.C8me4tf9Hec8jwhka-BZBwYbnetSB-ktamv1Rbj6fds",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"content\": \"Hummmmmm\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/posts/2002/edit",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"posts",
+								"2002",
+								"edit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete_post",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYzNjY5OTI2NSwiZXhwIjoxNjM2NzAyODY1LCJuYmYiOjE2MzY2OTkyNjUsImp0aSI6IngweGRXOTM0aDNncXo2eUQiLCJzdWIiOjEwMSwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.C8me4tf9Hec8jwhka-BZBwYbnetSB-ktamv1Rbj6fds",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/posts/2001",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"posts",
+								"2001"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user_posts",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYzNjkzNjA3MywiZXhwIjoxNjM2OTM5NjczLCJuYmYiOjE2MzY5MzYwNzMsImp0aSI6IkR6UjVNem9tbFVwUExsMnEiLCJzdWIiOjEwMSwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.SVdy1d_4iszNJJQ1l_Pk_bLzqfCEyuh_HG3DPHhHjR0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/users/1/posts",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"users",
+								"1",
+								"posts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "download_file",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/download/files/public/Mx8z2pO0pqH594g2cdC9yCRYcCD1FnUC48X42DsA.png",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"download",
+								"files",
+								"public",
+								"Mx8z2pO0pqH594g2cdC9yCRYcCD1FnUC48X42DsA.png"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "newsfeed",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYzNjkzODE5NSwiZXhwIjoxNjM2OTQxNzk1LCJuYmYiOjE2MzY5MzgxOTUsImp0aSI6InQzVzRxbU1ITFBHYWNFRzgiLCJzdWIiOjEwMSwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.VyctAbHYg-MrJJyoIpyQYMtu6Jf4C-OLDMIW3I8A-5o",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/newsfeed",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"newsfeed"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Upvote",
+			"item": [
+				{
+					"name": "add_upvote",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYzNjkzNzQ2NSwiZXhwIjoxNjM2OTQxMDY1LCJuYmYiOjE2MzY5Mzc0NjUsImp0aSI6IjBkSHRBdlh3QVZrYkhYcTciLCJzdWIiOjEwMSwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9._jxZQXWBSRd5IvsSG0g4bI8is0Swf1sywdemOEqykKw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/upvote-post/4",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"upvote-post",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "remove_upvote",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYzNjkzODE5NSwiZXhwIjoxNjM2OTQxNzk1LCJuYmYiOjE2MzY5MzgxOTUsImp0aSI6InQzVzRxbU1ITFBHYWNFRzgiLCJzdWIiOjEwMSwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.VyctAbHYg-MrJJyoIpyQYMtu6Jf4C-OLDMIW3I8A-5o",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/upvote-post/102",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"upvote-post",
+								"102"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "users_upvote",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/posts/1/upvote",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"posts",
+								"1",
+								"upvote"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "is_upvote",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYzNjkzNzQ2NSwiZXhwIjoxNjM2OTQxMDY1LCJuYmYiOjE2MzY5Mzc0NjUsImp0aSI6IjBkSHRBdlh3QVZrYkhYcTciLCJzdWIiOjEwMSwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9._jxZQXWBSRd5IvsSG0g4bI8is0Swf1sywdemOEqykKw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/is-upvote/post/102",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"is-upvote",
+								"post",
+								"102"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Follow",
+			"item": [
+				{
+					"name": "Follow",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYzNjkzODE5NSwiZXhwIjoxNjM2OTQxNzk1LCJuYmYiOjE2MzY5MzgxOTUsImp0aSI6InQzVzRxbU1ITFBHYWNFRzgiLCJzdWIiOjEwMSwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.VyctAbHYg-MrJJyoIpyQYMtu6Jf4C-OLDMIW3I8A-5o",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/follow-user/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"follow-user",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Unfollow",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYzNjkzODE5NSwiZXhwIjoxNjM2OTQxNzk1LCJuYmYiOjE2MzY5MzgxOTUsImp0aSI6InQzVzRxbU1ITFBHYWNFRzgiLCJzdWIiOjEwMSwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.VyctAbHYg-MrJJyoIpyQYMtu6Jf4C-OLDMIW3I8A-5o",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/follow-user/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"follow-user",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Following",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYzNjM3ODQ0MywiZXhwIjoxNjM2MzgyMDQzLCJuYmYiOjE2MzYzNzg0NDMsImp0aSI6IkRvYXdnSzdYZVE5MVo5RE8iLCJzdWIiOjEsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.Wnzf41WzfliXoLXL70X3iGc5M0J4qoKlgeGpJ1uYqTw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/users/10/following",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"users",
+								"10",
+								"following"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Followers",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYzNjM3ODQ0MywiZXhwIjoxNjM2MzgyMDQzLCJuYmYiOjE2MzYzNzg0NDMsImp0aSI6IkRvYXdnSzdYZVE5MVo5RE8iLCJzdWIiOjEsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.Wnzf41WzfliXoLXL70X3iGc5M0J4qoKlgeGpJ1uYqTw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/users/10/followers",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"users",
+								"10",
+								"followers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Suggestion",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYzNjU0MDczOCwiZXhwIjoxNjM2NTQ0MzM4LCJuYmYiOjE2MzY1NDA3MzgsImp0aSI6ImhSUTV2NVJCZDBhZU90aTIiLCJzdWIiOjEwMSwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.VwhzTez1a5tP4FPYZOxf4_ND0cBy8cKw__D1YeeWp2Y",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/follow/suggestion",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"follow",
+								"suggestion"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Comment",
+			"item": [
+				{
+					"name": "create_comment",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYzNjY0MTQ1NCwiZXhwIjoxNjM2NjQ1MDU0LCJuYmYiOjE2MzY2NDE0NTQsImp0aSI6IkRsczV6cHZ5bHJkV25XRUMiLCJzdWIiOjEwMSwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.Zu_IOTp7-H8OVK5Z57lgd03yyGfPQfT2ZgN5xl7SwF8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "content",
+									"value": "test pac comment 05",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/posts/2001/comments/create",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"posts",
+								"2001",
+								"comments",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete_comment",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYzNjYzOTQ1MSwiZXhwIjoxNjM2NjQzMDUxLCJuYmYiOjE2MzY2Mzk0NTEsImp0aSI6IktWYlduT1V6NGd5eE91Q2giLCJzdWIiOjEwMSwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.yRq9JQubjRmaU1calXdfFsEY_lwWEWwTk4xtHKJSx7I",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/posts/2001/comments/5005/delete",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"posts",
+								"2001",
+								"comments",
+								"5005",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update_comment",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYzNjYzOTQ1MSwiZXhwIjoxNjM2NjQzMDUxLCJuYmYiOjE2MzY2Mzk0NTEsImp0aSI6IktWYlduT1V6NGd5eE91Q2giLCJzdWIiOjEwMSwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.yRq9JQubjRmaU1calXdfFsEY_lwWEWwTk4xtHKJSx7I",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "content",
+									"value": "Test pac comment updated 03",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/posts/2001/comments/5005/update",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"posts",
+								"2001",
+								"comments",
+								"5005",
+								"update"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
 }
