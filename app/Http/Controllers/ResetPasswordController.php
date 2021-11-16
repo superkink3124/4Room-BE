@@ -35,7 +35,6 @@ class ResetPasswordController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'We have e-mailed your password reset link!',
-            'token' => $token
         ]);
     }
 
