@@ -10,8 +10,10 @@ use App\Http\Controllers\PostController;
 */
 
 
-Route::get('posts/{id}', [PostController::class, "show"]);
-Route::get('users/{id}/posts', [PostController::class, "user"]);
+Route::get('posts/{id}', [PostController::class, "show"])
+    ->middleware('jwt.verify');
+Route::get('users/{id}/posts', [PostController::class, "user"])
+    ->middleware('jwt.verify');
 Route::get('/newsfeed', [PostController::class, "newsfeed"])
     ->middleware('jwt.verify');
 Route::post('posts/{id}/edit', [PostController::class, "update"])

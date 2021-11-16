@@ -16,9 +16,12 @@ class PostFactory extends Factory
      */
     public function definition(): array
     {
+        $date = $this->faker->dateTimeBetween("-1 year", "now");
         return [
             'user_id' => rand(1, User::count()),
-            'content' => VNFaker::paragraphs()
+            'content' => VNFaker::paragraphs(),
+            'updated_at' => $date,
+            'created_at' => $date
         ];
     }
 }

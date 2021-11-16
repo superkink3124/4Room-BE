@@ -14,14 +14,14 @@ class UpvoteController extends Controller
      * Store a new upvote in database.
      *
      * @param Request $request
-     * @param int $id
+     * @param int $post_id
      * @return JsonResponse
      */
-    public function store(Request $request, int $id): JsonResponse
+    public function store(Request $request, int $post_id): JsonResponse
     {
         $user = $request->user;
         try {
-            $post = Post::findOrFail($id);
+            $post = Post::findOrFail($post_id);
         } catch (\Exception $e) {
             return response()->json([
                 "success" => false,
@@ -47,13 +47,13 @@ class UpvoteController extends Controller
     /**
      * Display list users upvote post.
      *
-     * @param int $id
+     * @param int $post_id
      * @return UserCollection|JsonResponse
      */
-    public function show(int $id)
+    public function show(int $post_id)
     {
         try {
-            $post = Post::findOrFail($id);
+            $post = Post::findOrFail($post_id);
         } catch (\Exception $e) {
             return response()->json([
                 "success" => false,
@@ -66,6 +66,29 @@ class UpvoteController extends Controller
             array_push($users, $user);
         }
         return new UserCollection($users);
+    }
+
+    /**
+     * Check if a user upvoted a post
+     * @param Request $request
+     * @param int $post_id
+     * @return JsonResponse
+     */
+    public function is_upvoted(Request $request, int $post_id)
+    {
+        $user = $request->user;
+        try {
+            $upvote = Upvote::where("post_id", $post_id)
+                            ->where("user_id", $user->id)
+                            ->firstOrFail();
+        } catch (\Exception $e) {
+            return response()->json([
+                "success" => true,
+                "is_upvoted" => false], 200);
+        }
+        return response()->json([
+            "success" => true,
+            "is_upvoted" => true], 200);
     }
 
     /**

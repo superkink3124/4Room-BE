@@ -25,24 +25,26 @@ class PostController extends Controller
         }
         return new PostCollection(Post::whereIn('user_id', $followings_id)
                                         ->orderBy('updated_at', 'desc')
-                                        ->simplePaginate(15));
+                                        ->simplePaginate(10));
     }
 
     /**
      * Display a list posts owned by user_id.
-     * @param int $id
+     * @param int $user_id
      * @return JsonResponse|PostCollection
      */
-     public function user(int $id)
+     public function user(int $user_id)
      {
          try {
-             $user = User::findOrFail($id);
+             $user = User::findOrFail($user_id);
          } catch (Exception $e) {
              return response()->json([
                  "success" => false,
                  "message" => "User does not exist in database."], 400);
          }
-         return new PostCollection($user->posts);
+         return new PostCollection($user->posts()
+                                        ->orderBy('updated_at', 'desc')
+                                        ->simplePaginate(10));
      }
 
     /**
@@ -75,15 +77,15 @@ class PostController extends Controller
     /**
      * Display the specified post by id.
      *
-     * @param int $id
+     * @param int $post_id
      * @return JsonResponse
      */
-    public function show(int $id): JsonResponse
+    public function show(int $post_id): JsonResponse
     {
         try {
             return response()->json([
                 "success" => true,
-                "data" => new PostResource(Post::findOrFail($id))
+                "data" => new PostResource(Post::findOrFail($post_id))
                 ], 200);
         } catch (Exception $e) {
             return response()->json([
@@ -96,14 +98,14 @@ class PostController extends Controller
      * Update the specified post in database.
      *
      * @param Request $request
-     * @param int $id
+     * @param int $post_id
      * @return JsonResponse
      */
-    public function update(Request $request, int $id): JsonResponse
+    public function update(Request $request, int $post_id): JsonResponse
     {
         $user = $request->user;
         try {
-            $post = Post::findOrFail($id);
+            $post = Post::findOrFail($post_id);
         } catch (Exception $e) {
             return response()->json([
                 "success" => false,
@@ -125,14 +127,14 @@ class PostController extends Controller
      * Remove the specified post from database.
      *
      * @param Request $request
-     * @param int $id
+     * @param int $post_id
      * @return JsonResponse
      */
-    public function destroy(Request $request, int $id): JsonResponse
+    public function destroy(Request $request, int $post_id): JsonResponse
     {
         $user = $request->user;
         try {
-            $post = Post::findOrFail($id);
+            $post = Post::findOrFail($post_id);
         } catch (Exception $e) {
             return response()->json([
                 "success" => false,
