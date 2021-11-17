@@ -25,6 +25,7 @@ class CreateUsersTable extends Migration
             $table->string('twitter_link')->nullable();
             $table->tinyInteger('role')->default(1);
             $table->timestamps();
+            $table->timestamp("last_update_notification")->default("2021-1-1 00:00:00");
         });
     }
 

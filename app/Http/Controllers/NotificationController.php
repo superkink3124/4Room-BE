@@ -6,6 +6,7 @@ use App\Events\NotificationUpdate;
 use App\Http\Resources\NotificationCollection;
 use App\Http\Resources\NotificationResource;
 use App\Models\Notification;
+use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
 
@@ -31,8 +32,31 @@ class NotificationController extends Controller
         }
     }
 
-    public static function update($notification) {
+    public static function update(Notification $notification) {
         event(new NotificationUpdate($notification));
+    }
+
+    public function count_unseen_notification(Request $request) {
+        $user = $request->user;
+        $user_id = $user->id;
+        $last_update = $user->last_update_notification;
+        $count = Notification::where("user_id", $user_id)->where("created_at", ">=", $last_update)->count();
+        var_dump($count);
+        return response()->json([
+            "success" => true,
+            "number_of_unseen_notification" => $count
+        ]);
+    }
+
+    public function update_last_update_notification(Request $request) {
+        date_default_timezone_set('Asia/Ho_Chi_Minh');
+        $user = $request->user;
+        $current_time = date("Y-m-d H:i:s");
+        $user = User::where("id", $user->id)->update(["last_update_notification" => $current_time]);
+        return response()->json([
+            "success" => true,
+            "time" => $current_time
+        ]);
     }
 
     // /**
