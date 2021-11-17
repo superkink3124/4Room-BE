@@ -20,7 +20,7 @@ class FollowSeeder extends Seeder
         foreach ($sources as $source) {
             $source_id = $source->id;
             shuffle($all_ids);
-            $target_ids = array_slice($all_ids, 0, 20);
+            $target_ids = array_slice($all_ids, 0, 5);
             foreach ($target_ids as $target_id) {
                 if ($source_id == $target_id) {
                     continue;

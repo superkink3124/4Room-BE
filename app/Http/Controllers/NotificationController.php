@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\NotificationUpdate;
 use App\Http\Resources\NotificationCollection;
+use App\Http\Resources\NotificationResource;
 use App\Models\Notification;
+use Exception;
 use Illuminate\Http\Request;
 
 class NotificationController extends Controller
@@ -12,6 +15,24 @@ class NotificationController extends Controller
     public function notification(Request $request) {
         $user = $request->user;
         return new NotificationCollection(Notification::where("user_id", $user->id)->orderBy("created_at", "desc")->simplePaginate(10));
+    }
+
+    public function show(int $notification_id) {
+        try {
+            return response()->json([
+                "success" => true,
+                "data" => new NotificationResource(Notification::findOrFail($notification_id))
+            ]);
+        } catch(Exception $ex) {
+            return response()->json([
+                "success" => false,
+                "message" => "Notification does not exist in database"
+            ], 400);
+        }
+    }
+
+    public static function update($notification) {
+        event(new NotificationUpdate($notification));
     }
 
     // /**

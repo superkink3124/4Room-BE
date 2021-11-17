@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\UserCollection;
+use App\Models\Notification;
 use App\Models\Post;
 use App\Models\Upvote;
 use Illuminate\Http\JsonResponse;
@@ -35,10 +36,11 @@ class UpvoteController extends Controller
                     "message" => "User already upvote post."], 400);
             }
         }
-        Upvote::create([
+        $upvote = Upvote::create([
             "user_id" => $user->id,
             "post_id" => $post->id
         ]);
+        NotificationController::update(Notification::where("upvote_id", $upvote->id)->first());
         return response()->json([
             "success" => true,
             "message" => "Upvoted post."], 200);

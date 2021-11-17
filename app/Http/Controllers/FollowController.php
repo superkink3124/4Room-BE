@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Resources\UserCollection;
 use App\Http\Resources\UserResource;
 use App\Models\Follow;
+use App\Models\Notification;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -99,10 +100,11 @@ class FollowController extends Controller
                 "success" => false,
                 "message" => "Source user already follow Target user."], 400);
         }
-        Follow::create([
+        $follow = Follow::create([
             "source_id" => $source_user->id,
             "target_id" => $target_user->id
         ]);
+        NotificationController::update(Notification::where("follow_id", $follow->id)->first());
         return response()->json([
             "success" => true,
             "message" => "Followed."], 200);

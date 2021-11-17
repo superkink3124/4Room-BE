@@ -8,6 +8,7 @@ use App\Models\File;
 use App\Models\Post;
 use App\Models\User;
 use App\Models\Comment;
+use App\Models\Notification;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -43,12 +44,12 @@ class CommentController extends Controller
             ], 400);
         }
 
-        Comment::create([
+        $comment = Comment::create([
             "user_id" => $user->id,
             "post_id" => $post_id,
             "content" => $request->input("content")
         ]);
-
+        NotificationController::update(Notification::where("comment_id", $comment->id)->first());
         return response()->json([
             "success" => true,
             "message" => "Created new comment."
