@@ -14,6 +14,6 @@ class UpvoteSeeder extends Seeder
      */
     public function run()
     {
-        Upvote::factory(5000)->create();
+        Upvote::factory(100)->create();
     }
 }

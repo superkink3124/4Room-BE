@@ -30,4 +30,8 @@ class Upvote extends Model
     {
         return $this->belongsTo(Post::class);
     }
+
+    public function notification() {
+        return $this->hasOne(Notification::class);
+    }
 }
