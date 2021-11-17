@@ -19,9 +19,9 @@ class CreateTriggerUpvote extends Migration
          FOR EACH ROW BEGIN
         
         INSERT INTO notifications
-        (notifications.user_id, notifications.upvote_id)
+        (notifications.user_id, notifications.upvote_id, notifications.created_at, notifications.updated_at)
         VALUES
-        ((SELECT posts.user_id FROM posts WHERE posts.id = NEW.post_id LIMIT 1), NEW.id);
+        ((SELECT posts.user_id FROM posts WHERE posts.id = NEW.post_id LIMIT 1), NEW.id, CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP());
         
         END");
     }

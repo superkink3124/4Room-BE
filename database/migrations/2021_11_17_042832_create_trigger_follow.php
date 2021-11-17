@@ -18,9 +18,9 @@ class CreateTriggerFollow extends Migration
         CREATE TRIGGER `add_notification_of_follow` AFTER INSERT ON `follows`
          FOR EACH ROW BEGIN
         INSERT INTO notifications
-        (notifications.user_id, notifications.follow_id)
+        (notifications.user_id, notifications.follow_id, notifications.created_at, notifications.updated_at)
         VALUES
-        (NEW.target_id, NEW.id);
+        (NEW.target_id, NEW.id, CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP());
         END");
     }
 
