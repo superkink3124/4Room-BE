@@ -6,6 +6,7 @@ use App\Http\Resources\UserCollection;
 use App\Models\Notification;
 use App\Models\Post;
 use App\Models\Upvote;
+use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -40,7 +41,12 @@ class UpvoteController extends Controller
             "user_id" => $user->id,
             "post_id" => $post->id
         ]);
-        NotificationController::update(Notification::where("upvote_id", $upvote->id)->first());
+        try {
+            $upvote = Notification::where("upvote_id", $upvote->id)->firstOrFail();
+            NotificationController::update($upvote);
+        } catch(Exception $ex) {
+
+        }
         return response()->json([
             "success" => true,
             "message" => "Upvoted post."], 200);

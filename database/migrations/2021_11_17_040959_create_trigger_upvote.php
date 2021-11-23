@@ -16,14 +16,17 @@ class CreateTriggerUpvote extends Migration
     {
         DB::unprepared("
         CREATE TRIGGER `add_notification_of_upvote` AFTER INSERT ON `upvotes`
-         FOR EACH ROW BEGIN
-        
-        INSERT INTO notifications
+ FOR EACH ROW BEGIN
+	DECLARE post_owner INTEGER;
+	SELECT posts.user_id INTO post_owner FROM posts WHERE posts.id = NEW.post_id LIMIT 1;
+    IF NEW.user_id != post_owner THEN
+    	INSERT INTO notifications
         (notifications.user_id, notifications.upvote_id, notifications.created_at, notifications.updated_at)
         VALUES
-        ((SELECT posts.user_id FROM posts WHERE posts.id = NEW.post_id LIMIT 1), NEW.id, CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP());
-        
-        END");
+        (post_owner, NEW.id, CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP());
+	END IF;        
+END
+        ");
     }
 
     /**

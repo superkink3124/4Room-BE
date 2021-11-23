@@ -16,9 +16,9 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        User::factory(30)
+        User::factory(40)
             ->has(Post::factory()
-                ->count(10)
+                ->count(30)
                 ->state(function (array $attributes, User $user) {
                 return ['user_id' => $user->id];
                 }),

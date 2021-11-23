@@ -49,7 +49,12 @@ class CommentController extends Controller
             "post_id" => $post_id,
             "content" => $request->input("content")
         ]);
-        NotificationController::update(Notification::where("comment_id", $comment->id)->first());
+        try {
+            $notification = Notification::where("comment_id", $comment->id)->firstOrFail();
+            NotificationController::update($notification);
+        } catch(Exception $ex) {
+
+        }
         return response()->json([
             "success" => true,
             "message" => "Created new comment."
