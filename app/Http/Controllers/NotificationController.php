@@ -33,8 +33,6 @@ class NotificationController extends Controller
     }
 
     public static function update(Notification $notification) {
-        // var_dump($notification->user_id);
-        // var_dump($notification->id);
         event(new NotificationUpdate($notification));
     }
 
