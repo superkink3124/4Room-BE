@@ -7,6 +7,7 @@ use App\Http\Resources\UserResource;
 use App\Models\Follow;
 use App\Models\Notification;
 use App\Models\User;
+use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -104,7 +105,13 @@ class FollowController extends Controller
             "source_id" => $source_user->id,
             "target_id" => $target_user->id
         ]);
-        NotificationController::update(Notification::where("follow_id", $follow->id)->first());
+        try {
+            $follow = Notification::where("follow_id", $follow->id)->firstOrFail();
+            NotificationController::update($follow);
+        } catch(Exception $ex) {
+
+        }
+        
         return response()->json([
             "success" => true,
             "message" => "Followed."], 200);

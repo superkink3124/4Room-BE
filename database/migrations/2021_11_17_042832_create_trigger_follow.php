@@ -16,12 +16,15 @@ class CreateTriggerFollow extends Migration
     {
         DB::unprepared("
         CREATE TRIGGER `add_notification_of_follow` AFTER INSERT ON `follows`
-         FOR EACH ROW BEGIN
-        INSERT INTO notifications
+ FOR EACH ROW BEGIN
+	IF NEW.source_id != NEW.target_id THEN
+    	INSERT INTO notifications
         (notifications.user_id, notifications.follow_id, notifications.created_at, notifications.updated_at)
-        VALUES
+		VALUES
         (NEW.target_id, NEW.id, CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP());
-        END");
+    END IF;
+END
+        ");
     }
 
     /**

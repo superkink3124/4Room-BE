@@ -34,6 +34,7 @@ class NotificationUpdate implements ShouldBroadcastNow
      */
     public function broadcastOn()
     {
+        // var_dump($this->notification->user_id);
         return new PrivateChannel('notification_user.'.$this->notification->user_id);
     }
 
@@ -42,6 +43,7 @@ class NotificationUpdate implements ShouldBroadcastNow
     }
 
     public function broadcastWith() {
+        // var_dump($this->notification->id);
         return ['notification' => [
             "id" => $this->notification->id,
         ]];
