@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Message;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -17,7 +18,9 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             CommentSeeder::class,
             UpvoteSeeder::class,
-            FollowSeeder::class
+            FollowSeeder::class,
+            RoomSeeder::class,
+            MessageSeeder::class
         ]);
     }
 }
