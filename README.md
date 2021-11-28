@@ -50,6 +50,22 @@ php artisan storage:link
 php artisan serve
 ```
 
+9.Setting broadcast  
+* .env  
+```
+PUSHER_APP_ID=1299119
+PUSHER_APP_KEY=3ef48bd1a87852f6ef19
+PUSHER_APP_SECRET=2d7a0a636ba1e9dcc361
+PUSHER_APP_CLUSTER=ap1
+```
+* Uncomment broadcast in config/app.php
+```
+'Broadcast' => Illuminate\Support\Facades\Broadcast::class,
+```
+* Config in config/broadcasting.php
+```
+'default' => env('BROADCAST_DRIVER', 'pusher'),
+```
 ### Tạo 1 loại API dựa theo Repository Design Pattern 
 1. Tạo file migration định nghĩa cấu trúc table 
 2. Tao Models 
