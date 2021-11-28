@@ -19,3 +19,6 @@ Route::get('profile', [UserController::class, "getProfile"])
     ->middleware('jwt.verify');
 Route::post('users/search', [UserController::class, "search"])
     ->middleware('jwt.verify');
+
+Route::post('change_avatar', [UserController::class, "change_avatar"])
+    ->middleware('jwt.verify');

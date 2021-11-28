@@ -127,4 +127,18 @@ class UserController extends Controller
             'data' => $data
         ]);
     }
+
+    public function change_avatar(Request $request) {
+        $avatar_id = $request->input("avatar_id");
+        try {
+            User::where("id", $request->user->id)->update(['avatar_id' => $avatar_id]);
+            return response()->json([
+                'success' => true
+            ]);
+        } catch(Exception $ex) {
+            return response()->json([
+                'success' => false  
+            ]);
+        }
+    }
 }

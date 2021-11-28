@@ -27,7 +27,8 @@ class User extends Authenticatable implements JWTSubject
         'facebook_link',
         'instagram_link',
         'linkedin_link',
-        'twitter_link'
+        'twitter_link',
+        'avatar_id'
     ];
 
     protected $hidden = array('password', 'role', 'created_at', 'updated_at');
