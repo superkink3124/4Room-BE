@@ -2,11 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\PostCollection;
-use App\Http\Resources\PostResource;
-use App\Models\File;
+use App\Http\Resources\CommentResource;
 use App\Models\Post;
-use App\Models\User;
 use App\Models\Comment;
 use App\Models\Notification;
 use Exception;
@@ -28,10 +25,11 @@ class CommentController extends Controller
     /**
      * Create a new comment.
      *
-     * @param  Request  $request
+     * @param Request $request
+     * @param int $post_id
      * @return JsonResponse
      */
-    public function createComment(Request $request, int $post_id): JsonResponse
+    public function store(Request $request, int $post_id): JsonResponse
     {
         $user = $request->user;
 
@@ -49,6 +47,7 @@ class CommentController extends Controller
             "post_id" => $post_id,
             "content" => $request->input("content")
         ]);
+
         try {
             $notification = Notification::where("comment_id", $comment->id)->firstOrFail();
             NotificationController::update($notification);
@@ -57,17 +56,20 @@ class CommentController extends Controller
         }
         return response()->json([
             "success" => true,
-            "message" => "Created new comment."
+            "message" => "Created new comment.",
+            "data" => new CommentResource($comment)
         ], 200);
     }
 
     /**
      * Update an existing comment.
      *
-     * @param  Request  $request
+     * @param Request $request
+     * @param int $post_id
+     * @param int $id
      * @return JsonResponse
      */
-    public function updateComment(Request $request, int $post_id, int $id): JsonResponse
+    public function update(Request $request, int $post_id, int $id): JsonResponse
     {
         $user = $request->user;
 
@@ -106,38 +108,14 @@ class CommentController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param Request $request
-     * @param int  $id
-     * @return JsonResponse
-     */
-    public function show($id): JsonResponse
-    {
-        //
-        return response()->json([]);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
      * Delete comment.
      *
      * @param Request $request
-     * @param  int  $id
+     * @param int $post_id
+     * @param int $id
      * @return JsonResponse
      */
-    public function deleteComment(Request $request, int $post_id, int $id): JsonResponse
+    public function destroy(Request $request, int $post_id, int $id): JsonResponse
     {
         $user = $request->user;
 
