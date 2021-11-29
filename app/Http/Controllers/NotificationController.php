@@ -33,8 +33,6 @@ class NotificationController extends Controller
     }
 
     public static function update(Notification $notification) {
-        // var_dump($notification->user_id);
-        // var_dump($notification->id);
         event(new NotificationUpdate($notification));
     }
 
@@ -43,10 +41,9 @@ class NotificationController extends Controller
         $user_id = $user->id;
         $last_update = $user->last_update_notification;
         $count = Notification::where("user_id", $user_id)->where("created_at", ">=", $last_update)->count();
-        var_dump($count);
         return response()->json([
             "success" => true,
-            "number_of_unseen_notification" => $count
+            "unread_notifications" => $count
         ]);
     }
 

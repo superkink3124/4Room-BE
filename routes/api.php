@@ -25,3 +25,4 @@ Route::group([], __DIR__ . '/api/follow.php');
 Route::group([], __DIR__ . '/api/comment.php');
 Route::group([], __DIR__ . '/api/file.php');
 Route::group([], __DIR__ . '/api/notification.php');
+Route::group([], __DIR__ . '/api/message.php');
