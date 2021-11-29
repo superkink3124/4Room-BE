@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\MessageUpdateEvent;
 use App\Http\Resources\MessageCollection;
 use App\Models\Message;
 use App\Models\Room;
@@ -51,6 +52,7 @@ class MessageController extends Controller
             "room_id" => $room->id,
             "content" => $request->input("content"),
         ]);
+        event(new MessageUpdateEvent($message));
         return response()->json([
             "success" => true,
             "message" => "Created new message."], 200);

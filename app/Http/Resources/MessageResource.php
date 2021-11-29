@@ -19,6 +19,7 @@ class MessageResource extends JsonResource
         return [
             'message_id' => $this->id,
             'user_id' => $this->user_id,
+            'room_id' => $this->room_id,
             'name_in_forum' => User::findOrFail($this->user_id)->name_in_forum,
             'content' => $this->content,
         ];
