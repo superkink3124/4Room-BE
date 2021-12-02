@@ -25,7 +25,8 @@ class UserResource extends JsonResource
             'linkedin_link' => $this->linkedin_link,
             'twitter_link' => $this->twitter_link,
             'follower' => $this->followers->count(),
-            'following' => $this->following->count()
+            'following' => $this->following->count(),
+            'avatar_id' => $this->avatar_id
         ];
     }
 }

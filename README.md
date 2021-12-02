@@ -75,3 +75,7 @@ PUSHER_APP_CLUSTER=ap1
 6. Test trên postman 
 
 Tham khảo thêm: Repository Design Pattern  
+
+> avatar_link example: http://localhost:8000/storage/avatar/1.jpeg
+> mkdir storage/app/public/avatar
+> Download images into storage/app/public/avatar directory
