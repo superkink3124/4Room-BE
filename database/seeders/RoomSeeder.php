@@ -14,8 +14,8 @@ class RoomSeeder extends Seeder
      */
     public function run()
     {
-        $names = ["Beach", "City", "Fantasy", "Library", "Lofi", "Natural",
-                "Piano", "Rain", "Study With Me"];
+        $names = ["beach", "city", "fantasy", "library", "lofi", "natural",
+                "piano", "rain", "live-study"];
         foreach ($names as $name) {
             Room::factory()->state([
                 'name' => $name,
