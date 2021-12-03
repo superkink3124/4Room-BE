@@ -22,6 +22,7 @@ class NotificationResource extends JsonResource
     {
         $record = NULL;
         $name_in_forum = NULL;
+        $avatar_id = NULL;
         if(!is_null($this->upvote_id)) {
             $upvote_model = Upvote::where("id", $this->upvote_id)->first();
             $record = [
@@ -32,6 +33,7 @@ class NotificationResource extends JsonResource
             ];
             $user_model = User::where("id", $record['user_id'])->first();
             $name_in_forum = $user_model->name_in_forum;
+            $avatar_id = $user_model->avatar_id;
         } else if(!is_null($this->comment_id)) {
             $comment_model = Comment::where("id", $this->comment_id)->first();
             $record = [
@@ -42,6 +44,7 @@ class NotificationResource extends JsonResource
             ];
             $user_model = User::where("id", $record['user_id'])->first();
             $name_in_forum = $user_model->name_in_forum;
+            $avatar_id = $user_model->avatar_id;
         } else if(!is_null($this->follow_id)) {
             $follow_model = Follow::where("id", $this->follow_id)->first();
             $record = [
@@ -51,6 +54,7 @@ class NotificationResource extends JsonResource
             ];
             $user_model = User::where("id", $record['user_id'])->first();
             $name_in_forum = $user_model->name_in_forum;
+            $avatar_id = $user_model->avatar_id;
         }
         return [
             'notification_id' => $this->id,
@@ -61,7 +65,8 @@ class NotificationResource extends JsonResource
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
             'record' => $record,
-            'name_in_forum' => $name_in_forum
+            'name_in_forum' => $name_in_forum,
+            'avatar_id' => $avatar_id
         ];
     }
 }
