@@ -16,12 +16,14 @@ class MessageResource extends JsonResource
      */
     public function toArray($request): array
     {
+        $user = User::findOrFail($this->user_id);
         return [
             'message_id' => $this->id,
             'user_id' => $this->user_id,
             'room_id' => $this->room_id,
-            'name_in_forum' => User::findOrFail($this->user_id)->name_in_forum,
+            'name_in_forum' => $user->name_in_forum,
             'content' => $this->content,
+            'avatar_id' => $user->avatar_id
         ];
     }
 }

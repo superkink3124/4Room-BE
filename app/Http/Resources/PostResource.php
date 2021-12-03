@@ -16,16 +16,18 @@ class PostResource extends JsonResource
      */
     public function toArray($request): array
     {
+        $user = User::findOrFail($this->user_id);
         return [
             'post_id' => $this->id,
             'owner_id' => $this->user_id,
-            'name_in_forum' => User::findOrFail($this->user_id)->name_in_forum,
+            'name_in_forum' => $user->name_in_forum,
             'content' => $this->content,
             'upvote' => $this->upvotes->count(),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
             'file' => new FileResource($this->file),
-            'comment' => CommentResource::collection($this->comments)
+            'comment' => CommentResource::collection($this->comments),
+            'avatar_id' => $user->avatar_id
         ];
     }
 }
