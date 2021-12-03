@@ -20,18 +20,23 @@ class ResetPasswordController extends Controller
      */
     public function sendMail(Request $request): JsonResponse
     {
-
         $token = Str::random(60);
-        $user = User::where('email', $request->email)->firstOrFail();
-        $passwordReset = PasswordReset::updateOrCreate([
-            'email' => $user->email,
-        ], [
-            'token' => $token,
-        ]);
-        if ($passwordReset) {
-            $user->notify(new ResetPasswordRequest($passwordReset->token));
+        try {
+            $user = User::where('email', $request->email)->firstOrFail();
+            $passwordReset = PasswordReset::updateOrCreate([
+                'email' => $user->email,
+            ], [
+                'token' => $token,
+            ]);
+            if ($passwordReset) {
+                $user->notify(new ResetPasswordRequest($passwordReset->token));
+            }
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Invalid email!',
+            ], 404);
         }
-
         return response()->json([
             'success' => true,
             'message' => 'We have e-mailed your password reset link!',
@@ -47,14 +52,14 @@ class ResetPasswordController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'This password reset token is invalid.',
-            ], 422);
+            ], 404);
         }
         if (Carbon::parse($passwordReset->updated_at)->addMinutes(720)->isPast()) {
             $passwordReset->delete();
             return response()->json([
                 'success' => false,
                 'message' => 'This password reset token is invalid.',
-            ], 422);
+            ], 404);
         }
         $user = User::where('email', $passwordReset->email)->firstOrFail();
         $updatePasswordUser = $user->update(["password" => bcrypt($request->only('password')["password"])]);

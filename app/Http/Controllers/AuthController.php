@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\UserResource;
 use Illuminate\Http\JsonResponse;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use App\Models\User;
@@ -49,7 +50,7 @@ class AuthController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'User created successfully.',
-            'data' => $user
+            'data' => new UserResource($user)
         ], Response::HTTP_OK);
     }
 
@@ -65,7 +66,7 @@ class AuthController extends Controller
 
         //Send failed response if request is not valid
         if ($validator->fails()) {
-            return response()->json(['error' => "Invalid email or password."], 200);
+            return response()->json(['error' => "Invalid email or password."], 400);
         }
 
         //Request is validated, create jwt
@@ -86,8 +87,9 @@ class AuthController extends Controller
         //Token created, return with success response and jwt token
         return response()->json([
             'success' => true,
+            'message' => "Login successfully.",
             'jwt' => $jwt,
-            'data' => User::where('email', $credentials['email'])->get()[0]
+            'data' => new UserResource(User::where('email', $credentials['email'])->first())
         ]);
     }
 

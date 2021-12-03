@@ -24,9 +24,9 @@ class CreateUsersTable extends Migration
             $table->string('instagram_link')->nullable();
             $table->string('twitter_link')->nullable();
             $table->tinyInteger('role')->default(1);
+            $table->tinyInteger('avatar_id')->default(1);
             $table->timestamps();
             $table->timestamp("last_update_notification")->default("2021-1-1 00:00:00");
-            $table->tinyInteger('avatar_id')->default(1);
         });
     }
 

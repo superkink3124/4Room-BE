@@ -128,7 +128,8 @@ class UserController extends Controller
         ]);
     }
 
-    public function change_avatar(Request $request) {
+    public function change_avatar(Request $request): JsonResponse
+    {
         $avatar_id = $request->input("avatar_id");
         try {
             User::where("id", $request->user->id)->update(['avatar_id' => $avatar_id]);
@@ -137,8 +138,8 @@ class UserController extends Controller
             ]);
         } catch(Exception $ex) {
             return response()->json([
-                'success' => false  
-            ]);
+                'success' => false
+            ], 400);
         }
     }
 }
