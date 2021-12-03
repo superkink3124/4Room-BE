@@ -2,18 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Room;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class RoomController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function index($id): JsonResponse
     {
-        //
+        $room = Room::find($id);
+        if (!$room)
+            return response()->json([
+                "success" => false,
+                "message" => "Room does not exist in database."], 400);
+
+        return response()->json(['success' => true, 'data' => $room]);
     }
 
     /**

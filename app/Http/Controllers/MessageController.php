@@ -13,14 +13,13 @@ class MessageController extends Controller
 {
     /**
      * Display messages of a room.
-     * @param $room_name
+     * @param $room_id
      * @return MessageCollection|JsonResponse
      */
-    public function index($room_name)
+    public function index($room_id)
     {
-        try {
-            $room = Room::where("name", $room_name)->firstOrFail();
-        } catch (\Exception $e) {
+        $room = Room::find($room_id);
+        if (!$room) {
             return response()->json([
                 "success" => false,
                 "message" => "Room does not exist in database."], 400);
@@ -34,25 +33,26 @@ class MessageController extends Controller
      * Store a newly created resource in storage.
      *
      * @param Request $request
-     * @param $room_name
+     * @param $room_id
      * @return JsonResponse
      */
-    public function store(Request $request, $room_name): JsonResponse
+    public function store(Request $request, $room_id): JsonResponse
     {
         $user = $request->user;
-        try {
-            $room = Room::where("name", $room_name)->firstOrFail();
-        } catch (\Exception $e) {
+        $room = Room::find($room_id);
+
+        if (!$room) {
             return response()->json([
                 "success" => false,
                 "message" => "Room does not exist in database."], 400);
         }
+
         $message = Message::create([
             "user_id" => $user->id,
             "room_id" => $room->id,
             "content" => $request->input("content"),
         ]);
-        event(new MessageUpdateEvent($message));
+        event(new MessageUpdateEvent($message, $user));
         return response()->json([
             "success" => true,
             "message" => "Created new message."], 200);

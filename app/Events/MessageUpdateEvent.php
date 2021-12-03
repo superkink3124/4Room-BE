@@ -16,15 +16,17 @@ class MessageUpdateEvent implements ShouldBroadcastNow
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $message;
+    public $user;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($message)
+    public function __construct($message, $user)
     {
         $this->message = $message;
+        $this->user = $user;
     }
 
     /**
@@ -47,6 +49,7 @@ class MessageUpdateEvent implements ShouldBroadcastNow
             'user_id' => $this->message->user_id,
             'room_id' => $this->message->room_id,
             'content' => $this->message->content,
+            'name_in_forum' => $this->user->name_in_forum
         ];
     }
 }
