@@ -39,9 +39,15 @@ class CommentController extends Controller
             return response()->json([
                 "success" => false,
                 "message" => "Could not create comment because this post does not exist."
-            ], 400);
+            ], 404); 
         }
-
+        // error_log($request->input("content") == "");
+        if ($request->input("content") == "") {
+            return response()->json([
+                "success" => false,
+                "message" => "You have not commented yet."
+            ], 400); 
+        }
         $comment = Comment::create([
             "user_id" => $user->id,
             "post_id" => $post_id,
@@ -79,7 +85,7 @@ class CommentController extends Controller
             return response()->json([
                 "success" => false,
                 "message" => "This post does not exist in database."
-            ], 400);
+            ], 404);
         }
 
         try {
@@ -90,9 +96,15 @@ class CommentController extends Controller
             return response()->json([
                 "success" => false,
                 "message" => "Comment does not exist in this post."
-            ], 400);
+            ], 404);
         }
-
+        // error_log($request->input("content") == "");
+        if ($request->input("content") == "") {
+            return response()->json([
+                "success" => false,
+                "message" => "Your comment is empty."
+            ], 400); 
+        }
         if ($request->input("content") == $comment->content) {
             return response()->json([
                 "success" => false,
@@ -125,7 +137,7 @@ class CommentController extends Controller
             return response()->json([
                 "success" => false,
                 "message" => "This post does not exist in database."
-            ], 400);
+            ], 404);
         }
 
         try {
@@ -136,7 +148,7 @@ class CommentController extends Controller
             return response()->json([
                 "success" => false,
                 "message" => "Comment does not exist in this post."
-            ], 400);
+            ], 404);
         }
 
         $comment->delete();
