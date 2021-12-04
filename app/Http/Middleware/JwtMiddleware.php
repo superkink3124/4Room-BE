@@ -30,15 +30,15 @@ class JwtMiddleware extends BaseMiddleware
             if ($e instanceof TokenInvalidException){
                 return response()->json([
                     "success" => false,
-                    "message" => "Token is Invalid"], 400);
+                    "message" => "Token is Invalid"], 401);
             } else if ($e instanceof TokenExpiredException){
                 return response()->json([
                     "success" => false,
-                    "message" => "Token is Expired"], 400);
+                    "message" => "Token is Expired"], 401);
             } else {
                 return response()->json([
                     "success" => false,
-                    "message" => "Authorization Token not found"], 400);
+                    "message" => "Authorization Token not found"], 401);
             }
         }
         return $next($request);

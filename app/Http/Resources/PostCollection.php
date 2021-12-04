@@ -17,6 +17,7 @@ class PostCollection extends ResourceCollection
     {
         return [
             "success" => true,
+            "message" => "Successful operation.",
             "data" => $this->collection
         ];
     }
