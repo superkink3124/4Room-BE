@@ -18,8 +18,8 @@ use Illuminate\Support\Facades\Route;
 //});
 
 Route::group([], __DIR__ . '/api/auth.php');
-Route::group([], __DIR__ . '/api/user.php');
 Route::group([], __DIR__ . '/api/post.php');
+Route::group([], __DIR__ . '/api/user.php');
 Route::group([], __DIR__ . '/api/upvote.php');
 Route::group([], __DIR__ . '/api/follow.php');
 Route::group([], __DIR__ . '/api/comment.php');

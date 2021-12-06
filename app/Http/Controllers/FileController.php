@@ -10,17 +10,17 @@ class FileController extends Controller
 {
     /***
      * Download a file
-     * @param $file_path
+     * @param $address
      * @return JsonResponse|StreamedResponse
      */
-    public function download($file_path)
+    public function download($address)
     {
         try {
-            return Storage::download($file_path);
+            return Storage::download($address);
         } catch (\Exception $e) {
             return response()->json([
                 "success" => false,
-                "message" => "Could not download file."], 400);
+                "message" => "File does not exist."], 404);
         }
     }
 }

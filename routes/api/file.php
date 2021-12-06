@@ -10,5 +10,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get('download/files/{file_path}', [FileController::class, "download"])->where(["file_path" => '.*']);
+Route::get('download/files/{address}', [FileController::class, "download"])->where(["address" => '.*']);
 
