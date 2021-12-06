@@ -8,17 +8,22 @@ use App\Http\Resources\NotificationResource;
 use App\Models\Notification;
 use App\Models\User;
 use Exception;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class NotificationController extends Controller
 {
 
-    public function notification(Request $request) {
+    public function notification(Request $request): NotificationCollection
+    {
         $user = $request->user;
-        return new NotificationCollection(Notification::where("user_id", $user->id)->orderBy("created_at", "desc")->simplePaginate(10));
+        return new NotificationCollection(Notification::where("user_id", $user->id)
+                                                        ->orderBy("created_at", "desc")
+                                                        ->simplePaginate(10));
     }
 
-    public function show(int $notification_id) {
+    public function show(int $notification_id): JsonResponse
+    {
         try {
             return response()->json([
                 "success" => true,
@@ -36,7 +41,8 @@ class NotificationController extends Controller
         event(new NotificationUpdate($notification));
     }
 
-    public function count_unseen_notification(Request $request) {
+    public function count_unseen_notification(Request $request): JsonResponse
+    {
         $user = $request->user;
         $user_id = $user->id;
         $last_update = $user->last_update_notification;
@@ -47,7 +53,8 @@ class NotificationController extends Controller
         ]);
     }
 
-    public function update_last_update_notification(Request $request) {
+    public function update_last_update_notification(Request $request): JsonResponse
+    {
         date_default_timezone_set('Asia/Ho_Chi_Minh');
         $user = $request->user;
         $current_time = date("Y-m-d H:i:s");

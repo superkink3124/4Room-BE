@@ -12,7 +12,7 @@ use App\Http\Controllers\CommentController;
 
 Route::post('posts/{post_id}/comments', [CommentController::class, 'store'])
     ->middleware('jwt.verify');
-Route::post('posts/{post_id}/comments/{id}', [CommentController::class, 'update'])
+Route::post('posts/{post_id}/comments/{comment_id}', [CommentController::class, 'update'])
     ->middleware('jwt.verify');
-Route::delete('posts/{post_id}/comments/{id}', [CommentController::class, 'destroy'])
+Route::delete('posts/{post_id}/comments/{comment_id}', [CommentController::class, 'destroy'])
     ->middleware('jwt.verify');

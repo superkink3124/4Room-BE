@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Events\MessageUpdateEvent;
 use App\Http\Resources\MessageCollection;
+use App\Http\Resources\MessageResource;
 use App\Models\Message;
 use App\Models\Room;
 use Illuminate\Http\JsonResponse;
@@ -22,7 +23,7 @@ class MessageController extends Controller
         if (!$room) {
             return response()->json([
                 "success" => false,
-                "message" => "Room does not exist in database."], 400);
+                "message" => "Room does not exist in database."], 404);
         }
         return new MessageCollection($room->messages()
                                     ->orderBy('created_at', 'desc')
@@ -44,7 +45,7 @@ class MessageController extends Controller
         if (!$room) {
             return response()->json([
                 "success" => false,
-                "message" => "Room does not exist in database."], 400);
+                "message" => "Room does not exist in database."], 404);
         }
 
         $message = Message::create([
@@ -55,29 +56,7 @@ class MessageController extends Controller
         event(new MessageUpdateEvent($message, $user));
         return response()->json([
             "success" => true,
-            "message" => "Created new message."], 200);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param Request $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+            "message" => "Created new message.",
+            "data" => new MessageResource($message)], 200);
     }
 }

@@ -6,19 +6,18 @@ use App\Models\Upvote;
 use App\Models\Comment;
 use App\Models\Follow;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
-
-use function PHPUnit\Framework\isNull;
 
 class NotificationResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
+     * @param  Request  $request
+     * @return array
      */
-    public function toArray($request)
+    public function toArray($request): array
     {
         $record = NULL;
         $name_in_forum = NULL;

@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MessageController;
 
-Route::get('/messages/{room_id}', [MessageController::class, "index"])->middleware("jwt.verify");
-Route::post('/messages/create/{room_id}', [MessageController::class, "store"])->middleware("jwt.verify");
+Route::get('/rooms/{room_id}/messages', [MessageController::class, "index"])
+    ->middleware("jwt.verify");
+Route::post('/rooms/{room_id}/messages', [MessageController::class, "store"])
+    ->middleware("jwt.verify");
 
