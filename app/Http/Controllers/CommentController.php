@@ -27,14 +27,13 @@ class CommentController extends Controller
         } catch (Exception $e) {
             return response()->json([
                 "success" => false,
-                "message" => "Could not create comment because this post does not exist."
+                "message" => "Post does not exist."
             ], 404);
         }
-        // error_log($request->input("content") == "");
         if ($request->input("content") == "") {
             return response()->json([
                 "success" => false,
-                "message" => "You comment is empty."
+                "message" => "Your comment is empty."
             ], 400);
         }
         $comment = Comment::create([

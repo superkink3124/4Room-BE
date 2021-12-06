@@ -27,14 +27,14 @@ class UpvoteController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 "success" => false,
-                "message" => "Post does not exist in database."], 400);
+                "message" => "Post does not exist in database."], 404);
         }
         $all_upvote = $post->upvotes;
         foreach ($all_upvote as $upvote) {
             if ($upvote->user_id == $user->id) {
                 return response()->json([
                     "success" => false,
-                    "message" => "User already upvote post."], 400);
+                    "message" => "User already upvote post."], 409);
             }
         }
         $upvote = Upvote::create([
@@ -71,7 +71,7 @@ class UpvoteController extends Controller
         $users = [];
         foreach ($all_upvote as $upvote) {
             $user = $upvote->user;
-            array_push($users, $user);
+            $users[] = $user;
         }
         return new UserCollection($users);
     }
@@ -82,7 +82,7 @@ class UpvoteController extends Controller
      * @param int $post_id
      * @return JsonResponse
      */
-    public function is_upvoted(Request $request, int $post_id)
+    public function is_upvoted(Request $request, int $post_id): JsonResponse
     {
         $user = $request->user;
         try {
@@ -92,10 +92,12 @@ class UpvoteController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 "success" => true,
+                "message" => "Successful operations.",
                 "is_upvoted" => false], 200);
         }
         return response()->json([
             "success" => true,
+            "message" => "Successful operations.",
             "is_upvoted" => true], 200);
     }
 
@@ -111,12 +113,12 @@ class UpvoteController extends Controller
         $user = $request->user;
         try {
             $upvote = Upvote::where("user_id", $user->id)
-                ->where("post_id", $post_id)
-                ->firstOrFail();
+                            ->where("post_id", $post_id)
+                            ->firstOrFail();
         } catch (\Exception $e) {
             return response()->json([
                 "success" => false,
-                "message" => "User did not upvote post before."], 400);
+                "message" => "User did not upvote post before."], 404);
         }
         $upvote->delete();
         return response()->json([
