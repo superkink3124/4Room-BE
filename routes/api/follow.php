@@ -9,13 +9,13 @@ use App\Http\Controllers\FollowController;
 |--------------------------------------------------------------------------
 */
 
+Route::post('target-users/{id}/follow', [FollowController::class, "store"])
+    ->middleware('jwt.verify');
+Route::delete('target-users/{id}/follow', [FollowController::class, "destroy"])
+    ->middleware('jwt.verify');
 Route::get('/users/{id}/following', [FollowController::class, "following"])
     ->middleware('jwt.verify');
 Route::get('/users/{id}/followers', [FollowController::class, "followers"])
     ->middleware('jwt.verify');
-Route::post('follow-user/{id}', [FollowController::class, "store"])
-    ->middleware('jwt.verify');
-Route::delete('follow-user/{id}', [FollowController::class, "destroy"])
-    ->middleware('jwt.verify');
-Route::get('/follow/suggestion', [FollowController::class, "suggestion"])
+Route::get('users/follow/suggestion', [FollowController::class, "suggestion"])
     ->middleware('jwt.verify');

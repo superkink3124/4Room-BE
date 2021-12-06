@@ -26,7 +26,7 @@ class FollowController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 "success" => false,
-                "message" => "Target user does not exist in database."], 400);
+                "message" => "Target user does not exist in database."], 404);
         }
         return new UserCollection($user->following);
     }
@@ -71,7 +71,7 @@ class FollowController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 "success" => false,
-                "message" => "Target user does not exist in database."], 400);
+                "message" => "Target user does not exist in database."], 404);
         }
         return new UserCollection($user->followers);
     }
@@ -91,7 +91,7 @@ class FollowController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 "success" => false,
-                "message" => "Target user does not exist in database."], 400);
+                "message" => "Target user does not exist in database."], 404);
         }
         $follow = Follow::where("source_id", $source_user->id)
                         ->where("target_id", $target_user->id)
@@ -99,19 +99,20 @@ class FollowController extends Controller
         if (count($follow) > 0 || $source_user->id == $target_user->id) {
             return response()->json([
                 "success" => false,
-                "message" => "Source user already follow Target user."], 400);
+                "message" => "Source user already follow Target user."], 409);
         }
         $follow = Follow::create([
             "source_id" => $source_user->id,
             "target_id" => $target_user->id
         ]);
+
         try {
             $follow = Notification::where("follow_id", $follow->id)->firstOrFail();
             NotificationController::update($follow);
         } catch(Exception $ex) {
 
         }
-        
+
         return response()->json([
             "success" => true,
             "message" => "Followed."], 200);
@@ -132,7 +133,7 @@ class FollowController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 "success" => false,
-                "message" => "Target user does not exist in database."], 400);
+                "message" => "Target user does not exist in database."], 404);
         }
         try {
             $follow = Follow::where("source_id", $source_user->id)
@@ -141,7 +142,7 @@ class FollowController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 "success" => false,
-                "message" => "Source user did not follow Target user before."], 400);
+                "message" => "Source user did not follow Target user before."], 409);
         }
         $follow->delete();
         return response()->json([
