@@ -2,6 +2,8 @@
 
 namespace App\Events;
 
+use App\Http\Resources\MessageResource;
+use App\Http\Resources\UserResource;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -45,11 +47,7 @@ class MessageUpdateEvent implements ShouldBroadcastNow
 
     public function broadcastWith() {
         return [
-            'message_id' => $this->message->id,
-            'user_id' => $this->message->user_id,
-            'room_id' => $this->message->room_id,
-            'content' => $this->message->content,
-            'name_in_forum' => $this->user->name_in_forum
+            'message' => new MessageResource($this->message)
         ];
     }
 }
