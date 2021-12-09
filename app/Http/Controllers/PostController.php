@@ -16,7 +16,8 @@ class PostController extends Controller
     /**
      * Display a list posts in user's newsfeed
      */
-    public function newsfeed(Request $request) {
+    public function newsfeed(Request $request): PostCollection
+    {
         $user = $request->user;
         $followings = $user->following;
         $followings_id = [$user->id];
@@ -40,7 +41,7 @@ class PostController extends Controller
          } catch (Exception $e) {
              return response()->json([
                  "success" => false,
-                 "message" => "User does not exist in database."], 400);
+                 "message" => "User does not exist in database."], 404);
          }
          return new PostCollection($user->posts()
                                         ->orderBy('updated_at', 'desc')
@@ -66,7 +67,8 @@ class PostController extends Controller
             }
             return response()->json([
                 "success" => true,
-                "message" => "Created new post."], 200);
+                "message" => "Created new post.",
+                "data" => new PostResource($post)], 200);
         } catch (Exception $e) {
             return response()->json([
                 "success" => false,
@@ -90,7 +92,7 @@ class PostController extends Controller
         } catch (Exception $e) {
             return response()->json([
                 "success" => false,
-                "message" => "Post does not exist in database."], 400);
+                "message" => "Post does not exist in database."], 404);
         }
     }
 
@@ -109,17 +111,18 @@ class PostController extends Controller
         } catch (Exception $e) {
             return response()->json([
                 "success" => false,
-                "message" => "Post does not exist in database."], 400);
+                "message" => "Post does not exist in database."], 404);
         }
         if ($user->id == $post->user->id) {
             $post->update(["content" => $request->input("content")]);
             return response()->json([
                 "success" => true,
-                "message" => "Updated post."], 200);
+                "message" => "Updated post.",
+                "data" => new PostResource($post)], 200);
         } else {
             return response()->json([
                 "success" => false,
-                "message" => "User does not own post."], 400);
+                "message" => "User does not own post."], 409);
         }
     }
 
@@ -138,7 +141,7 @@ class PostController extends Controller
         } catch (Exception $e) {
             return response()->json([
                 "success" => false,
-                "message" => "Post does not exist in database."], 400);
+                "message" => "Post does not exist in database."], 404);
         }
         if ($user->id == $post->user->id) {
             $post->delete();
@@ -148,7 +151,7 @@ class PostController extends Controller
         } else {
             return response()->json([
                 "success" => false,
-                "message" => "User does not own post."], 400);
+                "message" => "User does not own post."], 409);
         }
     }
 }

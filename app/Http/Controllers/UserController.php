@@ -56,12 +56,13 @@ class UserController extends Controller
             $is_follow = ($follow != null);
             return response()->json([
                 "success" => true,
+                'message' => "Successful operation.",
                 "data" => new UserResource($target_user),
                 "followed" => $is_follow], 200);
         } catch (Exception $e) {
             return response()->json([
                 "success" => false,
-                "message" => "User does not exist in database."], 400);
+                "message" => "User does not exist in database."], 404);
         }
     }
 
@@ -70,6 +71,7 @@ class UserController extends Controller
         $user = $request->user;
         return response()->json([
             'success' => true,
+            'message' => "Successful operation.",
             'data' => new UserResource($user)
         ]);
     }
@@ -80,11 +82,12 @@ class UserController extends Controller
      * @param Request $request
      * @return JsonResponse
      */
-    public function update(Request $request): JsonResponse
+    public function update(Request $request)
     {
+        $input = $request->except(['password', 'id', 'role', 'email', 'created_at', 'updated_at']);
         try {
             $user = $request->user;
-            $user->update($request->all());
+            $user->update($input);
             return response()->json([
                 "success" => true,
                 "message" => "Updated profile.",
@@ -117,15 +120,12 @@ class UserController extends Controller
             "message" => "Deleted user."], 200);
     }
 
-    public function search(Request $request): JsonResponse
+    public function search(Request $request): UserCollection
     {
-        $name_in_forum = $request->name_in_forum;
+        $name_in_forum = $request->query("name");
         $data = User::where("name_in_forum", "like", '%'.$name_in_forum.'%')->limit(10)->get();
 
-        return response()->json([
-            'success' => true,
-            'data' => $data
-        ]);
+        return new UserCollection($data);
     }
 
     public function change_avatar(Request $request): JsonResponse

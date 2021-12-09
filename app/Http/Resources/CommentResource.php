@@ -19,13 +19,11 @@ class CommentResource extends JsonResource
         try {
             $user = User::findOrFail($this->user_id);
             return [
-                'comment_id' => $this->id,
+                'id' => $this->id,
+                'owner' => new UserResource($user),
                 'content' => $this->content,
-                'user_id' => $this->user_id,
-                'name_in_forum' => $user->name_in_forum,
                 'created_at' => $this->created_at,
-                'updated_at' => $this->updated_at,
-                'avatar_id' => $user->avatar_id
+                'updated_at' => $this->updated_at
             ];
         } catch (\Exception $e) {
             return [

@@ -4,7 +4,6 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
 use Buihuycuong\Vnfaker\VNFaker;
 
 class UserFactory extends Factory
@@ -21,6 +20,7 @@ class UserFactory extends Factory
             'password' => Hash::make('hehehe123'),
             'name_in_forum' => VNFaker::fullname(),
             'bio' => VNFaker::sentences(2),
+            'avatar_id' => rand(1, 10)
         ];
     }
 

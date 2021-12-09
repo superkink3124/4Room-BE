@@ -13,16 +13,6 @@ use Illuminate\Http\Request;
 class CommentController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
      * Create a new comment.
      *
      * @param Request $request
@@ -32,22 +22,25 @@ class CommentController extends Controller
     public function store(Request $request, int $post_id): JsonResponse
     {
         $user = $request->user;
-
         try {
             Post::findOrFail($post_id);
         } catch (Exception $e) {
             return response()->json([
                 "success" => false,
-                "message" => "Could not create comment because this post does not exist."
+                "message" => "Post does not exist."
+            ], 404);
+        }
+        if ($request->input("content") == "") {
+            return response()->json([
+                "success" => false,
+                "message" => "Your comment is empty."
             ], 400);
         }
-
         $comment = Comment::create([
             "user_id" => $user->id,
             "post_id" => $post_id,
             "content" => $request->input("content")
         ]);
-
         try {
             $notification = Notification::where("comment_id", $comment->id)->firstOrFail();
             NotificationController::update($notification);
@@ -66,44 +59,27 @@ class CommentController extends Controller
      *
      * @param Request $request
      * @param int $post_id
-     * @param int $id
+     * @param int $comment_id
      * @return JsonResponse
      */
-    public function update(Request $request, int $post_id, int $id): JsonResponse
+    public function update(Request $request, int $post_id, int $comment_id): JsonResponse
     {
         $user = $request->user;
-
-        try {
-            Post::findOrFail($post_id);
-        } catch (Exception $e) {
-            return response()->json([
-                "success" => false,
-                "message" => "This post does not exist in database."
-            ], 400);
-        }
-
         try {
             $comment = Comment::where("user_id", $user->id)
                 ->where("post_id", $post_id)
-                ->findOrFail($id);
+                ->findOrFail($comment_id);
         } catch (Exception $e) {
             return response()->json([
                 "success" => false,
-                "message" => "Comment does not exist in this post."
-            ], 400);
+                "message" => "Comment does not exist."
+            ], 404);
         }
-
-        if ($request->input("content") == $comment->content) {
-            return response()->json([
-                "success" => false,
-                "message" => "You have not changed the comment yet."
-            ], 400);
-        }
-
         $comment->update(["content" => $request->input("content")]);
         return response()->json([
             "success" => true,
-            "message" => "Updated comment."
+            "message" => "Updated comment.",
+            "data" => new CommentResource($comment)
         ], 200);
     }
 
@@ -112,33 +88,22 @@ class CommentController extends Controller
      *
      * @param Request $request
      * @param int $post_id
-     * @param int $id
+     * @param int $comment_id
      * @return JsonResponse
      */
-    public function destroy(Request $request, int $post_id, int $id): JsonResponse
+    public function destroy(Request $request, int $post_id, int $comment_id): JsonResponse
     {
         $user = $request->user;
-
-        try {
-            Post::findOrFail($post_id);
-        } catch (Exception $e) {
-            return response()->json([
-                "success" => false,
-                "message" => "This post does not exist in database."
-            ], 400);
-        }
-
         try {
             $comment = Comment::where("user_id", $user->id)
                 ->where("post_id", $post_id)
-                ->findOrFail($id);
+                ->findOrFail($comment_id);
         } catch (Exception $e) {
             return response()->json([
                 "success" => false,
-                "message" => "Comment does not exist in this post."
-            ], 400);
+                "message" => "Comment does not exist."
+            ], 404);
         }
-
         $comment->delete();
         return response()->json([
             "success" => true,
