@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\UserResource;
+use Exception;
 use Illuminate\Http\JsonResponse;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use App\Models\User;
@@ -13,6 +14,10 @@ use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
+
+    /**
+     * @throws Exception
+     */
     public function register(Request $request): JsonResponse
     {
         //Validate data
@@ -43,7 +48,8 @@ class AuthController extends Controller
         $user = User::create([
             'name_in_forum' => $request->name_in_forum,
             'email' => $request->email,
-            'password' => bcrypt($request->password)
+            'password' => bcrypt($request->password),
+            'avatar_id' => random_int(1, 10)
         ]);
 
         //User created, return success response
@@ -97,7 +103,7 @@ class AuthController extends Controller
     {
         return response()->json([
             'success' => true,
-            'message' => 'Token is valid'
+            'message' => 'Token is valid.'
         ]);
     }
 
