@@ -75,7 +75,7 @@ class ResetPasswordController extends Controller
 
     public function reset_password(Request $request): JsonResponse
     {
-        $token = $request->input("token");
+        $token = $request->query("token");
         try {
             $passwordReset = PasswordReset::where('token', $token)->firstOrFail();
         } catch (\Exception $e) {

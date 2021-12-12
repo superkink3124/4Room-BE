@@ -31,15 +31,15 @@ class ResetPasswordRequest extends Notification implements ShouldQueue
      * Get the mail representation of the notification.
      *
      * @param  mixed  $notifiable
-     * @return \Illuminate\Notifications\Messages\MailMessage
+     * @return MailMessage
      */
-     public function toMail($notifiable)
-     {
-        $url = "localhost:8081/reset-password/{$this->token}";
+    public function toMail($notifiable): MailMessage
+    {
+        $url = url('http://4room.tech/reset-password/?token=' . $this->token);
 
         return (new MailMessage)
             ->line('You are receiving this email because we received a password reset request for your account.')
-            ->action('Reset Password', $url)
+            ->action('Reset Password', url($url))
             ->line('If you did not request a password reset, no further action is required.');
     }
 }
