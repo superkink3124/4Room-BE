@@ -54,6 +54,7 @@ php artisan serve
 9.Setting broadcast  
 * .env  
 ```
+BROADCAST_DRIVER=pusher
 PUSHER_APP_ID=1299119
 PUSHER_APP_KEY=3ef48bd1a87852f6ef19
 PUSHER_APP_SECRET=2d7a0a636ba1e9dcc361

@@ -10,11 +10,12 @@ use App\Models\User;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use phpDocumentor\Reflection\DocBlock\Tags\Reference\Reference;
 
 class FollowController extends Controller
 {
     /**
-     * Display a list followings of specified user.
+     * List followings of specified user.
      *
      * @param int $user_id
      * @return UserCollection|JsonResponse
@@ -32,34 +33,69 @@ class FollowController extends Controller
     }
 
     /**
-     * Display top 10 suggestion user
+     * Top 10 suggestion users = Random 3 in 50 users that has most followers + Random 7 in 200 friends of followings
      */
-    public function suggestion(Request $request)
+    public function suggestion(Request $request): UserCollection
     {
+        $result_ids = [];
         $request_user = $request->user;
+        // Random 7 friends of followings
+        $candidate_users = [];
+        $following =$request_user->following;
+        foreach ($following as $following_user) {
+            $following_following =$following_user->following;
+            foreach ($following_following as $following_following_user) {
+                array_push($candidate_users, new UserResource($following_following_user));
+            }
+            if (count($candidate_users) > 200) {
+                break;
+            }
+        }
+        shuffle($candidate_users);
+        foreach ($candidate_users as $candidate_user) {
+            if (count($result_ids) == 7) {
+                break;
+            }
+            if ($request_user->id == $candidate_user->id || in_array($candidate_user->id, $result_ids)) {
+                continue;
+            }
+            $follow = Follow::where("source_id", $request_user->id)
+                ->where("target_id", $candidate_user->id)
+                ->first();
+            if ($follow != null) {
+                continue;
+            }
+            array_push($result_ids, $candidate_user->id);
+        }
+        // Top 3 users that has most followers
         $users = User::all();
         $candidate_users = [];
         foreach ($users as $user) {
             array_push($candidate_users, new UserResource($user));
         }
         usort($candidate_users, function($a, $b) {return $a->followers->count() < $b->followers->count();});
-        $result = [];
+        $candidate_users = array_slice($candidate_users, 0, 50);
+        shuffle($candidate_users);
         foreach ($candidate_users as $candidate_user) {
-            if (count($result) == 10) {
+            if (count($result_ids) == 10) {
                 break;
             }
-            if ($request_user->id == $candidate_user->id) {
+            if ($request_user->id == $candidate_user->id || in_array($candidate_user->id, $result_ids)) {
                 continue;
             }
-            array_push($result, $candidate_user);
+            $follow = Follow::where("source_id", $request_user->id)
+                            ->where("target_id", $candidate_user->id)
+                            ->first();
+            if ($follow != null) {
+                continue;
+            }
+            array_push($result_ids, $candidate_user->id);
         }
-        return response()->json([
-            "success" => true,
-            "data" => $result], 200);
+        return new UserCollection(User::whereIn('id', $result_ids)->get());
     }
 
     /**
-     * Display a list followers of specified user.
+     * List followers of specified user.
      *
      * @param int $user_id
      * @return UserCollection|JsonResponse
@@ -112,7 +148,6 @@ class FollowController extends Controller
         } catch(Exception $ex) {
 
         }
-
         return response()->json([
             "success" => true,
             "message" => "Followed."], 200);
