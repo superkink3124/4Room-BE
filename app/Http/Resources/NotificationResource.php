@@ -22,6 +22,9 @@ class NotificationResource extends JsonResource
         $record = NULL;
         $name_in_forum = NULL;
         $avatar_id = NULL;
+        $upvote_model = NULL;
+        $comment_model = NULL;
+        $follow_model = NULL;
         if(!is_null($this->upvote_id)) {
             $upvote_model = Upvote::where("id", $this->upvote_id)->first();
             $record = [
@@ -65,7 +68,10 @@ class NotificationResource extends JsonResource
             'updated_at' => $this->updated_at,
             'record' => $record,
             'name_in_forum' => $name_in_forum,
-            'avatar_id' => $avatar_id
+            'avatar_id' => $avatar_id,
+            'upvote_model' => $upvote_model,
+            'comment_model' => $comment_model,
+            'follow_model' => $follow_model
         ];
     }
 }

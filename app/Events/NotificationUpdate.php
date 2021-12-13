@@ -2,6 +2,7 @@
 
 namespace App\Events;
 
+use App\Http\Resources\NotificationResource;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -44,8 +45,8 @@ class NotificationUpdate implements ShouldBroadcastNow
 
     public function broadcastWith() {
         // var_dump($this->notification->id);
-        return ['notification' => [
-            "id" => $this->notification->id,
-        ]];
+        return [
+            'notification' => new NotificationResource($this->notification)
+        ];
     }
 }
