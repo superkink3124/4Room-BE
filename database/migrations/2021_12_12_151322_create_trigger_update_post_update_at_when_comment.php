@@ -16,12 +16,12 @@ class CreateTriggerUpdatePostUpdateAtWhenComment extends Migration
     {
         DB::unprepared("
         CREATE TRIGGER `update_post_update_at` AFTER INSERT ON `comments` FOR EACH ROW BEGIN
-       
-       UPDATE posts
-       SET posts.updated_at = NOW()
-       WHERE posts.id = NEW.post_id;
-       
-       END
+
+        UPDATE posts
+        SET posts.updated_at = NOW()
+        WHERE posts.id = NEW.post_id;
+
+        END
         ");
     }
 
