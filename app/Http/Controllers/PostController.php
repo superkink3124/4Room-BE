@@ -14,23 +14,44 @@ use Illuminate\Http\Request;
 class PostController extends Controller
 {
     /**
-     * Display a list posts in user's newsfeed
+     * List posts in user's newsfeed = Post of following -> (random 50 post);
      */
     public function newsfeed(Request $request): PostCollection
     {
+        $result_post_ids = [];
         $user = $request->user;
+        //////////////////////////////////////////////////////////////
         $followings = $user->following;
-        $followings_id = [$user->id];
+        $following_ids = [$user->id];
         foreach ($followings as $following) {
-            array_push($followings_id, $following->id);
+            array_push($following_ids, $following->id);
         }
-        return new PostCollection(Post::whereIn('user_id', $followings_id)
+        $posts_following = Post::whereIn('user_id', $following_ids)->orderBy('updated_at', 'desc')->get();
+        foreach ($posts_following as $post_following) {
+            array_push($result_post_ids, $post_following->id);
+        }
+        //////////////////////////////////////////////////////////////
+        $posts = Post::all();
+        $other_posts = [];
+        foreach ($posts as $post) {
+            array_push($other_posts, new PostResource($post));
+        }
+//        usort($other_posts, function($a, $b) {return $a->upvotes->count() < $b->upvotes->count();});
+        shuffle($other_posts);
+        $other_posts = array_slice($other_posts, 0, sizeof($result_post_ids) / 5);
+        foreach ($other_posts as $other_post) {
+            if (in_array($other_post->id, $result_post_ids)) {
+                continue;
+            }
+            array_push($result_post_ids, $other_post->id);
+        }
+        return new PostCollection(Post::whereIn('id', $result_post_ids)
                                         ->orderBy('updated_at', 'desc')
                                         ->simplePaginate(10));
     }
 
     /**
-     * Display a list posts owned by user_id.
+     * List posts owned by user_id.
      * @param int $user_id
      * @return JsonResponse|PostCollection
      */
