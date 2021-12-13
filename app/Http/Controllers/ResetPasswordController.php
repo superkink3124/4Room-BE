@@ -48,7 +48,7 @@ class ResetPasswordController extends Controller
     public function change_password(Request $request): JsonResponse
     {
         $user = $request->user;
-        $passwords = $request->only('old_password', 'new_password');
+        $passwords = $request->only('old_password', 'new_password', 'new_password_confirmation');
         $validator = Validator::make($passwords, [
             'old_password' => 'required|string|min:6|max:50',
             'new_password' => 'required|string|min:6|max:50'
@@ -65,6 +65,12 @@ class ResetPasswordController extends Controller
                 'success' => false,
                 'message' => 'Old password is not correct.',
             ], 409);
+        }
+        if ($passwords["new_password"] != $passwords["new_password_confirmation"]) {
+            return response()->json([
+                'success' => false,
+                'message' => 'New password does not match confirmed password.'
+            ], 400);
         }
         $user->update(["password" => bcrypt($passwords["new_password"])]);
         return response()->json([

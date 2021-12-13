@@ -122,9 +122,13 @@ class UserController extends Controller
 
     public function search(Request $request): UserCollection
     {
-        $name_in_forum = $request->query("name");
-        $data = User::where("name_in_forum", "like", '%'.$name_in_forum.'%')->limit(10)->get();
-
+        $key_search = $request->query("name");
+        $data = User::where("name_in_forum", "like", '%'.$key_search.'%')
+                    ->limit(10)->get();
+        if (str_contains($key_search, '@') || sizeof($data) == 0) {
+            $data = User::where("email", "like", '%'.$key_search.'%')
+                ->limit(10)->get();
+        }
         return new UserCollection($data);
     }
 
