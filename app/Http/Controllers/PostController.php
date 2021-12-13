@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\PostCollection;
 use App\Http\Resources\PostResource;
+use App\Models\Comment;
 use App\Models\File;
 use App\Models\Post;
+use App\Models\Upvote;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\JsonResponse;
@@ -26,9 +28,26 @@ class PostController extends Controller
         foreach ($followings as $following) {
             array_push($following_ids, $following->id);
         }
-        $posts_following = Post::whereIn('user_id', $following_ids)->orderBy('updated_at', 'desc')->get();
+        $posts_following = Post::whereIn('user_id', $following_ids)->get();
+        $comments_following = Comment::whereIn('user_id', $following_ids)->get();
+        $upvotes_following = Upvote::whereIn('user_id', $following_ids)->get();
         foreach ($posts_following as $post_following) {
+            if (in_array($post_following->id, $result_post_ids)) {
+                continue;
+            }
             array_push($result_post_ids, $post_following->id);
+        }
+        foreach ($comments_following as $comment_following) {
+            if (in_array($comment_following->post_id, $result_post_ids)) {
+                continue;
+            }
+            array_push($result_post_ids, $comment_following->post_id);
+        }
+        foreach ($upvotes_following as $upvote_following) {
+            if (in_array($upvote_following->post_id, $result_post_ids)) {
+                continue;
+            }
+            array_push($result_post_ids, $upvote_following->post_id);
         }
         //////////////////////////////////////////////////////////////
         $posts = Post::all();
