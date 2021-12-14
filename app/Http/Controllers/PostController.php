@@ -100,7 +100,8 @@ class PostController extends Controller
             $user = $request->user;
             $post = Post::create([
                 "user_id" => $user->id,
-                "content" => $request->input("content"),
+                "title" => $request->input("title"),
+                "content" => $request->input("content")
             ]);
             if ($request->file('file') !== null && $request->file('file')->isValid()) {
                 File::storage_file($request, $post);
@@ -154,7 +155,9 @@ class PostController extends Controller
                 "message" => "Post does not exist in database."], 404);
         }
         if ($user->id == $post->user->id) {
-            $post->update(["content" => $request->input("content")]);
+            $post->update([
+                "title" => $request->input("title"),
+                "content" => $request->input("content")]);
             return response()->json([
                 "success" => true,
                 "message" => "Updated post.",
