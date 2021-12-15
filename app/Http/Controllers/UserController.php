@@ -143,7 +143,8 @@ class UserController extends Controller
                 User::where("id", $request->user->id)->update(['avatar_id' => $file_name]);
                 return response()->json([
                     'success' => true,
-                    'message' => "Changed avatar."
+                    'message' => "Changed avatar.",
+                    'data' => new UserResource($request->user)
                 ]);
             }
             catch(Exception $ex) {
