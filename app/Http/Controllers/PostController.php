@@ -12,6 +12,7 @@ use App\Models\User;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -184,6 +185,13 @@ class PostController extends Controller
                 "message" => "Post does not exist in database."], 404);
         }
         if ($user->id == $post->user->id) {
+            try {
+                $file = File::where('post_id', $post->id)->firstOrFail();
+                Storage::delete($file->address);
+            }
+            catch (Exception $ex) {
+
+            }
             $post->delete();
             return response()->json([
                 "success" => true,
