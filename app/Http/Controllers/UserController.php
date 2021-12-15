@@ -132,7 +132,7 @@ class UserController extends Controller
         return new UserCollection($data);
     }
 
-    public function change_avatar(Request $request)
+    public function change_avatar(Request $request): JsonResponse
     {
         if($request->file("avatar") !== null && $request->file("avatar")->isValid()) {
             try {
@@ -142,15 +142,20 @@ class UserController extends Controller
                 $file_name = $arr[count($arr) - 1];
                 User::where("id", $request->user->id)->update(['avatar_id' => $file_name]);
                 return response()->json([
-                    'success' => true
+                    'success' => true,
+                    'message' => "Changed avatar."
                 ]);
             }
             catch(Exception $ex) {
-
+                return response()->json([
+                    'success' => false,
+                    'message' => "Invalid input."
+                ], 400);
             }
         } else {
             return response()->json([
-                'success' => false
+                'success' => false,
+                'message' => "Invalid input."
             ], 400);
         }
     }
