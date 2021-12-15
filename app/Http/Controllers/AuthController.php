@@ -49,7 +49,7 @@ class AuthController extends Controller
             'name_in_forum' => $request->name_in_forum,
             'email' => $request->email,
             'password' => bcrypt($request->password),
-            'avatar_id' => random_int(1, 10)
+            'avatar_id' => random_int(1, 10).".png"
         ]);
 
         //User created, return success response
