@@ -17,9 +17,30 @@ class PostFactory extends Factory
     public function definition(): array
     {
         $date = $this->faker->dateTimeBetween("-1 year", "now");
+        $content = "# Random\n"
+            ."\n### 1. Part 1 \n"
+            ."+ ".VNFaker::paragraphs()."\n"
+            ."+ ".VNFaker::paragraphs()."\n"
+            ."+ ".VNFaker::paragraphs()."\n"
+            ."\n### 2. Part 2 \n"
+            ."+ ".VNFaker::paragraphs()."\n"
+            ."+ ".VNFaker::paragraphs()."\n"
+            ."+ ".VNFaker::paragraphs()."\n"
+            ."\n### 3. Part 3 \n"
+            ."+ ".VNFaker::paragraphs()."\n"
+            ."+ ".VNFaker::paragraphs()."\n"
+            ."+ ".VNFaker::paragraphs()."\n"
+            ."\n### 4. Part 4 \n"
+            ."+ ".VNFaker::paragraphs()."\n"
+            ."+ ".VNFaker::paragraphs()."\n"
+            ."+ ".VNFaker::paragraphs()."\n"
+            ."\n## Overview \n"
+            ."+ https://hackr.io/blog/types-of-software-testing"."\n"
+            ."\n## End";
         return [
             'user_id' => rand(1, User::count()),
-            'content' => VNFaker::paragraphs(),
+            'title' => VNFaker::sentences(),
+            'content' => $content,
             'updated_at' => $date,
             'created_at' => $date
         ];

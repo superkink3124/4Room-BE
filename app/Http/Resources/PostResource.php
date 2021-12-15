@@ -20,6 +20,7 @@ class PostResource extends JsonResource
         return [
             'id' => $this->id,
             'owner' => new UserResource($user),
+            'title' => $this->title,
             'content' => $this->content,
             'upvote' => $this->upvotes->count(),
             'created_at' => $this->created_at,
