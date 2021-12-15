@@ -11,6 +11,9 @@
 				{
 					"name": "Register a new account",
 					"request": {
+						"auth": {
+							"type": "noauth"
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
@@ -23,7 +26,8 @@
 							}
 						},
 						"url": {
-							"raw": "127.0.0.1:8000/api/register",
+							"raw": "http://127.0.0.1:8000/api/register",
+							"protocol": "http",
 							"host": [
 								"127",
 								"0",
@@ -141,7 +145,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"token\": \"fZbQfLlRGKIbRjeDoUtqoDwA4qklvKW9aJ7MMErMMRjnax3ehJwqdxibjlHf\",\n    \"new_password\": \"123456789\"\n}",
+							"raw": "{\n    \"password\": \"ductran123\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -149,7 +153,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8000/api/reset-password",
+							"raw": "http://127.0.0.1:8000/api/reset-password/?token=xTGlqcFPCqAywnAaARkfXGi91tguZ8qN66HQVmXI9LI6ne9q5CVBOKRpDCbN",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -160,7 +164,56 @@
 							"port": "8000",
 							"path": [
 								"api",
-								"reset-password"
+								"reset-password",
+								""
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "xTGlqcFPCqAywnAaARkfXGi91tguZ8qN66HQVmXI9LI6ne9q5CVBOKRpDCbN"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Change password",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYzOTMyODI5MCwiZXhwIjoxNjM5NTg3NDkwLCJuYmYiOjE2MzkzMjgyOTAsImp0aSI6IktiTlV1b2VNS044WEF0Q3YiLCJzdWIiOjEwMSwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.lsqmDxUDlYf-tS-Mz9d6aqU29cbm4PI5OYT08mpUrDY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"old_password\": \"zed1233\",\n    \"new_password\": \"zed1234\", \n    \"new_password_confirmation\": \"zed1234\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/change-password",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"change-password"
 							]
 						}
 					},
@@ -291,14 +344,14 @@
 					"response": []
 				},
 				{
-					"name": "Search users by name in forum",
+					"name": "Search users",
 					"request": {
 						"auth": {
 							"type": "bearer",
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYzODgwMTg0OSwiZXhwIjoxNjM4ODA1NDQ5LCJuYmYiOjE2Mzg4MDE4NDksImp0aSI6Im04MW9oUjdKM3czdmVUa2QiLCJzdWIiOjQxLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.Xp6ktmem6M_04_nd5mg7-HGWj-7tjNOcmr457pKPHIk",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYzOTM2MzMyMCwiZXhwIjoxNjM5NjIyNTIwLCJuYmYiOjE2MzkzNjMzMjAsImp0aSI6Im9ycFl1TmhTNXByaEFzQWQiLCJzdWIiOjEwMiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.vd1IijeO2h64M1mB2e8M792nsCGedz0Valeh-hz30zc",
 									"type": "string"
 								}
 							]
@@ -338,7 +391,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYzODExOTg1MSwiZXhwIjoxNjM4MTIzNDUxLCJuYmYiOjE2MzgxMTk4NTEsImp0aSI6ImFPY2JzcU9GQnhPWUdnMjIiLCJzdWIiOjEsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.kWIY1PM8pxN8R590HtQmZ7klLkkbGXOwOYHLBpMm7oQ",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYzOTU4MjYwNCwiZXhwIjoxNjM5ODQxODA0LCJuYmYiOjE2Mzk1ODI2MDQsImp0aSI6ImZHQWFXMmh0c1RlQjEzQVYiLCJzdWIiOjEwMSwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.AGUAucnmVb7Yep0X9zFcfzudYf29ge_YlULyG2YqZVo",
 									"type": "string"
 								}
 							]
@@ -349,14 +402,15 @@
 							"mode": "formdata",
 							"formdata": [
 								{
-									"key": "avatar_id",
-									"value": "3",
-									"type": "text"
+									"key": "avatar",
+									"type": "file",
+									"src": "/home/hp/Pictures/Screenshot from 2021-12-15 21-49-46.png"
 								}
 							]
 						},
 						"url": {
-							"raw": "127.0.0.1:8000/api/change_avatar/",
+							"raw": "http://127.0.0.1:8000/api/change_avatar",
+							"protocol": "http",
 							"host": [
 								"127",
 								"0",
@@ -366,10 +420,18 @@
 							"port": "8000",
 							"path": [
 								"api",
-								"change_avatar",
-								""
+								"change_avatar"
 							]
 						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get avatar",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": null
 					},
 					"response": []
 				}
@@ -526,7 +588,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYzODgwNDY1NywiZXhwIjoxNjM4ODA4MjU3LCJuYmYiOjE2Mzg4MDQ2NTcsImp0aSI6ImY1eE9reDA3QXJiRTVwMzEiLCJzdWIiOjQxLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.65sIniO4EPGu23KVMUfalot1qAWQ05PqJT5K9hme8sQ",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYzOTQwNjIyNCwiZXhwIjoxNjM5NjY1NDI0LCJuYmYiOjE2Mzk0MDYyMjQsImp0aSI6IjM2Y2ViVEJ0MGZGa3NjODMiLCJzdWIiOjEwMywicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.KtTetsGwuG702RaXhiL3cLLkkDp41nPoya2bArNbDrM",
 									"type": "string"
 								}
 							]
@@ -566,7 +628,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYzODgwNDY1NywiZXhwIjoxNjM4ODA4MjU3LCJuYmYiOjE2Mzg4MDQ2NTcsImp0aSI6ImY1eE9reDA3QXJiRTVwMzEiLCJzdWIiOjQxLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.65sIniO4EPGu23KVMUfalot1qAWQ05PqJT5K9hme8sQ",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYzOTU3ODEyMCwiZXhwIjoxNjM5ODM3MzIwLCJuYmYiOjE2Mzk1NzgxMjAsImp0aSI6Imo3dkJBdGg4VVhCbnlPbnQiLCJzdWIiOjQyLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.xD6mZWF_uGuDciudKiV3QJQKqTrVfQD2mKufnqirHrM",
 									"type": "string"
 								}
 							]
@@ -577,14 +639,19 @@
 							"mode": "formdata",
 							"formdata": [
 								{
+									"key": "title",
+									"value": "Test123",
+									"type": "text"
+								},
+								{
 									"key": "content",
-									"value": "Test312413",
+									"value": "123123",
 									"type": "text"
 								},
 								{
 									"key": "file",
 									"type": "file",
-									"src": "/home/anhduc/Study/Web/Thi/sach.jpg"
+									"src": "/home/hp/Downloads/KDD2014-Zhiyuan(Brett)Chen.pdf"
 								}
 							]
 						},
@@ -614,7 +681,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYzODgwNDY1NywiZXhwIjoxNjM4ODA4MjU3LCJuYmYiOjE2Mzg4MDQ2NTcsImp0aSI6ImY1eE9reDA3QXJiRTVwMzEiLCJzdWIiOjQxLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.65sIniO4EPGu23KVMUfalot1qAWQ05PqJT5K9hme8sQ",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYzOTQ0OTg5MiwiZXhwIjoxNjM5NzA5MDkyLCJuYmYiOjE2Mzk0NDk4OTIsImp0aSI6IjFFODZHbEN6dWNxbW1FWjQiLCJzdWIiOjEwMSwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.JNuMbhc-7xYJgyKENVChcNlgbIcfStIHHp5Ap1edVJM",
 									"type": "string"
 								}
 							]
@@ -622,7 +689,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:8000/api/posts/1",
+							"raw": "http://127.0.0.1:8000/api/posts/2006",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -634,7 +701,7 @@
 							"path": [
 								"api",
 								"posts",
-								"1"
+								"2006"
 							]
 						}
 					},
@@ -648,7 +715,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYzODgwNDY1NywiZXhwIjoxNjM4ODA4MjU3LCJuYmYiOjE2Mzg4MDQ2NTcsImp0aSI6ImY1eE9reDA3QXJiRTVwMzEiLCJzdWIiOjQxLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.65sIniO4EPGu23KVMUfalot1qAWQ05PqJT5K9hme8sQ",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYzOTQ0OTg5MiwiZXhwIjoxNjM5NzA5MDkyLCJuYmYiOjE2Mzk0NDk4OTIsImp0aSI6IjFFODZHbEN6dWNxbW1FWjQiLCJzdWIiOjEwMSwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.JNuMbhc-7xYJgyKENVChcNlgbIcfStIHHp5Ap1edVJM",
 									"type": "string"
 								}
 							]
@@ -656,16 +723,22 @@
 						"method": "POST",
 						"header": [],
 						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"content\": \"Hummmmmm\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "Nope",
+									"type": "text"
+								},
+								{
+									"key": "content",
+									"value": "# Jmeter\n\n## Testing software categorization\n\nhttps://google.com\n\n### 1. Functional testing - kiểm thử chức năng\n\nTool:  [Selenium](https://www.seleniumhq.org/), [JUnit](https://junit.org/junit5/), [soapUI](https://www.soapui.org/), [Watir](http://watir.com/),\n\n- Unit testing\n- Integration testing\n- End-to-end testing\n- Regression testing\n- Acceptance testing\n- White box testing\n- Black box testing\n- Interface testing\n- ...\n\n### 2. Non functional testing - kiểm thử phi chức năng\n\nTool: Loadster, Loadrunner, Jmeter \n\n- Performance testing: including Load test and Stress test\n- Security testing\n- Scalability testing\n- Volume testing\n- ...\n\nJmeter is primary used for Performance test, but also supports Functional Testing \n\n### 3. Load test vs Stress test \n\n+ Load test: used to determine the capacity of users that your system can handle \n+ Stress test: used to observe how your system behave under extreme loads, the ability to recover to normal stage \n\n## Overview\n\n### 1. Jmeter capability\n\n+ blablabla\n+ blabla\n\n### 2. Jmeter work process\n\n+ blablabla\n+ blabla",
+									"type": "text"
 								}
-							}
+							]
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8000/api/posts/2002",
+							"raw": "http://127.0.0.1:8000/api/posts/2001",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -677,7 +750,7 @@
 							"path": [
 								"api",
 								"posts",
-								"2002"
+								"2001"
 							]
 						}
 					},
@@ -691,7 +764,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYzODgwNDY1NywiZXhwIjoxNjM4ODA4MjU3LCJuYmYiOjE2Mzg4MDQ2NTcsImp0aSI6ImY1eE9reDA3QXJiRTVwMzEiLCJzdWIiOjQxLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.65sIniO4EPGu23KVMUfalot1qAWQ05PqJT5K9hme8sQ",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYzOTU3ODEyMCwiZXhwIjoxNjM5ODM3MzIwLCJuYmYiOjE2Mzk1NzgxMjAsImp0aSI6Imo3dkJBdGg4VVhCbnlPbnQiLCJzdWIiOjQyLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.xD6mZWF_uGuDciudKiV3QJQKqTrVfQD2mKufnqirHrM",
 									"type": "string"
 								}
 							]
@@ -699,7 +772,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:8000/api/posts/1200",
+							"raw": "http://127.0.0.1:8000/api/posts/1202",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -711,7 +784,7 @@
 							"path": [
 								"api",
 								"posts",
-								"1200"
+								"1202"
 							]
 						}
 					},
@@ -725,7 +798,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYzODgwNDY1NywiZXhwIjoxNjM4ODA4MjU3LCJuYmYiOjE2Mzg4MDQ2NTcsImp0aSI6ImY1eE9reDA3QXJiRTVwMzEiLCJzdWIiOjQxLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.65sIniO4EPGu23KVMUfalot1qAWQ05PqJT5K9hme8sQ",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYzOTQ0OTg5MiwiZXhwIjoxNjM5NzA5MDkyLCJuYmYiOjE2Mzk0NDk4OTIsImp0aSI6IjFFODZHbEN6dWNxbW1FWjQiLCJzdWIiOjEwMSwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.JNuMbhc-7xYJgyKENVChcNlgbIcfStIHHp5Ap1edVJM",
 									"type": "string"
 								}
 							]
@@ -760,7 +833,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYzODgwNDY1NywiZXhwIjoxNjM4ODA4MjU3LCJuYmYiOjE2Mzg4MDQ2NTcsImp0aSI6ImY1eE9reDA3QXJiRTVwMzEiLCJzdWIiOjQxLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.65sIniO4EPGu23KVMUfalot1qAWQ05PqJT5K9hme8sQ",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYzOTQwNjIyNCwiZXhwIjoxNjM5NjY1NDI0LCJuYmYiOjE2Mzk0MDYyMjQsImp0aSI6IjM2Y2ViVEJ0MGZGa3NjODMiLCJzdWIiOjEwMywicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.KtTetsGwuG702RaXhiL3cLLkkDp41nPoya2bArNbDrM",
 									"type": "string"
 								}
 							]
@@ -799,7 +872,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYzODgwNzE0NywiZXhwIjoxNjM4ODEwNzQ3LCJuYmYiOjE2Mzg4MDcxNDcsImp0aSI6IjBDUDZab2hDNnJnRGpQN0MiLCJzdWIiOjQxLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.QpuCoT3f42n_FZ2Uww2E73I4gzPC1t__T4vVMpkcXgc",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYzOTM3MzA1NywiZXhwIjoxNjM5NjMyMjU3LCJuYmYiOjE2MzkzNzMwNTcsImp0aSI6IjE1OHNoN3JYMEtZZTZHbjYiLCJzdWIiOjQyLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.McxsH9_-fzrN-iM_E61nCvc79rt0GcE-HTneboflTXI",
 									"type": "string"
 								}
 							]
@@ -1184,7 +1257,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYzODgwODg0MSwiZXhwIjoxNjM4ODEyNDQxLCJuYmYiOjE2Mzg4MDg4NDEsImp0aSI6IjU2OU9EODlaajVqcWFwVngiLCJzdWIiOjQxLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.fEHyJaeIWLa5yaCa5hJO13jPPuUsWfrrb8Is2pxxQl8",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYzOTA0MDUxNSwiZXhwIjoxNjM5MDQ0MTE1LCJuYmYiOjE2MzkwNDA1MTUsImp0aSI6IlVjYXp4VFNMY1F1QUNMTXEiLCJzdWIiOjQxLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.98g3w4WXaYiYaCf4vxehpJcUBPvKWELsAevVzC7n9WY",
 									"type": "string"
 								}
 							]
@@ -1219,7 +1292,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYzODgwODg0MSwiZXhwIjoxNjM4ODEyNDQxLCJuYmYiOjE2Mzg4MDg4NDEsImp0aSI6IjU2OU9EODlaajVqcWFwVngiLCJzdWIiOjQxLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.fEHyJaeIWLa5yaCa5hJO13jPPuUsWfrrb8Is2pxxQl8",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYzOTA0MDUxNSwiZXhwIjoxNjM5MDQ0MTE1LCJuYmYiOjE2MzkwNDA1MTUsImp0aSI6IlVjYXp4VFNMY1F1QUNMTXEiLCJzdWIiOjQxLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.98g3w4WXaYiYaCf4vxehpJcUBPvKWELsAevVzC7n9WY",
 									"type": "string"
 								}
 							]
