@@ -132,15 +132,23 @@ class UserController extends Controller
         return new UserCollection($data);
     }
 
-    public function change_avatar(Request $request): JsonResponse
+    public function change_avatar(Request $request)
     {
-        $avatar_id = $request->input("avatar_id");
-        try {
-            User::where("id", $request->user->id)->update(['avatar_id' => $avatar_id]);
-            return response()->json([
-                'success' => true
-            ]);
-        } catch(Exception $ex) {
+        if($request->file("avatar") !== null && $request->file("avatar")->isValid()) {
+            try {
+                $avatar = $request->file("avatar");
+                $path = $avatar->store("public/avatar");
+                $arr = explode("/", $path);
+                $file_name = $arr[count($arr) - 1];
+                User::where("id", $request->user->id)->update(['avatar_id' => $file_name]);
+                return response()->json([
+                    'success' => true
+                ]);
+            }
+            catch(Exception $ex) {
+
+            }
+        } else {
             return response()->json([
                 'success' => false
             ], 400);
