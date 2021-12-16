@@ -21,7 +21,7 @@ class CreateTriggerFollow extends Migration
     	INSERT INTO notifications
         (notifications.user_id, notifications.follow_id, notifications.created_at, notifications.updated_at)
 		VALUES
-        (NEW.target_id, NEW.id, CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP());
+        (NEW.target_id, NEW.id, NEW.created_at, NEW.updated_at);
     END IF;
 END
         ");

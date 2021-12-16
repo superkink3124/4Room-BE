@@ -23,7 +23,7 @@ class CreateTriggerUpvote extends Migration
     	INSERT INTO notifications
         (notifications.user_id, notifications.upvote_id, notifications.created_at, notifications.updated_at)
         VALUES
-        (post_owner, NEW.id, CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP());
+        (post_owner, NEW.id, NEW.created_at, NEW.updated_at);
 	END IF;        
 END
         ");
