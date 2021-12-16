@@ -21,7 +21,7 @@ class MessageFactory extends Factory
         return [
             'user_id' => rand(1, User::count()),
             'room_id' => rand(1, Room::count()),
-            'content' => VNFaker::sentences(),
+            'content' => VNFaker::company(),
             'updated_at' => $date,
             'created_at' => $date
         ];

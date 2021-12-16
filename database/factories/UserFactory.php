@@ -19,7 +19,7 @@ class UserFactory extends Factory
             'email' => $this->faker->unique()->safeEmail(),
             'password' => Hash::make('hehehe123'),
             'name_in_forum' => VNFaker::fullname(),
-            'bio' => VNFaker::sentences(2),
+            'bio' => VNFaker::city(),
             'avatar_id' => rand(1, 10) .".png"
         ];
     }

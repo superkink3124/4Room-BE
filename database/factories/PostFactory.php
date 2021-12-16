@@ -39,7 +39,7 @@ class PostFactory extends Factory
             ."\n## End";
         return [
             'user_id' => rand(1, User::count()),
-            'title' => VNFaker::sentences(),
+            'title' => VNFaker::colorName(),
             'content' => $content,
             'updated_at' => $date,
             'created_at' => $date

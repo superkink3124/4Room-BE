@@ -18,7 +18,7 @@ class CommentFactory extends Factory
     public function definition(): array
     {
         return [
-            'content' => VNFaker::sentences(),
+            'content' => VNFaker::company(),
             'user_id' => rand(1, User::count()),
             'post_id' => rand(1, Post::count()),
         ];
