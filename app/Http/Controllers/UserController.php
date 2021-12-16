@@ -144,7 +144,7 @@ class UserController extends Controller
                 return response()->json([
                     'success' => true,
                     'message' => "Changed avatar.",
-                    'data' => new UserResource($request->user)
+                    'data' => new UserResource(User::where("id", $request->user->id)->firstOrFail())
                 ]);
             }
             catch(Exception $ex) {
