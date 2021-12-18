@@ -55,10 +55,10 @@ php artisan serve
 * .env  
 ```
 BROADCAST_DRIVER=pusher
-PUSHER_APP_ID=1299119
-PUSHER_APP_KEY=3ef48bd1a87852f6ef19
-PUSHER_APP_SECRET=2d7a0a636ba1e9dcc361
-PUSHER_APP_CLUSTER=ap1
+PUSHER_APP_ID=push_app_ud
+PUSHER_APP_KEY=pusher_app_key
+PUSHER_APP_SECRET=pusher_app_secret
+PUSHER_APP_CLUSTER=pusher_app_cluster
 ```
 * Uncomment broadcast in config/app.php
 ```
