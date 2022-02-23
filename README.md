@@ -18,18 +18,9 @@ MAIL_ENCRYPTION=tls
 MAIL_FROM_ADDRESS=null
 MAIL_FROM_NAME="${APP_NAME}"
 ```
-2. Build docker image 
-```
-docker image build -t 4room-be . 
-```
-3. Run docker container
-```
-docker run -d --name 4room-be -p 8000:8000 4room-be
-```
-4. (Optional) Seed database
-```
-docker exec -it 4room-docker-be-1 /bin/sh -c "php artisan migrate:fresh --seed"
-```
+
+2 .Clone and follow instruction on FE, Docker repo
+
 
 ## Normal installation
 Requirement: `composer`, `php7.4`, `mysql`
