@@ -1,7 +1,38 @@
-# How to run
+# 4Room
++ Front-end: https://github.com/BuiChiTrung/4Room-FE
++ Back-end: https://github.com/superkink3124/4Room-BE
++ Docker: https://github.com/BuiChiTrung/4Room-Docker
+## Docker installation
+1. Create file ```.env```
+```
+cp .env.example .env
+```
+```
+APP_NAME=4Room
+MAIL_MAILER=smtp
+MAIL_HOST=smtp.gmail.com
+MAIL_PORT=587
+MAIL_USERNAME=your_gmail
+MAIL_PASSWORD=your_password
+MAIL_ENCRYPTION=tls
+MAIL_FROM_ADDRESS=null
+MAIL_FROM_NAME="${APP_NAME}"
+```
+2. Build docker image 
+```
+docker image build -t 4room-be . 
+```
+3. Run docker container
+```
+docker run -d --name 4room-be -p 8000:8000 4room-be
+```
+4. (Optional) Seed database
+```
+docker exec -it 4room-docker-be-1 /bin/sh -c "php artisan migrate:fresh --seed"
+```
 
-* Requirement: `composer`, `php7.4`, `mysql`
-
+## Normal installation
+Requirement: `composer`, `php7.4`, `mysql`
 1. Create file ```.env```
 ```
 cp .env.example .env
@@ -50,34 +81,3 @@ php artisan storage:link
 ```
 php artisan serve
 ```
-
-9.Setting broadcast  
-* .env  
-```
-BROADCAST_DRIVER=pusher
-PUSHER_APP_ID=push_app_ud
-PUSHER_APP_KEY=pusher_app_key
-PUSHER_APP_SECRET=pusher_app_secret
-PUSHER_APP_CLUSTER=pusher_app_cluster
-```
-* Uncomment broadcast in config/app.php
-```
-'Broadcast' => Illuminate\Support\Facades\Broadcast::class,
-```
-* Config in config/broadcasting.php
-```
-'default' => env('BROADCAST_DRIVER', 'pusher'),
-```
-### Tạo 1 loại API dựa theo Repository Design Pattern 
-1. Tạo file migration định nghĩa cấu trúc table 
-2. Tao Models 
-3. Tạo Repository (tk này sẽ tương tác trực tiếp với db, mỗi table tương ứng với 1 Repository)
-4. Tạo Controller (controller sẽ gọi các hàm trong repository)
-5. Tạo route cho api trong file api.php
-6. Test trên postman 
-
-Tham khảo thêm: Repository Design Pattern  
-
-> avatar_link example: http://localhost:8000/storage/avatar/1.jpeg
-> mkdir storage/app/public/avatar
-> Download images into storage/app/public/avatar directory
